@@ -22,7 +22,16 @@ OUT_BIAS=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked
 IN_HET=$OUT_BIAS
 OUT_HET=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het.vcf
 
+OUT_SNPs=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_SNPs.vcf
+OUT_MNPs=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_MNPs.vcf
+OUT_INDELs=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_INDELs.vcf
+OUT_COMPLEX=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_COMPLEX.vcf
 
+IN_BIALLEL=$OUT_SNPs
+OUT_BIALLEL=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs.vcf
+
+IN_MISSING=$OUT_BIALLEL
+OUT_MISSING=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked.vcf
 
 #QUAL >= 30
 #sh filter_VCF_GWAS_QUAL.sh $IN_QUAL $OUT_QUAL
@@ -44,16 +53,24 @@ OUT_HET=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_
 
 
 # Blanking "bad" genotypes and filtering variants with too few genotyped samples !!!filter criteria commented out since they only worked for biallelic SNPs so far, to do later!!!
-touch $OUT_BLANK
-python3 filter_VCF_GWAS_Missing.py $IN_BLANK $OUT_BLANK
+#touch $OUT_BLANK
+#python3 filter_VCF_GWAS_Missing.py $IN_BLANK $OUT_BLANK
 
 
 # Min. 1 read per strand per variant
-sh filter_VCF_GWAS_StrandBias.sh $IN_BIAS $OUT_BIAS
+#sh filter_VCF_GWAS_StrandBias.sh $IN_BIAS $OUT_BIAS
 
 # Min. 1 ALT and 1 REF allele in the population at this site
-touch $OUT_HET
-python3 filter_VCF_GWAS_HET.py $IN_HET $OUT_HET
+#touch $OUT_HET
+#python3 filter_VCF_GWAS_HET.py $IN_HET $OUT_HET
 
-# Filtering for SNPs !!!to do: separate variants!!!
-#vcffilter -s -f "TYPE = snp" $IN_SNP > $OUT_SNP
+#Separating Variant Types into unique files
+#sh separate_VCF_types.sh $OUT_HET $OUT_SNPs $OUT_MNPs $OUT_INDELs $OUT_COMPLEX
+
+#Filtering for biallelic SNPs
+#touch $OUT_BIALLEL
+#python3 filter_VCF_GWAS_biallelic_SNPs.py $IN_BIALLEL $OUT_BIALLEL
+
+#apply full blanking script
+touch $OUT_MISSING
+python3 filter_VCF_GWAS_Missing.py $IN_MISSING $OUT_MISSING
