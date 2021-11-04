@@ -1,0 +1,16 @@
+freebayes_269_samples_chr01-12.vcf 	 3608196 	
+100.
+freebayes_269_samples_chr01-12_SNPs.vcf 	 3072269 	
+85.1
+freebayes_269_samples_chr01-12_SNPs_QUAL_30.vcf 	 1201700 	
+33.3
+freebayes_269_samples_chr01-12_SNPs_QUAL_30_depth.vcf 	 1104602 	
+30.6
+freebayes_269_samples_chr01-12_QUAL_30.vcf 	 1550246 	
+42.9
+freebayes_269_samples_chr01-12_QUAL_30_depth.vcf 	 1425319 	
+39.5
+freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read.vcf 	 1167869 	
+32.3
+freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het.vcf 	 720847 	
+19.9
