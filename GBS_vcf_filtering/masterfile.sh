@@ -48,28 +48,28 @@ OUT_MISSING=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blan
 #vcftools --vcf $IN_VCF_FILE --site-quality --out $OUT_STAT_NAME
 
 # Depth filter
-#touch $OUT_DEPTH
-#python3 filter_VCF_GWAS_depth_per_site.py $IN_DEPTH $OUT_DEPTH
+touch $OUT_DEPTH
+python3 filter_VCF_GWAS_depth_per_site.py $IN_DEPTH $OUT_DEPTH
 
 
 # Blanking "bad" genotypes and filtering variants with too few genotyped samples !!!filter criteria commented out since they only worked for biallelic SNPs so far, to do later!!!
-#touch $OUT_BLANK
-#python3 filter_VCF_GWAS_Missing.py $IN_BLANK $OUT_BLANK
+touch $OUT_BLANK
+python3 filter_VCF_GWAS_Missing.py $IN_BLANK $OUT_BLANK
 
 
 # Min. 1 read per strand per variant
-#sh filter_VCF_GWAS_StrandBias.sh $IN_BIAS $OUT_BIAS
+sh filter_VCF_GWAS_StrandBias.sh $IN_BIAS $OUT_BIAS
 
 # Min. 1 ALT and 1 REF allele in the population at this site
-#touch $OUT_HET
-#python3 filter_VCF_GWAS_HET.py $IN_HET $OUT_HET
+touch $OUT_HET
+python3 filter_VCF_GWAS_HET.py $IN_HET $OUT_HET
 
 #Separating Variant Types into unique files
-#sh separate_VCF_types.sh $OUT_HET $OUT_SNPs $OUT_MNPs $OUT_INDELs $OUT_COMPLEX
+sh separate_VCF_types.sh $OUT_HET $OUT_SNPs $OUT_MNPs $OUT_INDELs $OUT_COMPLEX
 
 #Filtering for biallelic SNPs
-#touch $OUT_BIALLEL
-#python3 filter_VCF_GWAS_biallelic_SNPs.py $IN_BIALLEL $OUT_BIALLEL
+touch $OUT_BIALLEL
+python3 filter_VCF_GWAS_biallelic_SNPs.py $IN_BIALLEL $OUT_BIALLEL
 
 #apply full blanking script
 touch $OUT_MISSING
