@@ -49,7 +49,7 @@ for rec in vcfFile:
     # Checking for the desired qualities in each sample at each site
     for sample in rec.samples:
         if sample.called:
-            if sample['DP'] < 61 or sample['GQ'] < 20:
+            if sample['DP'] < 61:
                 sample.called = False
             elif '1' in sample['GT'].split('/') and sample['AO']/sample['DP'] < 0.25:
                     sample.called = False
