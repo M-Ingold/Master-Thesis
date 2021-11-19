@@ -1,11 +1,13 @@
 #Average genes and coverage per window tested for correlation
 library(ape)
+library(zoo)
+library(ggplot2)
 
 #CDS interpreted as genes
 gff <- read.gff("References/DM_1-3_516_R44_potato.v6.1.hc_gene_models.gff3")
 cds <- subset(gff, type == "CDS")
 cds <- cds[c(1,4,5)]
-cds_sorted <- cds[with(cds, order(seqid, start)), ]
+cds_sorted <- unique(cds[with(cds, order(seqid, start)), ])
 cds_sorted$n <- 1
 cds_chr01 <- subset(cds_sorted, seqid == "chr01")
 
@@ -13,8 +15,6 @@ coverage_chr01 <- read.delim("data/alignment/coverage_chr01.txt", header = F)
 coverage_chr02 <- read.delim("data/alignment/coverage_chr02.txt", header = F)
 coverage_chr03 <- read.delim("data/alignment/coverage_chr03.txt", header = F)
 
-#display gene density
-#hist(subset(cds_sorted, seqid == "chr01")$start)
 
 #sum of genes on a single chromosome
 rollingsum1chr <- function(file, window){
@@ -75,11 +75,11 @@ cor.test(chr01genes$sum, chr01coverage$avg)
 
 
 chr02coverage <- avgwindow1chr(coverage_chr02, 1000000)
-plot(subset(allgenes, chr == "chr02")$sum, chr02coverage$avg)
+plot(subset(allgenes, chr == "chr02")$sum, chr02coverage[1:460,]$avg)
 
-abline(lm(chr02coverage$avg ~ subset(allgenes, chr == "chr02")$sum))
+abline(lm(chr02coverage[1:460,]$avg ~ subset(allgenes, chr == "chr02")$sum))
 
-cor.test(subset(allgenes, chr == "chr02")$sum, chr02coverage$avg)
+cor.test(subset(allgenes, chr == "chr02")$sum, chr02coverage[1:460,]$avg)
 
 
 
@@ -90,3 +90,38 @@ abline(lm(chr03coverage$avg ~ subset(allgenes, chr == "chr03")$sum))
 
 cor.test(subset(allgenes, chr == "chr03")$sum, chr03coverage$avg)
 
+#display gene density
+d <- hist(subset(cds_sorted, seqid == "chr01")$start, 
+          xlim = c(0,max(subset(cds_sorted, seqid == "chr01")$start)),
+          breaks = 40)
+#density plot
+d <- plot(chr01coverage$avg, add = T)
+d
+
+rollwind <- rollmean(coverage_chr01$V3, 1000000)
+plot(rollwind)
+plot(chr01genes$sum)
+plot(chr02coverage$avg)
+
+ggplot(subset(cds_sorted, seqid == "chr01"), aes(start)) +
+  geom_histogram(fill= "blue",alpha=0.5) +
+  geom_smooth(data=chr01coverage, mapping = aes(x=start, y=avg*14), se=F, color = "black") +
+  theme_ipsum() +
+  scale_y_continuous(name = "Genes per bin", 
+                     sec.axis = sec_axis(trans=~./14, name = "Average coverage per 1Gb"))
+
+ggplot(subset(cds_sorted, seqid == "chr02"), aes(start)) +
+  geom_histogram(fill= "blue",alpha=0.5, bins = 46) +
+  geom_point(data=chr02coverage, mapping = aes(x=start, y=avg*4)) +
+  #geom_smooth(data=chr02coverage, mapping = aes(x=start, y=avg*8), se=T, color = "black") +
+  #theme_ipsum() +
+  scale_y_continuous(name = "Genes per bin", 
+                     sec.axis = sec_axis(trans=~./4, name = "Average coverage per 1Gb"))
+
+ggplot(subset(cds_sorted, seqid == "chr03"), aes(start)) +
+  geom_histogram(fill= "blue",alpha=0.5, bins = 46) +
+  geom_point(data=chr03coverage, mapping = aes(x=start, y=avg*4)) +
+  #geom_smooth(data=chr02coverage, mapping = aes(x=start, y=avg*8), se=T, color = "black") +
+  #theme_ipsum() +
+  scale_y_continuous(name = "Genes per bin", 
+                     sec.axis = sec_axis(trans=~./4, name = "Average coverage per 1Gb"))

@@ -65,11 +65,11 @@ OUT_MISSING=../../data/VCF/freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blan
 #python3 filter_VCF_GWAS_HET.py $IN_HET $OUT_HET
 
 #Separating Variant Types into unique files
-#sh separate_VCF_types.sh $OUT_HET $OUT_SNPs $OUT_MNPs $OUT_INDELs $OUT_COMPLEX
+sh separate_VCF_types.sh $OUT_HET $OUT_SNPs $OUT_MNPs $OUT_INDELs $OUT_COMPLEX
 
 #Filtering for biallelic SNPs
-#touch $OUT_BIALLEL
-#python3 filter_VCF_GWAS_biallelic_SNPs.py $IN_BIALLEL $OUT_BIALLEL
+touch $OUT_BIALLEL
+python3 filter_VCF_GWAS_biallelic_SNPs.py $IN_BIALLEL $OUT_BIALLEL
 
 #apply full blanking script
 touch $OUT_MISSING
