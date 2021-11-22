@@ -2,6 +2,7 @@
 
 # interactive mode needed!
 # analyse aligned files, input parent folder of folders with bam files
+#!!!weird coverages!!!
 
 #mkdir ../../analysis/$(basename $BAMFOLDER)/coverage
 
