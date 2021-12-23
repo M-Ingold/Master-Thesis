@@ -147,3 +147,42 @@ abline(h=0.1, col="blue") # if you need to add horizental line
 abline(v=halfdecaydist, col="green")
 mtext(round(halfdecaydist,2), side=1, line=0.05, at=halfdecaydist, cex=1, col="green")
 dev.off()
+
+# nlrq 
+fit.nlrq <- nlrq(rsq ~ ( (10+C*dist)/( (2+C*dist) * (11+C*dist) ) ) * 
+                    ( 1+( (3+C*dist) * (12+12*C*dist+(C*dist)^2) ) / ( 2*n*(2+C*dist) * (11+C*dist) ) ), 
+                  data=file, start = Cstart, tau = 0.9)
+
+summary(fit.nlrq)
+
+# Doing the same thing as above leads to single-digit LD values
+# rho <- -0.9
+# 
+# newrsq <- ( (10+rho*file$dist) / ( (2+rho*file$dist) * (11+rho*file$dist) ) ) *
+#   ( 1 + ( (3+rho * file$dist) * (12+12*rho*file$dist + (rho*file$dist)^2) ) / 
+#       (2*n*(2+rho*file$dist) * (11+rho*file$dist) ) )
+# 
+# newfile <- data.frame(file$dist, newrsq)
+# 
+# maxld <- max(newfile$newrsq,na.rm=TRUE) #using max LD value from adjusted data
+# halfdecay = maxld*0.5
+# halfdecaydist <- newfile$file.dist[which.min(abs(newfile$newrsq-halfdecay))]
+# newfile <- newfile[order(newfile$file.dist),]
+# 
+# 
+# plot(file$dist, file$rsq, cex=2, pch=".", xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
+# 
+# 
+# par(mar = c(5, 5, 1, 1)) 
+# plot(file$dist, file$rsq, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
+# lines(newfile$file.dist, newfile$newrsq, col="red", lwd=2)
+# abline(h=0.1, col="blue") # if you need to add horizental line
+# abline(v=halfdecaydist, col="green")
+# mtext(round(halfdecaydist,2), side=1, line=0.05, at=halfdecaydist, cex=1, col="green")
+
+#x <- seq(min(file$dist), max(file$dist), length = 10000)
+
+plot(file$dist, file$rsq, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
+
+lines(file$dist, predict(fit.nlrq), lty = 2, col = "red")
+      
