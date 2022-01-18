@@ -2,23 +2,27 @@ freebayes_269_samples_chr01-12.vcf 	 3608196
 100.
 freebayes_269_samples_chr01-12_QUAL_30.vcf 	 1550246 	
 42.9
-freebayes_269_samples_chr01-12_QUAL_30_depth.vcf 	 1425319 	
-39.5
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked.vcf 	 67744 	
-1.87
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read.vcf 	 59423 	
-1.64
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het.vcf 	 58762 	
-1.62
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_SNPs.vcf 	 54003 	
-1.49
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_MNPs.vcf 	 1912 	
-.052
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_INDELs.vcf 	 4676 	
-.129
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_COMPLEX.vcf 	 5913 	
-.163
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs.vcf 	 51402 	
-1.42
-freebayes_269_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked.vcf 	 33142 	
-.918
+freebayes_261_samples_chr01-12_QUAL_30.vcf 	 1550246 	
+42.9
+freebayes_261_samples_chr01-12_QUAL_30_depth.vcf 	 1387564 	
+38.4
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked.vcf 	 68761 	
+1.90
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read.vcf 	 60260 	
+1.67
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het.vcf 	 59575 	
+1.65
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_SNPs.vcf 	 48400 	
+1.34
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_MNPs.vcf 	 515 	
+.014
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_INDELs.vcf 	 2428 	
+.067
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_COMPLEX.vcf 	 1344 	
+.037
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs.vcf 	 46990 	
+1.30
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked.vcf 	 32849 	
+.910
+freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked_MAF.vcf 	 5562 	
+.154

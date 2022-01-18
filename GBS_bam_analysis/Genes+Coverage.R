@@ -25,6 +25,7 @@ coverage_chr09 <- read.delim("../data/alignment/coverage_chr09.txt", header = F)
 coverage_chr10 <- read.delim("../data/alignment/coverage_chr10.txt", header = F)
 coverage_chr11 <- read.delim("../data/alignment/coverage_chr11.txt", header = F)
 coverage_chr12 <- read.delim("../data/alignment/coverage_chr12.txt", header = F)
+coverage_all <- read.delim("../data/alignment/samtools_coverage.txt", header = F)
 
 
 #sum of genes on a single chromosome
@@ -84,17 +85,18 @@ avgwindow1chr <- function(file, window){
   return(df)
 }
 
-avgwindow1chrtest <- function(file, window){
-  df <- data.frame(matrix(NA, nrow = length(seq(0, max(file$V2), by=window))-1, ncol = 2))
-  
-  df$avg <- tapply(file$V3, cut(file$V2, seq(0, max(file$V2), by=window)), mean)
-  
-  df$start <- seq(0, max(file$V2), by=window)[1:length(seq(0, max(file$V2), by=window))-1]
-  
-  return(df)
-}
-
-avgwindow1chrtest(coverage_chr01, 1000000)
+#different results, why?
+# avgwindow1chrtest <- function(file, window){
+#   df <- data.frame(matrix(NA, nrow = length(seq(0, max(file$V2), by=window))-1, ncol = 2))
+#   
+#   df$avg <- tapply(file$V3, cut(file$V2, seq(0, max(file$V2), by=window)), mean)
+#   
+#   df$start <- seq(0, max(file$V2), by=window)[1:length(seq(0, max(file$V2), by=window))-1]
+#   
+#   return(df)
+# }
+# 
+# avgwindow1chrtest(coverage_chr01, 1000000)
 
 # chr01coverage <- avgwindow1chr(coverage_chr01, 1000000)
 # 
@@ -170,7 +172,11 @@ avgwindow1chrtest(coverage_chr01, 1000000)
 # I couldn't get the function to call avgwindow1chr properly, so it's calculated beforehand. 
 # It causes Error: $ operator is invalid for atomic vectors. WTF?
 
+# p <- c("coverage_","chr01")
+# file <- paste(p, collapse = "")
+# chrcoverage <- avgwindow1chr(file, 1000000)
 
+# works when a big file with all the data is subset and used, file name doesn't get recognized as object when used in another function
 plotgenerator <- function(chr){
   p <- c("coverage_",chr)
   file <- paste(p, collapse = "")
@@ -189,20 +195,20 @@ plotgenerator <- function(chr){
 plotgeneratortest <- function(chr){
   p <- c("coverage_",chr)
   file <- paste(p, collapse = "")
-  print(typeof(file))
-  chrcoverage <- avgwindow1chrtest(coverage_chr01, 1000000)
+  #print(typeof(file))
+  chrcoverage <- avgwindow1chr(subset(coverage_all, V1 == "chr01"), 1e6)
   sub <- subset(cds_sorted, seqid == chr)
   plot <- ggplot(sub, aes(start)) +
-    geom_histogram(fill= "blue",alpha=0.5, bins = dim(chr01coveragewindow)[1]) +
-    geom_point(data=chr01coveragewindow, mapping = aes(x=start, y=avg*4)) +
-    geom_smooth(data=chr01coveragewindow, mapping = aes(x=mid, y=avg*4), se=F, color = "black") +
+    geom_histogram(fill= "blue",alpha=0.5, bins = dim(chrcoverage)[1]) +
+    geom_point(data=chrcoverage, mapping = aes(x=start, y=avg*4)) +
+    geom_smooth(data=chrcoverage, mapping = aes(x=start, y=avg*4), se=F, color = "black") +
     scale_y_continuous(name = "Genes per bin", 
                        sec.axis = sec_axis(trans=~./4, name = "Average coverage per 1Gb")) +
     ggtitle(chr)
   print(plot)
 }
 
-plotgenerator("chr01")
+plotgeneratortest("chr01")
 # 
 # plot01 <- plotgenerator(chr = "chr01")
 # plot02 <- plotgenerator("chr02")
