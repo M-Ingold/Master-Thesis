@@ -1,5 +1,9 @@
 library(ape)
 library(vcfR)
+library(cluster)
+library(ggplot2)
+library(factoextra)
+library(dendextend)
 
 vcfTetra <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked_MAF.vcf")
 dosagetetra <- extract.gt(vcfTetra, as.numeric = F)
@@ -31,6 +35,7 @@ ss <- sample(1:261, 20)
 dist <- dist(t(testmatrix[,ss]))
 dist <- dist(scale(t(testmatrix)))
 dist <- dist(t(testmatrix))
+res.dist <- dist(t(testmatrix))
 
 # phylogram
 tre <- nj(dist)
@@ -42,7 +47,7 @@ edgelabels(tex=round(tre$edge.length,1), bg=rgb(.8,.8,1,.8))
 fviz_dist(dist)
 
 # Number of clusters zero, or 2 or 3 without transposition?
-fviz_nbclust(t(testmatrix), kmeans, method = "wss", k.max = 100)
+fviz_nbclust(t(testmatrix), kmeans, method = "wss", k.max = 10)
 
 km.res <- kmeans(t(testmatrix), 2, nstart = 25)
 km.res3 <- kmeans(t(testmatrix), 3, nstart = 25)
@@ -57,7 +62,8 @@ fviz_cluster(km.res3, data = t(testmatrix), palette = c("#2E9FDF", "#00AFBB", "#
 # PAM
 # 2 clusters
 fviz_nbclust(t(testmatrix), pam, method = "silhouette")
-pam.res <- pam(t(testmatrix), 2, medoids = c(155, 33)) 
+pam.res <- pam(t(testmatrix), 2, #medoids = c(155, 33)
+               ) 
 print(pam.res)
 
 # clusters not in line with kmeans
@@ -67,4 +73,81 @@ fviz_cluster(pam.res, palette = c("#00AFBB", "#FC4E07"), # color palette
              repel = TRUE, # Avoid label overplotting (slow) 
              ggtheme = theme_classic() 
 )
+
+# hierarcical clustering
+res.hc <- hclust(d= res.dist, method = "ward.D2")
+fviz_dend(res.hc, cex = 0.5)
+
+# Compute cophentic distance 
+res.coph <- cophenetic(res.hc)
+
+# Correlation between cophenetic distance and the original distance 
+cor(res.dist, res.coph)
+
+res.hc2 <- hclust(res.dist, method = "average") 
+cor(res.dist, cophenetic(res.hc2))
+fviz_dend(res.hc2, cex = 0.5)
+
+# Cut tree into groups 
+grp <- cutree(res.hc, h = 90) 
+head(grp, n= 4)
+
+# Cut in groups and color by groups
+fviz_dend(res.hc2, h = 90, # Cut in groups 
+          cex = 0.5, # label size 
+          #k_colors = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"), 
+          color_labels_by_k = TRUE, # color labels by groups 
+          rect = F, # Add rectangle around groups 
+          #type = "circular"
+          )
+
+# only works with defined number of groups?
+fviz_cluster(list(data = t(testmatrix), cluster = grp), 
+             palette = c("#2E9FDF", "#00AFBB", "#E7B800", "#FC4E07"), 
+             ellipse.type = "convex", # Concentration ellipse 
+             repel = TRUE, # Avoid label overplotting (slow) 
+             show.clust.cent = FALSE, ggtheme = theme_minimal())
+
+# Agglomerative Nesting (Hierarchical Clustering) 
+res.agnes <- agnes(x= t(testmatrix), # data matrix 
+                   stand = FALSE, # Standardize the data 
+                   metric = "euclidean", # metric for distance matrix 
+                   method = "average" # Linkage method 
+                   )
+
+fviz_dend(res.agnes, cex = 0.6, h= 90,type = "circular")
+
+# Create two dendrograms 
+dend1 <- as.dendrogram (res.hc) 
+dend2 <- as.dendrogram (res.hc2)
+
+# Create a list to hold dendrograms 
+dend_list <- dendlist(dend1, dend2)
+
+tanglegram(dend1, dend2)
+
+tanglegram(dend1, dend2, highlight_distinct_edges = FALSE, # Turn-off dashed lines 
+           common_subtrees_color_lines = T, # Turn-off line colors 
+           common_subtrees_color_branches = TRUE, # Color common branches 
+           main = paste("entanglement =", round(entanglement(dend_list), 2)) 
+           )
+
+# Cophenetic correlation matrix 
+cor.dendlist(dend_list, method = "cophenetic")
+# Baker correlation matrix 
+cor.dendlist(dend_list, method = "baker")
+
+# unrooted layout
+require("igraph") 
+fviz_dend(res.hc2, h= 90, k_colors = "npg", type = "phylogenic", repel = TRUE, phylo_layout = "layout.gem")
+
+
+# Heatmaps
+library("RColorBrewer") 
+col <- colorRampPalette(brewer.pal(10, "RdYlBu"))(256)
+
+heatmap(testmatrix, scale = "none", col = col)
+
+library("pheatmap") 
+pheatmap(testmatrix, color = rev(hcl.colors(50, "Sunset")))
 

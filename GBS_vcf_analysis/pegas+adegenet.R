@@ -4,8 +4,6 @@ library(adegenet)
 library(ggplot2)
 #library(GGtools)
 library(poppr)
-library(factoextra)
-library(cluster)
 
 #x <- read.vcf('../data/VCF/freebayes_264_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked.vcf', to = 50000)
 
