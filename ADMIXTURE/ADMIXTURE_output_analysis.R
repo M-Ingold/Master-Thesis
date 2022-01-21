@@ -11,13 +11,19 @@ dev.off()
 tbl=read.table("../scripts/ADMIXTURE/diploid.3.Q")
 
 png(filename = "ADMIXTURE_3_clusters.png", width = 2000, height = 800, units = "px")
+par(mar = c(5, 8, 4, 2))
 barplot(t(as.matrix(tbl)), col=rainbow(3),
-          xlab="Individual #", ylab="Ancestry", border=NA)
+        xlab="Individual #", ylab="Proportional Membership (Q)", border=NA,
+        cex.lab = 3, cex.axis = 2
+        )
 dev.off()
 
 tbl=read.table("../scripts/ADMIXTURE/diploid.10.Q")
 
 png(filename = "ADMIXTURE_10_clusters.png", width = 2000, height = 800, units = "px")
+par(mar = c(5, 8, 4, 2))
 barplot(t(as.matrix(tbl)), col=rainbow(10),
-        xlab="Individual #", ylab="Ancestry", border=NA)
+        xlab="Individual #", ylab="Proportional Membership (Q)", border=NA,
+        cex.lab = 3, cex.axis = 2
+        )
 dev.off()

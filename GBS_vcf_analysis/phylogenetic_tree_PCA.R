@@ -4,8 +4,11 @@ library(cluster)
 library(ggplot2)
 library(factoextra)
 library(dendextend)
+library(readxl)
+library(dplyr)
 
 # to-do: test without diploid breeds
+#        save plots
 
 vcfTetra <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked_MAF.vcf")
 dosagetetra <- extract.gt(vcfTetra, as.numeric = F)
@@ -19,13 +22,30 @@ dosagetetra <- as.numeric(na.omit(dosagetetra))
 
 testmatrix <- matrix(unlist(dosagetetra), nrow = 5187, ncol = 261)
 
+# import potato genotype data
+GBS02 <- read_excel("/media/rna/CYSTOPHORA/GBS_Analysis/data/GBS2/GBS02_sample-IDs_14.04.21.xlsx", skip = 6)
+GBS02 <- rename(GBS02, Identifier = "Sample identifier")
+GBS01 <- read_excel("/media/rna/CYSTOPHORA/GBS_Analysis/data/GBS1/22-01-2021_Zuordnung_genotypes_SB.aktualisiert.xlsx")
+
+# poorly merge datasets, maybe do it better later. Good enough for now
+intersect <- intersect(names(GBS01), names(GBS02))
+GBS <- merge(GBS01, GBS02, by=intersect, all = T)
+
+df <- data.frame(Identifier=gsub("Sample_", "",colnames(vcfTetra@gt)[-1]))
+Samples <- merge(df, GBS, by="Identifier")
+
+# add sample code to matrix to later substitute proper breed name
+colnames(testmatrix) <- Samples$VARIETY
+
+
 pca = prcomp(t(testmatrix), scale. = T)
 vars = 100*pca$sdev / sum(pca$sdev)
-plot(pca$x[,1],pca$x[,2],xlab = sprintf("PCA1 (%.1f%%)", pca.var.per[1]), ylab = sprintf("PCA2 (%.1f%%)", pca.var.per[2]))
-plot(pca$x[,2],pca$x[,3],xlab = sprintf("PCA2 (%.1f%%)", pca.var.per[2]), ylab = sprintf("PCA3 (%.1f%%)", pca.var.per[3]))
 
 pca.var <- pca$sdev^2
 pca.var.per <- round(pca.var/sum(pca.var)*100, 1)
+plot(pca$x[,1],pca$x[,2],xlab = sprintf("PC1 (%.1f%%)", pca.var.per[1]), ylab = sprintf("PC2 (%.1f%%)", pca.var.per[2]))
+plot(pca$x[,2],pca$x[,3],xlab = sprintf("PC2 (%.1f%%)", pca.var.per[2]), ylab = sprintf("PC3 (%.1f%%)", pca.var.per[3]))
+plot(pca$x[,3],pca$x[,4],xlab = sprintf("PC3 (%.1f%%)", pca.var.per[2]), ylab = sprintf("PC4 (%.1f%%)", pca.var.per[3]))
 
 barplot(pca.var.per, main="Scree Plot", xlab="Principal Component", ylab="Percent Variation")
 
@@ -146,12 +166,13 @@ fviz_dend(res.hc2, h= 90, k_colors = "npg", type = "phylogenic", repel = TRUE, p
 
 # Heatmaps
 library("RColorBrewer") 
-col <- colorRampPalette(brewer.pal(10, "RdYlBu"))(256)
+col <- rev(colorRampPalette(brewer.pal(10, "RdYlBu"))(256))
 
 heatmap(testmatrix, scale = "none", col = col)
 
 library("pheatmap") 
-pheatmap(testmatrix, color = rev(hcl.colors(50, "Sunset")))
+pheatmap(testmatrix, color = rev(hcl.colors(50, "Sunset")), cex = 0.8)
+pheatmap(testmatrix, color = col, cex = 0.8)
 
 # Cluster validation
 library(clustertend)
