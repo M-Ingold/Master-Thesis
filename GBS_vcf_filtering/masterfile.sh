@@ -93,4 +93,4 @@ OUT_MAF=../../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_
 #touch $OUT_MISSING
 #python3 filter_VCF_GWAS_Missing_full_script.py $IN_MISSING $OUT_MISSING
 
-bcftools view --min-af 0.05 --max-af 0.95 --exclude-uncalled $IN_MAF > $OUT_MAF
+ ~/genetools/bcftools-1.14/bcftools view --min-af 0.05 --max-af 0.95 --exclude-uncalled $IN_MAF > $OUT_MAF

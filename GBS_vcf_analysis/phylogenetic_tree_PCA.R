@@ -5,6 +5,8 @@ library(ggplot2)
 library(factoextra)
 library(dendextend)
 
+# to-do: test without diploid breeds
+
 vcfTetra <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked_MAF.vcf")
 dosagetetra <- extract.gt(vcfTetra, as.numeric = F)
 
@@ -151,3 +153,9 @@ heatmap(testmatrix, scale = "none", col = col)
 library("pheatmap") 
 pheatmap(testmatrix, color = rev(hcl.colors(50, "Sunset")))
 
+# Cluster validation
+library(clustertend)
+hopkins(t(testmatrix), n = 260)
+# H = 0.378, not clustering great i guess?
+
+fviz_dist(dist(t(testmatrix)), show_labels = FALSE)
