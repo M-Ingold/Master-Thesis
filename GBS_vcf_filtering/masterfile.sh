@@ -41,26 +41,26 @@ OUT_MAF=../../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallel
 
 #filter out double genotypes: P2-AT, P2-LI, P1-AG, P01-BEL, P2-F12-172-DE, P2-G12-173-SO, P2-H12-179-AG 
 #and bad coverage sample BIR-2. List created by hand
-#~/genetools/bcftools-1.14/bcftools view --samples-file samples.txt $IN_SAMPLES > $OUT_SAMPLES
+bcftools view --samples-file samples.txt $IN_SAMPLES > $OUT_SAMPLES
 
 #Separating Variant Types into unique files
-#sh separate_VCF_types.sh $OUT_SAMPLES $OUT_SNPs $OUT_MNPs $OUT_INDELs $OUT_COMPLEX
+sh separate_VCF_types.sh $OUT_SAMPLES $OUT_SNPs $OUT_MNPs $OUT_INDELs $OUT_COMPLEX
 
 # Min. 1 read per strand per variant
-#touch $OUT_BIAS
-#sh filter_VCF_GWAS_StrandBias.sh $IN_BIAS $OUT_BIAS
+touch $OUT_BIAS
+sh filter_VCF_GWAS_StrandBias.sh $IN_BIAS $OUT_BIAS
 
 # Min. 1 ALT and 1 REF alleles or 2 ALT and 0 REF alleles in the population at this site
-#touch $OUT_HET
-#python3 filter_VCF_GWAS_HET.py $IN_HET $OUT_HET
+touch $OUT_HET
+python3 filter_VCF_GWAS_HET.py $IN_HET $OUT_HET
 
 #Filtering for biallelic SNPs
-#touch $OUT_BIALLEL
-#python3 filter_VCF_GWAS_biallelic_SNPs.py $IN_BIALLEL $OUT_BIALLEL
+touch $OUT_BIALLEL
+python3 filter_VCF_GWAS_biallelic_SNPs.py $IN_BIALLEL $OUT_BIALLEL
 
 # Blanking "bad" genotypes and filtering variants with too few genotyped samples
-#touch $OUT_MISSING
-#python3 filter_VCF_GWAS_Missing.py $IN_MISSING $OUT_MISSING
+touch $OUT_MISSING
+python3 filter_VCF_GWAS_Missing.py $IN_MISSING $OUT_MISSING
 
 # Create statistics for average depth for subsequent filtering of max depth
 #IN_PATH_SUBSET=../../data/vcf_GWAS_input
@@ -77,4 +77,4 @@ vcftools --vcf $IN_DEPTH --site-mean-depth
 touch $OUT_DEPTH
 python3 filter_VCF_GWAS_depth_per_site.py $IN_DEPTH $OUT_DEPTH
 
- ~/genetools/bcftools-1.14/bcftools view --min-af 0.05 --max-af 0.95 --exclude-uncalled $IN_MAF > $OUT_MAF
+bcftools view --min-af 0.05 --max-af 0.95 --exclude-uncalled $IN_MAF > $OUT_MAF

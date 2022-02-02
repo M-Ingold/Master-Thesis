@@ -14,6 +14,7 @@ library(ggpubr)
 #        save plots
 
 vcfTetra <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf")
+
 dosagetetra <- extract.gt(vcfTetra, as.numeric = F)
 
 dosagetetra <- replace(dosagetetra, dosagetetra == "0/0/0/0", 0)
@@ -21,16 +22,21 @@ dosagetetra <- replace(dosagetetra, dosagetetra == "0/0/0/1", 1)
 dosagetetra <- replace(dosagetetra, dosagetetra == "0/0/1/1", 2)
 dosagetetra <- replace(dosagetetra, dosagetetra == "0/1/1/1", 3)
 dosagetetra <- replace(dosagetetra, dosagetetra == "1/1/1/1", 4)
-dosagetetra <- as.numeric(na.omit(dosagetetra))
+# to-do: impute NAs
+dosagetetra[is.na(dosagetetra)] <- 0
+#dosagetetra <- as.numeric(na.omit(dosagetetra))
 
-testmatrix <- matrix(unlist(dosagetetra), nrow = length(dosagetetra)/261, ncol = 261)
+
+dosagetetra <- as.numeric(dosagetetra)
+
+testmatrix <- t(matrix(unlist(dosagetetra), nrow = length(dosagetetra)/261, ncol = 261))
 
 # import potato genotype data
 GBS02 <- read_excel("../data/GBS2/GBS02_sample-IDs_14.04.21.xlsx", skip = 6)
 GBS02 <- rename(GBS02, Identifier = "Sample identifier")
 GBS01 <- read_excel("../data/GBS1/22-01-2021_Zuordnung_genotypes_SB.aktualisiert.xlsx")
 
-# poorly merge datasets, maybe do it better later. Good enough for now
+# poorly merge datasets, maybe do it better later. Too bad!
 intersect <- intersect(names(GBS01), names(GBS02))
 GBS <- merge(GBS01, GBS02, by=intersect, all = T)
 
@@ -38,7 +44,7 @@ df <- data.frame(Identifier=gsub("Sample_", "",colnames(vcfTetra@gt)[-1]))
 Samples <- merge(df, GBS, by="Identifier")
 
 # add sample code to matrix to later substitute proper breed name
-colnames(testmatrix) <- Samples$VARIETY
+rownames(testmatrix) <- Samples$VARIETY
 
 # subset Samples by ADMIXTURE population membership > 90%
 admixture=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf.5.Q")
@@ -66,10 +72,10 @@ for (breed in 1:nrow(admixture)){
 }
 
 # subset for non-admixed breeds
-testmatrix <- testmatrix[, rownames(admixture)]
+testmatrix <- testmatrix[rownames(admixture), ]
 
 # after subsetting, some rows contain all the same number. These have to be removed, in this case using the variance.
-testmatrix <- t(testmatrix)[ , which(apply(t(testmatrix), 2, var) != 0)]
+testmatrix <- (testmatrix)[ , which(apply((testmatrix), 2, var) != 0)]
 
 
 pca = prcomp((testmatrix), scale. = T)
@@ -97,7 +103,7 @@ dev.off()
 # scaling not necessary because no different units are measured?
 #ss <- sample(1:261, 20)
 #dist <- dist(t(testmatrix[,ss]))
-dist <- dist(scale(t(testmatrix)))
+#dist <- dist(scale(t(testmatrix)))
 dist <- dist((testmatrix))
 res.dist <- dist((testmatrix))
 
@@ -207,11 +213,13 @@ dend_list <- dendlist(dend1, dend2)
 
 tanglegram(dend1, dend2)
 
+png(filename = "tanglegram_wardD2_average.png", width = 1200, height = 800, units = "px")
 tanglegram(dend1, dend2, highlight_distinct_edges = FALSE, # Turn-off dashed lines 
            common_subtrees_color_lines = T, # Turn-off line colors 
            common_subtrees_color_branches = TRUE, # Color common branches 
            main = paste("entanglement =", round(entanglement(dend_list), 2)) 
            )
+dev.off()
 
 # Cophenetic correlation matrix 
 cor.dendlist(dend_list, method = "cophenetic")
@@ -230,8 +238,11 @@ col <- rev(colorRampPalette(brewer.pal(10, "RdYlBu"))(256))
 heatmap(testmatrix, scale = "none", col = col)
 
 library("pheatmap") 
+png(filename = "heatmap.png", width = 1200, height = 800, units = "px")
 pheatmap(testmatrix, color = rev(hcl.colors(50, "Sunset")), cex = 0.8)
-pheatmap(testmatrix, color = col, cex = 0.8)
+dev.off()
+
+#pheatmap(testmatrix, color = col, cex = 0.8)
 
 # Cluster validation
 library(clustertend)
