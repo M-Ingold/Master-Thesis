@@ -3,9 +3,9 @@ library(ape)
 library(adegenet)
 library(poppr)
 
-vcf <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked.vcf")
+vcf <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf")
 
-vcf005 <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked_MAF.vcf")
+vcf005 <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf")
 # dna <- ape::read.dna("References/DM_1-3_516_R44_potato_genome_assembly.v6.1.fasta", format = "fasta")
 # gff <- read.table("References/DM_1-3_516_R44_potato.v6.1.repr_hc_gene_models.gff3", sep="\t", quote="")
 # 
@@ -23,9 +23,44 @@ hist(altAF, main = "Histogram of alternative allele frequency")
 hist(altAF005, main = "Histogram of alternative allele frequency for MAF > 0.05")
 dev.off()
 
+maf <- maf(vcf,2)
+maf <- as.data.frame(maf)
+
+maf005 <- maf(vcf005,2)
+maf005 <- as.data.frame(maf005)
+
+png(filename = "mafs.png", width=1000, height = 500)
+par(mfrow=c(1,2))
+hist(maf$Frequency, main = "Histogram of MAF")
+hist(maf005$Frequency, main = "Histogram of MAF > 0.05")
+dev.off()
+
+
+hist(test$Frequency)
+sum(test$Frequency >= 0.05)
+sum(test$Frequency >= 0.05)/nrow(test)
+
+# PIC
+pic <- sapply(maf$Frequency, function(x) 1-(x^2+(1-x)^2)-(2*x^2*(1-x)^2))
+pic005 <- sapply(maf005$Frequency, function(x) 1-(x^2+(1-x)^2)-(2*x^2*(1-x)^2))
+
+
+
+png(filename = "PIC.png", width=1000, height = 500)
+par(mfrow=c(1,2))
+hist(pic, main = "Histogram of PIC")
+abline(v=mean(pic), col="red", lwd=3, lty=2)
+hist(pic005, main = "Histogram of PIC for MAF > 0.05")
+abline(v=mean(pic005), col="red", lwd=3, lty=2)
+dev.off()
+
 gt <- extract.gt(vcf, element = "GT")
 
 dp <- extract.gt(vcf, element = "DP")
+depthoverall <- as.numeric(extract.info(vcf,element = "DP"))
+min(depthoverall)
+max(depthoverall)
+hist(depthoverall)
 
 #population list needed
 #mydiff <- genetic_diff(vcf)

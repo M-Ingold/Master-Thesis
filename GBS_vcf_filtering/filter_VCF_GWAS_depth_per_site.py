@@ -46,7 +46,6 @@ meanDepthFrame = pd.read_csv(absDepPath, sep="\t")
 #########################################################
 
 # Relative input string for the pyVCF module
-#relVcfOutPathString = "../../data/variant_calls_GWAS_filtered/freebayes_192_samples_chr01-chr12_SNPs_135-samples_QUAL-30_Depth.vcf"
 relVcfOutPathString = sys.argv[2]
 # Turning it into absolute path
 vcfOutPathString = pathlib.Path(relVcfOutPathString)
@@ -62,18 +61,14 @@ vcfOutFile = vcf.Writer(open(absVcfOutPath, 'w'), vcfFile)
 #                                                                                   #
 #####################################################################################
 
-# Filtering the SNPs according to the formula Depth <= 
-'''
+# Setting the 0.95 quantile as threshold for maximum mean depth
+maxThreshold = np.quantile(meanDepthFrame["MEAN_DEPTH"], 0.95) # ~769.6
+# Iterating over each entry in the depth data frame (each entry corresponds to one variant)
 for i in range(meanDepthFrame.shape[0]):
-    threshold = meanDepthFrame['MEAN_DEPTH'][i] + 10 * meanDepthFrame['MEAN_DEPTH'][i]
+    # Loading the variant
     rec = next(vcfFile)
-    # Writing selected variant either to stdout or output file, if specified
-    if rec.INFO['DP'] >= 20 & rec.INFO['DP'] <= threshold:
-        vcfOutFile.write_record(rec)
-'''
-for i in range(meanDepthFrame.shape[0]):
-    threshold = meanDepthFrame['MEAN_DEPTH'][i] + 10 * meanDepthFrame['MEAN_DEPTH'][i]
-    rec = next(vcfFile)
-    # Writing selected variant to the output file, if specified
-    if rec.INFO['DP'] >= 30 & rec.INFO['DP'] <= threshold:
-        vcfOutFile.write_record(rec)
+    # Checking the concordance between the variant's position and the position in the depth data frame
+    if rec.CHROM == meanDepthFrame['CHROM'][i] and rec.POS == meanDepthFrame['POS'][i]:
+        # Writing selected variant to the output file, if its mean sequencing depth is below the upper threshold
+        if meanDepthFrame["MEAN_DEPTH"][i] <= maxThreshold:
+            vcfOutFile.write_record(rec)

@@ -51,8 +51,9 @@ for rec in vcfFile:
         if sample.called:
             if sample['DP'] < 61:
                 sample.called = False
-            #elif '1' in sample['GT'].split('/') and int(sample['AO'])/int(sample['DP']) < 0.25:
-            #        sample.called = False
+            # Blank genotypes which are biallelic but minor allele relative read frequency is < 0.20 (for one out of 4 haplotypes to be the minor allele, approx. 25% of reads should contain the minor allele)
+            elif len(set(sample['GT'].split('/'))) == 2 and np.min(sample['AD'])/sample['DP'] < 0.20:
+                sample.called = False
 
     # Filtering for call rate
     if rec.call_rate >= 0.90:

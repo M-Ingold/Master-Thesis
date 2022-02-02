@@ -46,16 +46,13 @@ vcfOutFile = vcf.Writer(open(absVcfOutPath, 'w'), vcfFile)
 
 # Filtering the SNPs according to the minimum number of reference and alternative allele
 for rec in vcfFile:
-    # Counter for ALT and REF
-    REF=0
-    ALT=0
-    # Checking for the desired qualities in each sample at each site
+    # Counter for heterozygous genotypes
+    HET = 0
+    # Loop over each sample
     for sample in rec.samples:
-        if sample.called:
-            # Check for existence of '0' and '1' alleles
-            if '0' in sample['GT'].split('/'):
-                REF+=1
-            if '1' in sample['GT'].split('/'):
-                ALT+=1
-    if REF > 0 and ALT > 0:
+        # Checking for heterozygosity
+        if sample.called and len(set(sample['GT'].split('/'))) == 2:
+            HET += 1
+            break # the first heterozygous genotype fulfills the filtering criterium. Jump directly to the next variant
+    if HET == 1:
         vcfOutFile.write_record(rec)

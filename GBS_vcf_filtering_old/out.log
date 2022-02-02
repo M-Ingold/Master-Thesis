@@ -1,0 +1,12 @@
+
+VCFtools - 0.1.15
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf ../../data/VCF/freebayes_261_samples_chr01-12_QUAL_30.vcf
+	--site-mean-depth
+
+After filtering, kept 261 out of 261 Individuals
+Outputting Depth for Each Site
+After filtering, kept 1550246 out of a possible 1550246 Sites
+Run Time = 225.00 seconds

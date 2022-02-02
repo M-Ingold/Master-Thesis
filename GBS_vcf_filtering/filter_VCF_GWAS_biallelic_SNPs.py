@@ -46,6 +46,9 @@ vcfOutFile = vcf.Writer(open(absVcfOutPath, 'w'), vcfFile)
 
 # Filtering only for biallelic SNPs
 for rec in vcfFile:
-    # Writing selected variant to the output file, if passing the threshold
+    # Check for SNPs that have only one alternative allele besides the reference allele
     if len(rec.INFO["AO"]) == 1:
         vcfOutFile.write_record(rec)
+    # In case of absence of a reference allele in the population, check for SNPs that have exactly two alternative alleles
+    #elif rec.INFO["RO"] == 0 and len(rec.INFO["AO"]) == 2:
+    #    vcfOutFile.write_record(rec)

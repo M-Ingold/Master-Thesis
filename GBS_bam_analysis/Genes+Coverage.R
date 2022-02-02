@@ -25,7 +25,7 @@ coverage_chr09 <- read.delim("../data/alignment/coverage_chr09.txt", header = F)
 coverage_chr10 <- read.delim("../data/alignment/coverage_chr10.txt", header = F)
 coverage_chr11 <- read.delim("../data/alignment/coverage_chr11.txt", header = F)
 coverage_chr12 <- read.delim("../data/alignment/coverage_chr12.txt", header = F)
-coverage_all <- read.delim("../data/alignment/samtools_coverage.txt", header = F)
+#coverage_all <- read.delim("../data/alignment/samtools_coverage.txt", header = F)
 
 
 #sum of genes on a single chromosome
@@ -239,109 +239,109 @@ chr12coveragewindow <- avgwindow1chr(coverage_chr12, 1000000)
 
 plot1 <- ggplot(subset(cds_sorted, seqid == "chr01"), aes(start)) +
             geom_histogram(fill= "blue",alpha=0.5, bins = 88) +
-            geom_point(data=chr01coveragewindow, mapping = aes(x=start, y=avg*4)) +
-            geom_smooth(data=chr01coveragewindow, mapping = aes(x=mid, y=avg*4), se=F, color = "black") +
+            geom_point(data=chr01coveragewindow, mapping = aes(x=start, y=avg)) +
+            geom_smooth(data=chr01coveragewindow, mapping = aes(x=mid, y=avg), se=F, color = "black") +
             scale_y_continuous(name = "Genes per bin",
-                       sec.axis = sec_axis(trans=~./4, name = "Average coverage per 1Gb")) +
+                       sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb")) +
             ggtitle("Chr01")
 
 plot2 <- ggplot(subset(cds_sorted, seqid == "chr02"), aes(start)) +
             geom_histogram(fill= "blue",alpha=0.5, bins = 46) +
-            geom_point(data=chr02coveragewindow, mapping = aes(x=start, y=avg*4)) +
-            geom_smooth(data=chr02coveragewindow, mapping = aes(x=start, y=avg*4), se=F, color = "black") +
+            geom_point(data=chr02coveragewindow, mapping = aes(x=start, y=avg)) +
+            geom_smooth(data=chr02coveragewindow, mapping = aes(x=start, y=avg), se=F, color = "black") +
             #theme_bw() +
             scale_y_continuous(name = "Genes per bin",
-                               sec.axis = sec_axis(trans=~./4, name = "Average coverage per 1Gb"))+
+                               sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
             ggtitle("Chr02")
 
 plot3 <- ggplot(subset(cds_sorted, seqid == "chr03"), aes(start)) +
             geom_histogram(fill= "blue",alpha=0.5, bins = 60) +
-            geom_point(data=chr03coveragewindow, mapping = aes(x=start, y=avg*4)) +
-            geom_smooth(data = chr03coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+            geom_point(data=chr03coveragewindow, mapping = aes(x=start, y=avg)) +
+            geom_smooth(data = chr03coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
             #theme_ipsum() +
             scale_y_continuous(name = "Genes per bin",
-                               sec.axis = sec_axis(trans=~./4, name = "Average coverage per 1Gb"))+
+                               sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
             ggtitle("Chr03")
 
 plot4 <- ggplot(subset(cds_sorted, seqid == "chr04"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = 69) +
-  geom_point(data=chr04coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr04coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr04coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr04coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr04")
 
 plot5 <- ggplot(subset(cds_sorted, seqid == "chr05"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = 55) +
-  geom_point(data=chr05coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr05coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr05coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr05coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr05")
 
 plot6 <- ggplot(subset(cds_sorted, seqid == "chr06"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = 59) +
-  geom_point(data=chr06coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr06coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr06coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr06coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr06")
 
 plot7 <- ggplot(subset(cds_sorted, seqid == "chr07"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = 57) +
-  geom_point(data=chr07coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr07coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr07coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr07coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr07")
 
 plot8 <- ggplot(subset(cds_sorted, seqid == "chr08"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = dim(chr08coveragewindow)[1]) +
-  geom_point(data=chr08coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr08coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr08coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr08coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr08")
 
 plot9 <- ggplot(subset(cds_sorted, seqid == "chr09"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = dim(chr09coveragewindow)[1]) +
-  geom_point(data=chr09coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr09coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr09coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr09coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr09")
 
 plot10 <- ggplot(subset(cds_sorted, seqid == "chr10"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = dim(chr10coveragewindow)[1]) +
-  geom_point(data=chr10coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr10coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr10coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr10coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr10")
 
 plot11 <- ggplot(subset(cds_sorted, seqid == "chr11"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = dim(chr11coveragewindow)[1]) +
-  geom_point(data=chr11coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr11coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr11coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr11coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr11")
 
 plot12 <- ggplot(subset(cds_sorted, seqid == "chr12"), aes(start)) +
   geom_histogram(fill= "blue",alpha=0.5, bins = dim(chr12coveragewindow)[1]) +
-  geom_point(data=chr12coveragewindow, mapping = aes(x=start, y=avg*4)) +
-  geom_smooth(data = chr12coveragewindow, mapping = aes(x=start, y=avg*4), se = F, color = "black")+
+  geom_point(data=chr12coveragewindow, mapping = aes(x=start, y=avg)) +
+  geom_smooth(data = chr12coveragewindow, mapping = aes(x=start, y=avg), se = F, color = "black")+
   #theme_ipsum() +
   scale_y_continuous(name = "Genes per bin",
-                     sec.axis = sec_axis(trans=~./5, name = "Average coverage per 1Gb"))+
+                     sec.axis = sec_axis(trans=~./1, name = "Average coverage per 1Gb"))+
   ggtitle("Chr12")
 
 
