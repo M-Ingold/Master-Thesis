@@ -1,0 +1,262 @@
+"","VARIETY","...1","Nr.","Abbr..x","Exp..x","Maturity","Mother","Father","COUNTRY.x","Year","Source","heat-sensitivity_combi_HI_starch","Identifier","Sample name","Nr","Stärke % verfügbar","Lfd. #","FAU_Nr","Abbr..y","BREEDER/ Origin","REMARK/ GLKS/ LFL","Maturity/ purpose","parent_genotyped"
+"1","14715/274","1",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-E06-350-S274-2","350-S274-2",NA,NA,"GBS2_45",350,"S274","Bavaria Saat","Stpr Stärke 2020","Stärke",FALSE
+"2","14736-2PA","2",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-F06-351-S2pa-2","351-S2pa-2",NA,NA,"GBS2_46",351,"S2pa","Bavaria Saat","Stpr Stärke 2020","Stärke",FALSE
+"3","17423-10","3",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-G06-354-M10-2","354-M10-2",NA,NA,"GBS2_47",354,"M10","Bavaria Saat","Mpr Stärke 2020","Stärke",FALSE
+"4","7965-5","4",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-H06-355-M5-2","355-M5-2",NA,NA,"GBS2_48",355,"M5","Bavaria Saat","Mpr Stärke 2020","Stärke",FALSE
+"5","ACOUSTIC","5",NA,NA,NA,NA,"ORCHESTRA","DOB1997-507-015","NLD",2018,"https://www.plantbreeding.wur.nl/PotatoPedigree/pedigree_imagemap.php?id=9368",NA,"P01-F09-395-ACO-2","395-ACO-2",NA,NA,"GBS2_70",395,"ACO","C. Meijer B.V.","ADAPT-set",NA,FALSE
+"6","ADORA","6",1,"AD","Exp_03",6,"ORLIK","ALCMARIA","NLD",1990,NA,"medium","P1-A01-001-AD","001-AD",1,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"7","AGRIA","8",45,"AG","Exp_03",5,"QUARTA","SEMLO","NLD",1985,NA,"medium-torerant",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,FALSE
+"8","AIKO","13",104,"AK","Exp_06",4,"ASSIA","JULIVER","GER",1989,NA,"medium-sensitiv","P2-H01-104-AK","104-AK",104,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"9","ALBATROS","14",NA,NA,NA,NA,"1.293112-77 N+Z","1.3014102-81","GER",1996,"https://www.plantbreeding.wur.nl/PotatoPedigree/pedigree_imagemap.php?id=9368",NA,"P01-A07-357-ALB-2","357-ALB-2",NA,NA,"GBS2_49",357,"ALB","Norika","Mpr Stärke 2020",NA,FALSE
+"10","ALCANDER","15",2,"AC","Exp_07",6,"RZ- 95-6141","CRISPS4ALL","NLD",2018,NA,"medium","P1-B01-002-AC","002-AC",2,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"11","ALLIANS","16",3,"AL","Exp_03",8,"L 185/88359","E 90/55","GER",2003,NA,"medium","P1-C01-003-AL","003-AL",3,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"12","ALLISON","17",4,"AN","Exp_01",5,"HEO 98-1620","AGATA","NLD",2018,NA,"tolerant","P1-D01-004-AN","004-AN",4,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"13","ALMERA","18",5,"AE","Exp_01",6,"BOHM 77-2102","AR 80- 31-  20","NLD",1999,NA,"medium","P1-E01-005-AE","005-AE",5,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"14","ALONSO","19",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-H09-397-ALO-2","397-ALO-2",NA,NA,"GBS2_72",397,"ALO","Agrico","ADAPT-set",NA,FALSE
+"15","ALOUETTE","20",6,"AO","Exp_03",8,"AR 02-139-1","LAURA","NLD",2014,NA,"medium-sensitiv","P1-F01-006-AO","006-AO",6,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"16","ALTHEA","21",7,"AH","Exp_01",5,"HEO 98-1620","HEO 96- 176","NLD",2018,NA,"medium-tolerant","P1-G01-007-AH","007-AH",7,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"17","ALTUS","22",8,"ALT","Exp_01",5,"KARNA 87-2306","KARTEL","NLD",2008,NA,"medium","P1-H01-008-ALT","008-ALT",8,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"18","ALVERSTONE RUSSET","24",9,"AV","Exp_03",4,"CRE 98- 200","INNOVATOR","NLD",2017,NA,"medium-torerant",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,TRUE
+"19","AMADO","25",NA,NA,NA,NA,"KURAS","BH 84-212","GER",2002,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php?name=AMADO",NA,"P01-A01-208-AMA-2","208-AMA-2",NA,NA,"GBS2_01",208,"AMA","Europlant","LSV 211 Weih","Stärke",TRUE
+"20","AMARYL","26",105,"AM","Exp_06",4,"SASKIA","(CPC 1673-20 (adg) x FURORE)","NLD",1963,NA,"medium-sensitiv","P2-A02-105-AM","105-AM",105,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"21","AMBITION","27",10,"AB","Exp_03",7,"ADORA","QUINTA","NLD",2007,NA,"medium-sensitiv","P1-B02-010-AB","010-AB",10,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"22","AMSEL","28",106,"AMS","Exp_06",6,"AQUILA","FLAVA","GER",1956,NA,"(tolerant)","P2-B02-106-AMS","106-AMS",106,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"23","ANNABELLE","29",11,"AA","Exp_01",7,"NICOLA","MONALISA","NLD",2001,NA,"medium-tolerant","P1-C02-011-AA","011-AA",11,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"24","ANYA","30",12,"AY","Exp_01",5,"DESIREE","PINK FIR APPLE","GBR",1996,NA,"medium","P1-D02-012-AY","012-AY",12,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"25","ARIZONA","31",13,"AZ","Exp_01",6,"UK 150-19D22","MASCOTTE","NLD",2009,NA,"medium-sensitiv","P1-E02-013-AZ","013-AZ",13,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"26","ARRAN LUXURY","32",107,"ALU","Exp_06",5,"ARRAN VICTORY","FLOURBALL","GBR",1929,NA,"(sensitiv)","P2-C02-107-ALU","107-ALU",107,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"27","ASTERIX","33",182,"AS","Exp_06",NA,"CARDINAL","VE 70-9","NLD",1991,NA,"medium-tolerant","P2-H10-182-AS","182-AS",182,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"28","ATLANTIC","34",14,"AT","Exp_03",5,"WAUSEON","LENAPE","USA",1976,NA,"medium-sensitiv","P1-F02-014-AT","014-AT",14,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"29","AURUM","35",15,"AU","Exp_01",7,"SYLVANA","VOYAGER","NLD",2019,NA,"sensitiv","P1-G02-015-AU","015-AU",15,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"30","AXION","36",NA,NA,NA,NA,"KA 87-2306","STABILO","NLD",2008,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php?name=AXION",NA,"P01-B01-215-AX-2","215-AX-2",NA,NA,"GBS2_02",215,"AX","Averis","LSV 211 Weih","Stärke",FALSE
+"31","BAFANA","37",16,"BF","Exp_03",5,"VICTORIA","FELSINA","NLD",2009,NA,"medium","P1-H02-016-BF","016-BF",16,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"32","BARAKA","38",17,"BR","Exp_03",6,"SVP 50 358","AVENIR","NLD",1971,NA,"medium-sensitiv","P1-A03-017-BR","017-BR",17,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"33","BARBARA","39",108,"BB","Exp_03",5,"MPI 64.956/68","AM 62.740","GER",1982,NA,"medium-tolerant","P2-D02-108-BB","108-BB",108,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"34","BARTINA","40",183,"BA","Exp_04",NA,"SATURNA","ZPC 62-75","NLD",1988,NA,"medium","P2-A11-183-BA","183-BA",183,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"35","BAVATOP","41",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-C01-218-BAV-2","218-BAV-2",NA,NA,"GBS2_03",218,"BAV","Bavaria Saat","LSV 211 Weih","Stärke",FALSE
+"36","BELANA","42",18,"BL","Exp_03",8,"MILVA","E 87/66","GER",NA,NA,"medium","P1-B03-018-BL","018-BL",18,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"37","BETTINA","43",NA,NA,NA,NA,"FRANZI","795/883","GER",1988,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php?name=BETTINA",NA,"P01-B06-344-BET-2","344-BET-2",NA,NA,"GBS2_42",344,"BET","Bavaria Saat",NA,"mittelfrühe Speisesorte",FALSE
+"38","BIE 03- 320","44",19,"B03","Exp_01",7,"BIE 94- 449","BIE 92- 970","NLD",NA,NA,"medium","P1-C03-019-B03","019-B03",19,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"39","BIG ROSSA","45",NA,NA,NA,NA,"LAURA","FLORA","BRD",2007,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php?name=BETTINA",NA,"P01-H05-342-BIG-2","342-BIG-2",NA,NA,"GBS2_40",342,"BIG","Bavaria Saat",NA,"miittelfrühe Speisesorte",FALSE
+"40","BIM 11-107-12","46",20,"B11","Exp_03",8,"IVP4X-121-34","LAURA","NLD",NA,NA,"medium","P1-D03-020-B11","020-B11",20,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"41","BINTJE","47",184,"BI","Exp_06",5,"MUNSTERSEN","JAUNE D'OR","NLD",1910,NA,"medium","P2-B11-184-BI","184-BI",184,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"42","BLANCHARD","48",109,"BC","Exp_03",5,NA,NA,"FRA",1849,NA,"tolerant","P2-E02-109-BC","109-BC",109,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"43","BOSS","49",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-C10-400-BOS-2","400-BOS-2",NA,NA,"GBS2_75",400,"BOS","Saatzucht Firlbeck",NA,NA,FALSE
+"44","BRAVO","50",110,"BV","Exp_07",4,"ZEEUWSE BLAUWE","WILHELM KORN","NLD",1900,NA,"medium-sensitiv","P2-F02-110-BV","110-BV",110,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"45","BRICATA KWS","51",21,"BT","Exp_01",7,"OPAL","VR 808","GER",NA,NA,"tolerant","P1-E03-021-BT","021-BT",21,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"46","BRIOSA","52",22,"BO","Exp_03",7,"RZ- 89-2050","CARRERA","NLD",2015,NA,"medium-tolerant","P1-F03-022-BO","022-BO",22,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"47","BÜ12-288","53",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-E01-225-BUE-2","225-BUE-2",NA,NA,"GBS2_05",225,"BUE",NA,"LSV 211 Weih","Stärke",FALSE
+"48","CAESAR","54",23,"CA","Exp_03",6,"MONALISA","ROP B1178","NLD",1990,NA,"medium","P1-G03-023-CA","023-CA",23,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"49","CAMEL","55",24,"CM","Exp_01",7,"ROSARA","RZ- 97-6139","NLD",2013,NA,"medium-tolerant","P1-H03-024-CM","024-CM",24,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"50","CANBERRA","56",25,"CN","Exp_03",7,"LATONA","RED SCARLETT","NLD",2007,NA,"medium","P1-A04-025-CN","025-CN",25,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"51","CARDYMA","57",26,"CY","Exp_03",6,"AND 97-  15","BIE 93-1101","NLD",NA,NA,"medium-sensitiv","P1-B04-026-CY","026-CY",26,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"52","CARLITA","58",27,"CL","Exp_01",7,"JAERLA","PROVITA","NLD",1991,NA,"medium-sensitiv","P1-C04-027-CL","027-CL",27,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"53","CARRERA","59",28,"CR","Exp_03",7,"ALLARD","CONCURRENT","NLD",1999,NA,"medium-sensitiv","P1-D04-028-CR","028-CR",28,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"54","CARUSO","60",NA,NA,NA,NA,"SA 2952/78","SA 92-352-6","GER",2004,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-B10-399-CAR-2","399-CAR-2",NA,NA,"GBS2_74",399,"CAR","Solana R.","ADAPT-set",NA,FALSE
+"55","CATRIONA","61",111,"CT","Exp_06",6,"McGill and Smiths seedling 10.264 A 10.612",NA,"GBR",1920,"https://varieties.ahdb.org.uk/varieties","(sensitiv)","P2-G02-111-CT","111-CT",111,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"56","CECILE","62",29,"CE","Exp_01",7,"NICOLA","RZ- 88- 404","NLD",2003,NA,"medium-sensitiv","P1-E04-029-CE","029-CE",29,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"57","CHALLENGER","63",30,"CH","Exp_03",6,"AZIZA","VICTORIA","NLD",2008,NA,"medium-torerant","P1-F04-030-CH","030-CH",30,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"58","CIKLAMEN","64",31,"CK","Exp_03",5,"MAGYAR ROZSA","1-71.17/6N+B","HUN",1988,NA,"medium-sensitiv","P1-G04-031-CK","031-CK",31,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"59","CLEOPATRA","65",32,"CP","Exp_03",6,"ZPC 50 35","DESIREE","NLD",1980,NA,"medium-sensitiv","P1-H04-032-CP","032-CP",32,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"60","COLOMBA","66",33,"CO","Exp_01",6,"CARRERA","AGATA","NLD",2011,NA,"medium","P1-A05-033-CO","033-CO",33,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"61","COQUINE","67",65,"CQ","Exp_02",7,"INRA TT118.3",NA,"FRA",2008,NA,"tolerant","P1-A09-065-CQ","065-CQ",65,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"62","CUMBICA","68",34,"CU","Exp_01",6,NA,NA,"GER",2010,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php","medium","P1-B05-034-CU","034-CU",34,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"63","DAISY","69",35,"DA","Exp_03",7,"GIPSY","CULPA","FRA",1998,NA,"medium","P1-C05-035-DA","035-DA",35,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"64","DAKOTA ROSE","70",49,"DK","Exp_01",6,"ND 1196 2 R","NORDONNA","USA",2001,NA,"medium-sensitiv","P1-A07-049-DK","049-DK",49,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"65","DARTIEST","71",NA,NA,NA,NA,"KURAS","SERESTA","NLD",2012,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-B07-360-DAR-2","360-DAR-2",NA,NA,"GBS2_50",360,"DAR","Semagri",NA,NA,TRUE
+"66","DELIA RED","72",36,"DR","Exp_03",7,"HIL 95- 303","DYNAMICA","NLD",2016,NA,"medium-sensitiv","P1-D05-036-DR","036-DR",36,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"67","DERBY","73",37,"DB","Exp_03",6,"MONDIAL","FRESCO","NLD",1999,NA,"tolerant","P1-E05-037-DB","037-DB",37,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"68","DESIREE","74",172,"DE","Exp_04",NA,"URGENTA","DEPESCHE","NLD",1962,NA,"medium-sensitiv","P2-F09-172-DE","172-DE",172,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"69","DIAMANT","79",38,"DM","Exp_01",6,"MUTANT UIT","CARDINAL","GER",NA,NA,"sensitiv","P1-F05-038-DM","038-DM",38,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"70","DIANELLA","80",112,"DN","Exp_07",4,"PROZENTRAGIS","PEPO","GER",1940,NA,"sensitiv","P2-H02-112-DN","112-DN",112,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"71","DIROSSO","81",39,"DI","Exp_01",7,"RZ- 93-9810","AMOROSA","NLD",2013,NA,"tolerant","P1-G05-039-DI","039-DI",39,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"72","DJANGO","82",NA,NA,NA,NA,"HELIOS","W 2899-9","GER",2006,NA,NA,"P01-C07-361-DJ-2","361-DJ-2",NA,NA,"GBS2_51",361,"DJ","Bavaria Saat",NA,NA,FALSE
+"73","DOUBLE FUN","83",40,"DF","Exp_01",3,"VG3CAE  5","CHARMANTE","NLD",2014,NA,"medium-tolerant","P1-H05-040-DF","040-DF",40,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"74","DOUNIA","84",61,"DO","Exp_01",6,"INRA 94T97.43","G93TT296006","FRA",NA,NA,"(tolerant)","P1-E08-061-DO","061-DO",61,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"75","DROSSEL","85",113,"DS","Exp_03",5,"AQUILA","FLAVA","GER",1956,NA,"medium","P2-A03-113-DS","113-DS",113,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"76","DVY 04- 312","86",41,"DY","Exp_01",7,"DVY 97- 186","HEG 93-   3","NLD",NA,NA,"medium-sensitiv","P1-A06-041-DY","041-DY",41,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"77","EDZELL BLUE","87",114,"EZ","Exp_03",5,"unknown",NA,"GBR",1815,NA,"tolerant","P2-B03-114-EZ","114-EZ",114,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"78","EL BEIDA","88",42,"EB","Exp_01",4,"MONDIAL","89F12.16","FRA",2011,NA,"medium-sensitiv","P1-B06-042-EB","042-EB",42,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"79","EL MUNDO","89",43,"EM","Exp_03",6,"HEO 95-  84","VALOR","NLD",2010,NA,"medium-sensitiv","P1-C06-043-EM","043-EM",43,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"80","ERIKA","90",NA,NA,NA,NA,NA,NA,NA,NA,"3 different entries on plantbreeding.wur.nl",NA,"P01-G09-396-ERI-2","396-ERI-2",NA,NA,"GBS2_71",396,"ERI","Agrico","ADAPT-set",NA,FALSE
+"81","ERNTEDANK","91",115,"ED","Exp_07",5,"ACKERSEGEN","FLAVA","GER",1946,NA,"medium-tolerant","P2-C03-115-ED","115-ED",115,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"82","EUROFLORA","92",NA,NA,NA,NA,"AMADO","seedling","GER",2007,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-F01-240-EuF-2","240-EuF-2",NA,NA,"GBS2_06",240,"EuF","Europlant","LSV 211 Weih","Stärke",TRUE
+"83","EUROGRANDE","93",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-D07-362-EuG-2","362-EuG-2",NA,NA,"GBS2_52",362,"EuG","Europlant",NA,NA,FALSE
+"84","EURORESA","94",NA,NA,NA,NA,NA,NA,"GER",2010,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-G01-241-EuR-2","241-EuR-2",NA,NA,"GBS2_07",241,"EuR","Europlant","LSV 211 Weih","Stärke",FALSE
+"85","EUROSTARCH","95",NA,NA,NA,NA,NA,NA,"GER",2005,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-E07-363-EuS-2","363-EuS-2",NA,NA,"GBS2_53",363,"EuS","Europlant",NA,NA,FALSE
+"86","EUROVIVA","96",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-H01-242-EuV-2","242-EuV-2",NA,NA,"GBS2_08",242,"EuV","Europlant","LSV 211 Weih","Stärke",FALSE
+"87","EVORA","97",185,"EV","Exp_04",NA,"LEE 92-196","VALOR","NLD",2011,NA,"medium-sensitiv","P2-C11-185-EV","185-EV",185,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"88","F13/21428","98",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-E08-375-F28-2","375-F28-2",NA,NA,"GBS2_61",375,"F28","Saatzucht Firlbeck","Mpr Stärke 2020",NA,FALSE
+"89","F14/11710","99",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-F08-378-F10-2","378-F10-2",NA,NA,"GBS2_62",378,"F10","Saatzucht Firlbeck","Mpr Stärke 2020",NA,FALSE
+"90","F14/6933","100",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-G08-380-F33-2","380-F33-2",NA,NA,"GBS2_63",380,"F33","Saatzucht Firlbeck","Mpr Stärke 2020",NA,FALSE
+"91","F14/7074","101",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-H08-381-F74-2","381-F74-2",NA,NA,"GBS2_64",381,"F74","Saatzucht Firlbeck","Mpr Stärke 2020",NA,FALSE
+"92","F15/3121","102",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-A09-383-F21-2","383-F21-2",NA,NA,"GBS2_65",383,"F21","Saatzucht Firlbeck","Mpr Stärke 2020",NA,FALSE
+"93","F15/6576","103",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-B09-391-F76-2","391-F76-2",NA,NA,"GBS2_66",391,"F76","Saatzucht Firlbeck","Mpr Stärke 2020",NA,FALSE
+"94","F15560","104",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-C09-392-F60-2","392-F60-2",NA,NA,"GBS2_67",392,"F60","Saatzucht Firlbeck","Mpr Stärke 2020",NA,FALSE
+"95","FABULA","105",44,"FU","Exp_03",6,"MONALISA","HUDSON","NLD",1997,NA,"medium","P1-D06-044-FU","044-FU",44,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"96","FARIDA","106",186,"FA","Exp_06",NA,"RZ 91-2313","VDW 87-36","NLD",2015,NA,"(sensitiv)","P2-D11-186-FA","186-FA",186,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"97","FAUSTA","107",116,"FS","Exp_03",5,"SOMMERSTARK E","W 8102/214","GER",1975,NA,"medium-sensitiv","P2-D03-116-FS","116-FS",116,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"98","FELSINA","108",46,"FE","Exp_01",6,"MORENE","GLORIA","NLD",1992,NA,"medium-tolerant","P1-F06-046-FE","046-FE",46,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"99","FICHTEGOLD","109",117,"FG","Exp_07",4,"((ZWICKAUER FRUHE x JUBEL) x KLARA)","MITTELFRUHE","GER",1946,NA,"medium-sensitiv","P2-E03-117-FG","117-FG",117,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"100","FINK","110",118,"FK","Exp_03",5,"AQUILA","(VORAN x MITTELFRUHE)","GER",1956,NA,"medium","P2-F03-118-FK","118-FK",118,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"101","FIONIA","111",119,"FI","Exp_07",6,"6794","MARIS PIPER","POL",1968,NA,"medium-sensitiv","P2-G03-119-FI","119-FI",119,"nein",NA,NA,NA,NA,NA,NA,TRUE
+"102","FLAMENCO","112",47,"FL","Exp_03",4,"RED SCARLETT","RED CLOUD","NLD",2013,NA,"medium-sensitiv","P1-G06-047-FL","047-FL",47,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"103","FONTANE","113",48,"FN","Exp_03",7,"AGRIA","AR 76 34 3","NLD",1999,NA,"medium","P1-H06-048-FN","048-FN",48,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"104","FORTUS","114",187,"FO","Exp_06",NA,"VOYAGER","RZ 95-6066","NLD",2015,NA,"(sensitiv)","P2-E11-187-FO","187-FO",187,"nein",NA,NA,NA,NA,NA,NA,TRUE
+"105","FRINGILLA","115",121,"FGI","Exp_03",4,"FELDESLOHN","SITTA","GER",1977,NA,"medium-tolerant","P2-H03-121-FGI","121-FGI",121,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"106","FRÜHBOTE","116",122,"FB","Exp_07",7,"JULI","SONNENRAGIS","GER",1935,NA,"medium-tolerant","P2-A04-122-FB","122-FB",122,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"107","GALA","117",NA,NA,NA,NA,"2.6 720-86","LEYLA","GER",2002,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-A02-245-GA-2","245-GA-2",NA,NA,"GBS2_09",245,"GA",NA,"LSV 207 Weih","mfr",FALSE
+"108","GLORIETTA","118",50,"GL","Exp_03",8,"ALLIANS","VALETTA","GER",NA,NA,"medium","P1-B07-050-GL","050-GL",50,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"109","GOLDMARIE","119",NA,NA,NA,NA,"ANDANTE","AGILA","GER",NA,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-B02-246-GM-2","246-GM-2",NA,NA,"GBS2_10",246,"GM",NA,"LSV 202 Weih","fr",FALSE
+"110","GREAT  SCOT","120",123,"GS","Exp_07",5,"IMPERATOR","CHAMPION","GBR",1909,NA,"medium-sensitiv","P2-B04-123-GS","123-GS",123,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"111","GWENNE","121",51,"GW","Exp_01",7,"INRA 94T97.43","G93TT296006","FRA",2011,NA,"medium","P1-C07-051-GW","051-GW",51,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"112","HANSA","122",52,"HA","Exp_03",7,"OBERARNB.FRUHE","FLAVA","GER",1957,NA,"medium","P1-D07-052-HA","052-HA",52,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"113","HEIDENIERE","123",124,"HN","Exp_04",5,"unknown",NA,"GER",1953,NA,"(sensitiv)","P2-C04-124-HN","124-HN",124,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"114","HERACLEA","124",53,"HE","Exp_03",7,"MARKIES","RZ- 94-1538","NLD",2015,NA,"medium","P1-E07-053-HE","053-HE",53,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"115","HERMES","125",54,"HR","Exp_03",7,"DDR 5158","SW 163/55","AUT",NA,NA,"medium-sensitiv","P1-F07-054-HR","054-HR",54,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"116","HERMOSA","126",55,"HM","Exp_01",6,"MONDIAL","CARRERA","NLD",2017,NA,"(sensitiv)","P1-G07-055-HM","055-HM",55,"nein",NA,NA,NA,NA,NA,NA,TRUE
+"117","HYVA","127",125,"HY","Exp_07",5,NA,NA,"FRA",1949,NA,"medium","P2-D04-125-HY","125-HY",125,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"118","IDEAAL","128",126,"ID","Exp_07",7,"EPICURE","JAUNE D'OR","NLD",1917,NA,"medium","P2-E04-126-ID","126-ID",126,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"119","INCA SUN","129",56,"IS","Exp_01",9,"SCRI 81568","SCRI 71746 PHU","GBR",2001,NA,"medium","P1-H07-056-IS","056-IS",56,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"120","INNOVATOR","130",57,"IN","Exp_03",6,"SHEPODY","RZ- 84-2580","NLD",1999,NA,"medium","P1-A08-057-IN","057-IN",57,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"121","ISKRA","131",127,"IK","Exp_07",4,"(DOON EARLY x PHYTOPHTHOROUSTOITSCHIVY)","ROON","RUS",1965,NA,"medium","P2-F04-127-IK","127-IK",127,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"122","IVORY RUSSET","132",58,"IR","Exp_03",4,"RZ- 93-7105","INNOVATOR","NLD",2011,NA,"medium","P1-B08-058-IR","058-IR",58,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"123","JANA","133",128,"JA","Exp_07",5,"BEA","FRUHMOLLE","SVN",1973,NA,"(sensitiv)","P2-G04-128-JA","128-JA",128,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"124","JAZZY","134",59,"JZ","Exp_01",6,"FRANCELINE","CUPIDO","NLD",2010,NA,"(medium)","P1-C08-059-JZ","059-JZ",59,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"125","JELLY","135",NA,NA,NA,NA,"MARABEL","L 173/92/921","GER",2002,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-C02-250-JE-2","250-JE-2",NA,NA,"GBS2_11",250,"JE",NA,"LSV 207 Weih","mfr",TRUE
+"126","JOLY","136",60,"JO","Exp_03",4,"SIFRA","VIRGO","NLD",2017,NA,"medium","P1-D08-060-JO","060-JO",60,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"127","JUBILAT","137",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-F07-364-JUB-2","364-JUB-2",NA,NA,"GBS2_54",364,"JUB","Solana",NA,NA,FALSE
+"128","JUWEL","138",NA,NA,NA,NA,"BS 857/58","FLORA","GER",2004,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-A06-343-JUW-2","343-JUW-2",NA,NA,"GBS2_41",343,"JUW","Bavaria Saat",NA,"sehr frühe Speisesorte",FALSE
+"129","KAMYK","139",129,"KA","Exp_04",4,"ORLIK","APOLLO","CZE",1974,NA,"sensitiv","P2-H04-129-KA","129-KA",129,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"130","KARELIA","140",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-D02-256-KAR-2","256-KAR-2",NA,NA,"GBS2_12",256,"KAR",NA,"LSV 207 Weih","mfr",FALSE
+"131","KEDVENC","141",130,"KD","Exp_07",5,"ARANYALMA","27","HUN",1968,NA,"sensitiv","P2-A05-130-KD","130-KD",130,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"132","KEMENYITÖ KIRALY","142",132,"KK","Exp_07",4,NA,NA,"HUN",1939,NA,"(sensitiv)","P2-B05-132-KK","132-KK",132,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"133","KENNEBEC","143",62,"KE","Exp_03",4,"USDA B 127","USDA   96  56","USA",1948,NA,"medium-tolerant","P1-F08-062-KE","062-KE",62,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"134","KING GEORGE V","144",133,"KG","Exp_07",5,"unknown",NA,"GBR",1911,NA,"(sensitiv)","P2-C05-133-KG","133-KG",133,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"135","KONDOR","145",188,"KO","Exp_06",NA,"KONST 61-333","WILJA","NLD",1984,NA,"(sensitiv)","P2-F11-188-KO","188-KO",188,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"136","KONSUM","146",134,"KN","Exp_07",5,"DEUTSCHLAND","PROFESSOR GISEVIUS","GER",1929,NA,"(sensitiv)","P2-D05-134-KN","134-KN",134,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"137","KORETTA","147",135,"KR","Exp_04",5,"1-67.254/13 N","ADRETTA","GER",1984,NA,"medium-sensitiv","P2-E05-135-KR","135-KR",135,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"138","KRASAVA","148",136,"KS","Exp_07",5,"VISNOVSKE ROHLICKY","B 53","CZE",1940,NA,"(sensitiv)","P2-F05-136-KS","136-KS",136,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"139","KRONE","149",NA,NA,NA,NA,"BS 3/82","QUINTA","GER",2002,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-E05-337-KRO-2","337-KRO-2",NA,NA,"GBS2_37",337,"KRO","Bavaria Saat",NA,"mittelfrühe Speissorte",FALSE
+"140","KUBA","150",NA,NA,NA,NA,"BZURA","KARLENA","POL",1999,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-E02-258-KUB-2","258-KUB-2",NA,NA,"GBS2_13",258,"KUB","Niehoff","LSV 211 Weih","Stärke",FALSE
+"141","KURAS","151",NA,NA,NA,NA,"BRDA","VK 69-491","NLD",1996,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-F02-259-KUR-2","259-KUR-2",NA,NA,"GBS2_14",259,"KUR","Europlant","LSV 211 Weih","Stärke",FALSE
+"142","KURODA","152",63,"KU","Exp_01",6,"AR 76 199 3","KONST 80-1407","NLD",1998,NA,"(sensitiv)","P1-G08-063-KU","063-KU",63,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"143","LA VIE","153",64,"LV","Exp_01",8,"VDZ 99- 276","ANNABELLE","NLD",2019,NA,"tolerant","P1-H08-064-LV","064-LV",64,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"144","LADY CLAIRE","154",189,"LC","Exp_06",NA,"AGRIA","KW 78-34-470","NLD",1996,NA,"medium","P2-G11-189-LC","189-LC",189,"nein",NA,NA,NA,NA,NA,NA,TRUE
+"145","LADY ROSETTA","155",190,"LR","Exp_04",NA,"CARDINAL","VTN 62-33-3","NLD",1988,NA,"medium-tolerant","P2-H11-190-LR","190-LR",190,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"146","LANDSORTE P94/077","156",137,"L77","Exp_04",4,NA,NA,"ROM",NA,NA,"sensitiv","P2-G05-137-L77","137-L77",137,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"147","LANDSORTE P94/197","157",138,"L197","Exp_06",4,NA,NA,"ROM",NA,NA,"medium","P2-H05-138-L197","138-L197",138,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"148","LINDA","158",180,"LD","Exp_06",NA,NA,NA,NA,NA,"3 different entries on plantbreeding.wur.nl","medium","P2-F10-180-LD","180-LD",180,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"149","LINZER SPEISE","159",139,"LS","Exp_07",5,"GOLDSEGEN","EVA","AUT",1970,NA,"medium-tolerant","P2-A06-139-LS","139-LS",139,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"150","LIPSI","160",197,"LP","Exp_04",5,"4-65.64/48 N","4-65.64/48 N x 2-67.387","GER",1984,NA,"medium-sensitiv","P2-E12-197-LP","197-LP",197,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"151","LISETA","161",191,"LI","Exp_06",NA,"SPUNTA","VE 66-295","NLD",1988,NA,"(sensitiv)","P1-B09-066-LI","066-LI",66,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"152","LIU","162",140,"Liu","Exp_07",5,"2-70.4154 N","1-65.751/132 N","LIU",1988,NA,"medium","P2-B06-140-Liu","140-Liu",140,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"153","MANITOU","163",67,"MU","Exp_02",7,"LAURA","MARANCA","NLD",2008,NA,"medium-tolerant","P1-C09-067-MU","067-MU",67,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"154","MARABEL","164",68,"MR","Exp_02",7,"NENA","MA 75 364","GER",NA,NA,"medium-sensitiv","P1-D09-068-MR","068-MR",68,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"155","MARIS PIPER","165",69,"MP","Exp_02",5,"Y 22 6","ARCAIRN*HERALD","GBR",1963,NA,"tolerant","P1-E09-069-MP","069-MP",69,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"156","MARKIES","166",70,"MK","Exp_03",7,"FIANNA","AGRIA","NLD",1997,NA,"medium-tolerant","P1-F09-070-MK","070-MK",70,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"157","MARTA","167",141,"MA","Exp_07",5,"B 53","ADMIRAL","CZE",1944,NA,"sensitiv","P01-D10-141-MA-2","141-MA-2",NA,NA,"GBS2_76",141,"MA","IPK Genbank","HOTNet",NA,FALSE
+"158","MAXI","168",NA,NA,NA,NA,"SIBU","2899/9","GER",2004,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-G02-279-MAX-2","279-MAX-2",NA,NA,"GBS2_15",279,"MAX","Saatzucht Firlbeck","LSV 211 Weih","Stärke",FALSE
+"159","MAXILLA","169",NA,NA,NA,NA,"MA. 62.34/21","LU. 62.356/11","GER",1981,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-G07-366-MAL-2","366-MAL-2",NA,NA,"GBS2_55",366,"MAL","Norika",NA,NA,FALSE
+"160","MAYAN GOLD","170",71,"MG","Exp_02",8,"SCRI DB270 43","SCRI DB220 52","GBR",2001,NA,"medium","P1-G09-071-MG","071-MG",71,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"161","MAYAN TWILIGHT","171",72,"MT","Exp_02",8,"SCRI DB270 43","SCRI DB272 52","GBR",2008,NA,"medium-tolerant","P1-H09-072-MT","072-MT",72,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"162","MC INTOSH","172",142,"MI","Exp_04",5,"HERALD","phu","GBR",1944,NA,"sensitiv","P2-C06-142-MI","142-MI",142,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"163","MEISE","173",143,"ME","Exp_04",5,"AQUILA","FLAVA","GER",1956,NA,"sensitiv","P2-D06-143-ME","143-ME",143,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"164","MELODY","174",NA,NA,NA,NA,"VE 74-45","W 72-22-496","NLD",2001,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-H02-281-MEL-2","281-MEL-2",NA,NA,"GBS2_16",281,"MEL",NA,"LSV 207 Weih","mfr",FALSE
+"165","MEMPHIS","175",73,"MM","Exp_03",6,"MUH 92-  13","MUH 91-  13","NLD",2012,NA,"medium","P1-A10-073-MM","073-MM",73,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"166","MOGLI","176",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-D08-374-MOG-2","374-MOG-2",NA,NA,"GBS2_60",374,"MOG","Saatzucht Firlbeck",NA,NA,FALSE
+"167","MONALISA","177",74,"ML","Exp_02",7,"BIERMA A1 287","COLMO","NLD",1982,NA,"medium","P1-B10-074-ML","074-ML",74,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"168","MONDIAL","178",176,"MO","Exp_04",NA,"SPUNTA","VE 66-295","NLD",1987,NA,"-","P2-B10-176-MO","176-MO",176,"nein",NA,NA,NA,NA,NA,NA,TRUE
+"169","MORITZ","179",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-A03-283-MOR-2","283-MOR-2",NA,NA,"GBS2_17",283,"MOR","Saatzucht Firlbeck","LSV 211 Weih","Stärke",FALSE
+"170","MOZART","180",75,"MZ","Exp_02",7,"REDSTAR","CAESAR","NLD",2003,NA,"tolerant","P1-C10-075-MZ","075-MZ",75,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"171","MUSICA","181",NA,NA,NA,NA,"CMK 93-042-005","LADY CHRISTL","NLD",2007,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-D09-393-MUS-2","393-MUS-2",NA,NA,"GBS2_68",393,"MUS","C. Meijer B.V.","ADAPT-set",NA,FALSE
+"172","NEDERLANDER","182",144,"NE","Exp_04",4,"BREEDBLAD EERSTELING","BERLIKUMER GEELTJE","NLD",1940,NA,"medium-sensitiv","P2-E06-144-NE","144-NE",144,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"173","NICOLA","183",145,"NI","Exp_04",5,"CLIVIA","6430/1011","GER",1973,NA,"medium-sensitiv","P2-F06-145-NI","145-NI",145,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"174","NORDLICHT","184",NA,NA,NA,NA,"DUNJA","B 68/861","GER",1982,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-B03-285-NL-2","285-NL-2",NA,NA,"GBS2_18",285,"NL","Norika","LSV 211 Weih","Stärke",FALSE
+"175","NORMA","185",146,"NO","Exp_04",4,"PREUSSEN","B 53","CZE",1940,NA,"medium-sensitiv","P2-G06-146-NO","146-NO",146,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"176","OLYMPIA","186",148,"OL","Exp_04",5,"VON KAMEKE 212.52","VON KAMEKE 209.17","GER",1943,NA,"sensitiv","P2-H06-148-OL","148-OL",148,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"177","OTOLIA","187",NA,NA,NA,NA,"B 97/239/236","VR 95-098","GER",2015,"https://www.ipaustralia.gov.au/sites/default/files/journals/pvj_34_3.pdf",NA,"P01-C03-288-OT-2","288-OT-2",NA,NA,"GBS2_19",288,"OT",NA,"LSV 207 Weih","mfr",FALSE
+"178","PANAMERA","188",76,"PM","Exp_02",6,"VOYAGER","FABULA","NLD",2013,NA,"tolerant","P1-D10-076-PM","076-PM",76,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"179","PANTHER","189",149,"PA","Exp_07",4,"BRA 3/35","TIGER","GER",1947,NA,"(sensitiv)","P2-A07-149-PA","149-PA",149,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"180","PARTNER","190",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-D03-292-PAR-2","292-PAR-2",NA,NA,"GBS2_20",292,"PAR",NA,"LSV 211 Weih","Stärke",FALSE
+"181","PATERSON'S VIKTORIA","191",150,"PV","Exp_07",4,"FLUKE seedling",NA,"GBR",1863,NA,"medium","P2-B07-150-PV","150-PV",150,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"182","PENTLAND DELL","192",77,"PD","Exp_02",5,"ROSLIN CHANIA","ROSLIN SASUMUA","GBR",1961,NA,"medium","P1-E10-077-PD","077-PD",77,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"183","PETRA","193",NA,NA,NA,NA,NA,NA,NA,NA,"3 different entries on plantbreeding.wur.nl",NA,"P01-D05-336-PE-2","336-PE-2",NA,NA,"GBS2_36",336,"PE","Bavaria Saat",NA,"frühe Speisesorte",FALSE
+"184","PICASSO","194",78,"PI","Exp_02",6,"CARA","AUSONIA","NLD",1994,NA,"tolerant","P1-F10-078-PI","078-PI",78,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"185","POLONIA","195",151,"PO","Exp_07",5,"ROSAFOLIA","EARLY ROSE","POL",1942,NA,"(sensitiv)","P2-C07-151-PO","151-PO",151,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"186","PORTA","196",152,"PR","Exp_04",5,"HANSA","3312","GER",1970,NA,"medium-sensitiv","P2-D07-152-PR","152-PR",152,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"187","PRINCESS","197",181,"PC","Exp_06",NA,"DUNJA","DUNJA","GER",1998,NA,"medium","P2-G10-181-PC","181-PC",181,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"188","QUEEN ANNE","198",NA,NA,NA,NA,"SA 99-002-44","GALA","GER",2012,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-E03-297-QA-2","297-QA-2",NA,NA,"GBS2_21",297,"QA",NA,"LSV 207 Weih","mfr",TRUE
+"189","RAMBO","199",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-F03-298-RAM-2","298-RAM-2",NA,NA,"GBS2_22",298,"RAM",NA,"LSV 211 Weih","Stärke",FALSE
+"190","RATTE","200",79,"RA","Exp_02",6,"unknown",NA,"GER",1872,NA,"tolerant","P1-G10-079-RA","079-RA",79,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"191","REALTA","201",153,"RE","Exp_07",4,"REAAL","MARITTA","NLD",1962,NA,"medium","P2-E07-153-RE","153-RE",153,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"192","RED KING EDWARD","202",154,"RK","Exp_07",4,"KING EDWARD mutant",NA,"GBR",1916,NA,"-","P2-F07-154-RK","154-RK",154,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"193","REGINA","203",NA,NA,NA,NA,NA,NA,NA,NA,"8 different entries on plantbreeding.wur.nl",NA,"P01-G03-299-REG-2","299-REG-2",NA,NA,"GBS2_23",299,"REG",NA,"LSV 207 Weih","mfr",FALSE
+"194","RENETA","204",155,"RT","Exp_07",4,"TRIUMPH","B 53","CZE",1940,NA,"sensitiv","P2-G07-155-RT","155-RT",155,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"195","RICHHILL","205",80,"RI","Exp_02",6,"COSMOS","VALOR","NLD",2009,NA,"tolerant","P1-H10-080-RI","080-RI",80,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"196","RODEO","206",81,"RD","Exp_02",6,"MONDIAL","BIMONDA","NLD",1999,NA,"tolerant","P1-A11-081-RD","081-RD",81,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"197","ROSI","207",194,"RO","Exp_04",NA,"SYMFONIA","MOZART","NLD",2015,NA,"medium-sensitiv","P2-D12-194-RO","194-RO",194,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"198","ROTE LÖTSCHENTALER","208",156,"RL","Exp_04",4,NA,NA,"CHE",1994,NA,"sensitiv","P2-H07-156-RL","156-RL",156,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"199","ROTKELCHEN","209",157,"RN","Exp_07",5,"LI. 1537/48","pollenmixture 362/45 + HILLA","GER",1966,NA,"tolerant","P2-A08-157-RN","157-RN",157,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"200","ROYAL","210",82,"RY","Exp_02",7,"MIDAS","92 BUY 1","DNK",2008,NA,"medium","P1-B11-082-RY","082-RY",82,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"201","RUDOLPH","211",83,"RU","Exp_03",NA,"CHIEFTAIN","STIRLING","GBR",2006,NA,"tolerant","P1-C11-083-RU","083-RU",83,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"202","RUSSET BURBANK","212",192,"RB","Exp_04",NA,"BURBANK mutant ?",NA,"USA",1908,NA,"sensitiv","P2-B12-192-RB","192-RB",192,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"203","SABABA","213",84,"SB","Exp_03",5,"HEO 94- 189","EL PASO","NLD",2019,NA,"medium","P1-D11-084-SB","084-SB",84,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"204","SAFARI","214",85,"SF","Exp_03",6,"OBELIX","AMADEUS","NLD",2006,NA,"tolerant","P1-E11-085-SF","085-SF",85,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"205","SAGITTA","215",86,"SG","Exp_02",6,"GALLIA","RZ- 86-2918","NLD",2006,NA,"medium","P1-F11-086-SG","086-SG",86,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"206","SALUT","216",159,"SL","Exp_07",5,"WE. 58.7/49 N","ST. 4140","GER",1978,NA,"tolerant","P2-B08-159-SL","159-SL",159,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"207","SANJAVA","217",NA,NA,NA,NA,"GALA","LEYLA","GER",2004,"https://inspection.canada.ca/english/plaveg/pbrpov/cropreport/pot/app00010753e.shtml",NA,"P01-D06-348-SAJ-2","348-SAJ-2",NA,NA,"GBS2_44",348,"SAJ","Bavaria Saat",NA,"frühe Speisesorte",TRUE
+"208","SANTANA","218",87,"SAN","Exp_02",6,"SPUNTA","VK 69-491","NLD",1994,NA,"medium-torerant","P1-G11-087-SAN","087-SAN",87,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"209","SANTE","219",88,"ST","Exp_02",6,"Y 66- 13- 636","AM 66-  42","NLD",1983,NA,"medium-sensitiv","P1-H11-088-ST","088-ST",88,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"210","SAPRODI","220",NA,NA,NA,NA,"SCARLET","SOFISTA","NLD",2014,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-H03-302-SAP-2","302-SAP-2",NA,NA,"GBS2_24",302,"SAP","Semagri","LSV 211 Weih","Stärke",TRUE
+"211","SARPO MIRA","221",89,"SM","Exp_02",NA,"76.PO12.14.268","D187","HUN",2003,NA,"tolerant","P1-A12-089-SM","089-SM",89,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"212","SATURNA","222",178,"SA","Exp_06",NA,"MARITTA","(RECORD x CPC 1673-1 (adg))","NLD",1964,NA,"medium-tolerant","P2-D10-178-SA","178-SA",178,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"213","SCALA","223",NA,NA,NA,NA,"ALCMARIA","PRIMA","GER",1982,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-A04-303-SCA-2","303-SCA-2",NA,NA,"GBS2_25",303,"SCA",NA,"LSV 211 Weih","Stärke",FALSE
+"214","SCHWALBE","224",160,"SH","Exp_04",4,"AQUILA","CAPELLA","GER",1956,NA,"medium-sensitiv","P01-E10-160-SH-2","160-SH-2",NA,NA,"GBS2_77",160,"SH","IPK Genbank","HOTNet",NA,FALSE
+"215","SELMA","225",NA,NA,NA,NA,"DELOS","92/456","GER",1972,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-G05-340-SEL-2","340-SEL-2",NA,NA,"GBS2_39",340,"SEL","Bavaria Saat",NA,"mittelfrühe Speisesorte",FALSE
+"216","SERENO","226",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-B04-304-SER-2","304-SER-2",NA,NA,"GBS2_26",304,"SER",NA,"LSV 211 Weih","Stärke",FALSE
+"217","SERUM STAR","227",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-C04-305-SeS-2","305-SeS-2",NA,NA,"GBS2_27",305,"SeS",NA,"LSV 211 Weih","Stärke",FALSE
+"218","SEVIM","228",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-F05-339-SEV-2","339-SEV-2",NA,NA,"GBS2_38",339,"SEV","Bavaria Saat",NA,"mittelspäte Speisesorte",FALSE
+"219","SIEGLINDE","229",161,"SIE","Exp_04",6,"BOHM 155/06","JULI","GER",1935,NA,"sensitiv","P2-C08-161-SIE","161-SIE",161,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"220","SIFRA","230",90,"SI","Exp_02",5,"MONDIAL","ROBINTA","NLD",2008,NA,"medium-tolerant","P1-B12-090-SI","090-SI",90,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"221","SKAWA","231",NA,NA,NA,NA,"OL 452","MARIELLA","POL",2000,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-H07-370-SKA-2","370-SKA-2",NA,NA,"GBS2_56",370,"SKA","Niehoff",NA,NA,FALSE
+"222","SL 07-12","232",NA,NA,NA,NA,NA,NA,"NLD",NA,NA,NA,"P01-D04-311-S07-2","311-S07-2",NA,NA,"GBS2_28",311,"S07",NA,"LSV 211 Weih","Stärke",FALSE
+"223","SOFISTA","233",NA,NA,NA,NA,"SL 86-246","SERESTA","NLD",2005,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-A08-371-SOF-2","371-SOF-2",NA,NA,"GBS2_57",371,"SOF","Semagri",NA,NA,FALSE
+"224","SOLARA","234",173,"SO","Exp_04",NA,"HEIDRUN","EBSTORF 75/75","GER",1989,NA,"medium-tolerant","P2-G09-173-SO","173-SO",173,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"225","SOLINA","235",162,"SN","Exp_04",5,"SALUT","ADRETTA","GER",1986,NA,"sensitiv","P2-D08-162-SN","162-SN",162,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"226","SOLO","236",NA,NA,NA,NA,NA,NA,"CZE",NA,NA,NA,"P01-C06-345-SOL-2","345-SOL-2",NA,NA,"GBS2_43",345,"SOL","Bavaria Saat",NA,"frühe Speisesorte",FALSE
+"227","SONJA","237",163,"SJ","Exp_04",5,"MPI 61.303/34","EBSTORF 921","AUT",1986,NA,"(sensitiv)","P2-E08-163-SJ","163-SJ",163,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"228","SORKA","238",164,"SOR","Exp_04",5,"BELORUSSKY RANNY","700","SUN",1977,NA,"sensitiv","P2-F08-164-SOR","164-SOR",164,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"229","SOUND","239",NA,NA,NA,NA,NA,NA,"NLD",2019,"https://inspection.canada.ca/english/plaveg/pbrpov/cropreport/pot/app00010753e.shtml",NA,"P01-E09-394-SOU-2","394-SOU-2",NA,NA,"GBS2_69",394,"SOU","C. Meijer B.V.","ADAPT-set",NA,FALSE
+"230","SPATZ","240",165,"SZ","Exp_04",4,"CAPELLA","BRA D 79","GER",1958,NA,"medium-sensitiv","P2-G08-165-SZ","165-SZ",165,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"231","SPRINTER","241",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-E04-315-SPR-2","315-SPR-2",NA,NA,"GBS2_29",315,"SPR",NA,"LSV 211 Weih","Stärke",FALSE
+"232","SPUNTA","242",174,"SP","Exp_06",NA,"BEA","USDA 96-56","NLD",1968,NA,"(tolerant)","P2-H09-174-SP","174-SP",174,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"233","STÄRKEPROFI","243",NA,NA,NA,NA,NA,NA,"GER",2007,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-F04-316-StP-2","316-StP-2",NA,NA,"GBS2_30",316,"StP","Saatzucht Firlbeck","LSV 211 Weih","Stärke",FALSE
+"234","STILETTO","244",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-G04-317-STI-2","317-STI-2",NA,NA,"GBS2_31",317,"STI",NA,"LSV 211 Weih","Stärke",FALSE
+"235","STRATOS","245",NA,NA,NA,NA,"MERCATOR","SERESTA","NLD",2009,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-B08-372-STR-2","372-STR-2",NA,NA,"GBS2_58",372,"STR","Semagri",NA,NA,FALSE
+"236","SUNDANCE","246",91,"SD","Exp_02",7,"RZ- 89-2050","QUARTA","NLD",2016,NA,"medium-sensitiv","P1-C12-091-SD","091-SD",91,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"237","SUNITA","247",92,"SU","Exp_03",7,"MARABEL","CARRERA","NLD",2014,NA,"medium-sensitiv","P1-D12-092-SU","092-SU",92,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"238","SUNRED","248",93,"SR","Exp_02",6,"RODEO","DAKOTA ROSE","NLD",2016,NA,"medium","P1-E12-093-SR","093-SR",93,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"239","SYLVANA","249",175,"SY","Exp_06",NA,"FABULA","XANTIA","NLD",2008,NA,"medium-sensitiv","P2-A10-175-SY","175-SY",175,"nein",NA,NA,NA,NA,NA,NA,TRUE
+"240","TAISIYA","250",94,"TA","Exp_02",7,"MILVA","YP- 95- 111","NLD",2011,NA,"medium-tolerant","P1-F12-094-TA","094-TA",94,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"241","TARZAN","251",NA,NA,NA,NA,NA,NA,"GER",2018,NA,NA,"P01-H04-319-TAR-2","319-TAR-2",NA,NA,"GBS2_32",319,"TAR",NA,"LSV 211 Weih","Stärke",FALSE
+"242","TOMENSA","252",177,"TO","Exp_07",NA,"ST 155","TAIGA","GER",1989,NA,"medium-sensitiv","P2-C10-177-TO","177-TO",177,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"243","TONI","253",166,"TN","Exp_04",5,"FLAVA","seedling","GER",1946,NA,"(sensitiv)","P2-H08-166-TN","166-TN",166,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"244","TRIPLO","254",95,"TR","Exp_02",6,"AGRIA","FRESCO","NLD",2000,NA,"medium-tolerant","P1-G12-095-TR","095-TR",95,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"245","TRITON","255",NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"P01-A05-325-TRI-2","325-TRI-2",NA,NA,"GBS2_33",325,"TRI",NA,"LSV 211 Weih","Stärke",FALSE
+"246","TROGS LICHTBLICK","256",167,"TL","Exp_04",5,"GEHEIMRAT VON RUMCKER","FURSTENKRONE","GER",1922,NA,"(sensitiv)","P2-A09-167-TL","167-TL",167,"nein",NA,NA,NA,NA,NA,NA,FALSE
+"247","TYSON","257",96,"TY","Exp_02",6,"SYLVANA","CYRANO","NLD",2016,NA,"medium","P1-H12-096-TY","096-TY",96,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"248","ULTIMUS","258",168,"UL","Exp_04",4,"RODE STAR","PEPO","NLD",1935,NA,"medium-sensitiv","P2-B09-168-UL","168-UL",168,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"249","VALDIVIA","259",NA,NA,NA,NA,"VIENNA","NO 00-0205","AUT",2016,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-A10-398-VAL-2","398-VAL-2",NA,NA,"GBS2_73",398,"VAL","Agrico","ADAPT-set",NA,FALSE
+"250","VIOLA","260",169,"VI","Exp_04",6,"JULI","SONNENRAGIS","GER",1938,NA,"medium-sensitiv","P2-C09-169-VI","169-VI",169,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"251","VIRGINIA","261",170,"VG","Exp_04",4,"dms","FLAVA","GER",1950,NA,"sensitiv","P2-D09-170-VG","170-VG",170,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"252","VITELOTTE NOIRE","262",97,"VN","Exp_02",2,"unknown",NA,"FRA",1815,NA,"medium-tolerant","P2-A01-097-VN","097-VN",97,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"253","VOYAGER","263",98,"VY","Exp_03",7,"RZ- 85- 238","OBELIX","NLD",2003,NA,"medium","P2-B01-098-VY","098-VY",98,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"254","VR 808","264",99,"VR","Exp_02",7,"LADY CLAIRE","ATLANTIC","NLD",2009,NA,"medium-tolerant","P2-C01-099-VR","099-VR",99,"ja",NA,NA,NA,NA,NA,NA,TRUE
+"255","WEGA","265",NA,NA,NA,NA,NA,NA,NA,NA,"3 different entries on plantbreeding.wur.nl",NA,"P01-B05-333-WEG-2","333-WEG-2",NA,NA,"GBS2_34",333,"WEG",NA,"LSV 202 Weih","fr",FALSE
+"256","WEKARAGIS","266",171,"WE","Exp_04",4,"BESELER","KUCKUCK","GER",1928,NA,"medium-sensitiv","P2-E09-171-WE","171-WE",171,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"257","YDUN","267",NA,NA,NA,NA,"KURAS","SERESTA","DEN",2014,"https://www.plantbreeding.wur.nl/PotatoPedigree/lookup.php",NA,"P01-C05-334-YD-2","334-YD-2",NA,NA,"GBS2_35",334,"YD",NA,"LSV 211 Weih","Stärke",TRUE
+"258","YUKON GOLD","268",100,"YU","Exp_02",7,"NORGLEAM","W 52 79 4","CAN",1980,NA,"medium-tolerant","P2-D01-100-YU","100-YU",100,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"259","ZARINA","269",101,"ZA","Exp_03",7,"HOT 03-7460","OPERA","NLD",2019,NA,"tolerant","P2-E01-101-ZA","101-ZA",101,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"260","ZINA RED","270",102,"ZR","Exp_03",7,"SYMFONIA","AMOROSA","NLD",2013,NA,"medium-tolerant","P2-F01-102-ZR","102-ZR",102,"ja",NA,NA,NA,NA,NA,NA,FALSE
+"261","ZORBA","271",103,"ZO","Exp_04",6,"CIP 312/35","CAROLA","ESP",1997,NA,"medium-sensitiv","P2-G01-103-ZO","103-ZO",103,"ja",NA,NA,NA,NA,NA,NA,FALSE

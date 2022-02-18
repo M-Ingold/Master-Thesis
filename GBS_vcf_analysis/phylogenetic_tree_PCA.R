@@ -128,15 +128,17 @@ for (breed in 1:nrow(admixture)){
   }
 }
 
+#admixture_subpops <- admixture$subpopulation
+#rownames(admixture_subpops) <- rownames(admixture)
 #write.csv(admixture, file = "75_non-admixed_breeds.csv")
 
 # subset for non-admixed breeds
 matrix_tetra <- matrix_tetra[rownames(admixture), ]
 matrix_dip <- matrix_dip[rownames(admixture), ]
 
-# subset for non-admixed breeds with known maturity etc
-matrix_tetra <- matrix_tetra[x$Row.names, ]
-matrix_dip <- matrix_dip[rownames(x), ]
+# # subset for non-admixed breeds with known maturity etc
+# matrix_tetra <- matrix_tetra[x$Row.names, ]
+# matrix_dip <- matrix_dip[rownames(x), ]
 
 # after subsetting, some rows contain all the same number. These have to be removed, in this case using the variance.
 matrix_tetra <- (matrix_tetra)[ , which(apply((matrix_tetra), 2, var) != 0)]

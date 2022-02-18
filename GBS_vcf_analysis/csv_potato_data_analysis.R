@@ -80,12 +80,12 @@ for (breed in 1:nrow(admixture)){
 
 
 
-data <- read_excel("../data/Additional_data/Screeningdaten_Set 1-6.xlsx", skip = 1)
-sampleNames <- read_excel("../data/Additional_data/22-01-2021_Zuordnung_genotypes_SB_aktualisiert_verbessert.xlsx")
+data <- read_excel("../data/Additional_data/2022-02-14_Screeningdaten_Set_1-7.xlsx", skip = 1)
+#sampleNames <- read_excel("../data/Additional_data/22-01-2021_Zuordnung_genotypes_SB.aktualisiert.xlsx")
 
 # Only taking the data for which we have unique identifier of genotyped samples in the 'sampleNames'
-data <- data[1:191,]
-sampleNames <- sampleNames[1:189,c(1,5)]
+data <- data[1:199,]
+#sampleNames <- sampleNames[1:189,c(1,5)]
 
 #setdiff(data$`3`, sampleNames$VARIETY)
 
@@ -93,17 +93,42 @@ sampleNames <- sampleNames[1:189,c(1,5)]
 breedData <- as.data.frame(data[1:12]) # Data common to all measured traits
 breedData <- breedData %>% distinct(Variety, .keep_all = T)
 breedData <-  replace(breedData, breedData == "DEU", "GER")
-rownames(breedData) <- breedData$Variety
-breedData$Maturity <- as.character(breedData$Maturity)
-x <- merge(breedData, admixture, by = 0)
 
-n=0
-test <- list()
-for (breed in 1:nrow(breedData)){
-  if (any(breedData$Variety[breed] == na.omit(breedData[8]))){
-    test <- c(test, breedData$Variety[breed])
+merge <- merge(breedData, Samples, by.x = "Variety", by.y = "VARIETY", all=T)
+
+# write all known data of a breed to add parents by hand
+write.csv(merge, file="breed_info_full.csv")
+
+# subset varieties with population group and maturity data
+#rownames(breedData) <- breedData$Variety
+# breedData$Maturity <- as.character(breedData$Maturity)
+# x <- merge(breedData, admixture, by = 0)
+ 
+
+
+# list of samples with genotyped parents
+parentlist <- read_csv("breed_info_full.csv", col_types = "c")
+
+tempparentlist <- parentlist[, c(2,7,8)]
+tempparentlist[is.na(tempparentlist)] <- "0"
+
+# if mother or father of a breed is present in the list of genotyped breeds, add it to a list
+parents_genotyped <- list()
+for (breed in 1:nrow(tempparentlist)){
+  if (any(tempparentlist$VARIETY == tempparentlist$Mother[breed])){
+    parents_genotyped <- c(parents_genotyped, tempparentlist$VARIETY[breed])
   }
-  if (any(breedData$Variety[breed] == na.omit(breedData[9]))){
-    test <- c(test, breedData$Variety[breed])
+  if (any(tempparentlist$VARIETY == tempparentlist$Father[breed])){
+    parents_genotyped <- c(parents_genotyped, tempparentlist$VARIETY[breed])
   }
 }
+
+# create a dataframe using the list generated above and add the boolean column to merge dfs
+l <- unique(parents_genotyped)
+l <- (data.frame(VARIETY = unlist(l)))
+l$parent_genotyped <- TRUE
+
+parentlist_new <- merge(parentlist, l, by = "VARIETY", all = T)
+parentlist_new$parent_genotyped[is.na(parentlist_new$parent_genotyped)] <- FALSE
+
+write.csv(parentlist_new, file="breed_info_full+genotyped_parents.csv")

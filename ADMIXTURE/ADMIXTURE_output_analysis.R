@@ -1,4 +1,4 @@
-
+library(gridExtra)
 
 #copy - pasted values for CV error depending on number of clusters
 K <- c(0.19391,0.18748,0.18594,0.18442,0.18390,0.18397,0.18267,0.18567,0.18342,0.18500)
@@ -79,3 +79,16 @@ barplot(t(as.matrix(tbl_sorted4)), col=rainbow(3),
 )
 dev.off()
 
+# pophelper
+library(pophelper)
+
+sfiles <- list.files(path = "../scripts/ADMIXTURE/", pattern = "freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf.*.Q", full.names=T)
+slist <- sortQ(readQ(files=sfiles))
+tr1 <- tabulateQ(qlist=slist)
+
+png(filename = "ADMIXTURE_1_to_10_clusters_all_SNPs.png", width = 2000, height = 2000, units = "px")
+p1 <- plotQ(slist,imgoutput="join",returnplot=T,exportplot=F,basesize=20, sortind = "all", sharedindlab = F)
+grid.arrange(p1$plot[[1]])
+dev.off()
+
+#analyseQ(sfiles,exportpath=getwd())
