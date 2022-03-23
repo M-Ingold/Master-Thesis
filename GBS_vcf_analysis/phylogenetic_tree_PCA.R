@@ -61,8 +61,9 @@ rownames(matrix_tetra) <- Samples$VARIETY
 rownames(matrix_dip) <- Samples$VARIETY
 
 # tanglegrams of diploid VCF compared to tetraploid VCF
-res.dist_dip <- dist((matrix_dip))
-res.dist_tetra <- dist((matrix_tetra))
+library(poppr)
+res.dist_dip <- nei.dist((matrix_dip))
+res.dist_tetra <- nei.dist((matrix_tetra))
 
 res.hc_dip_wardd2 <- hclust(d= res.dist_dip, method = "ward.D2")
 res.hc_tetra_wardd2 <- hclust(d= res.dist_tetra, method = "ward.D2")
@@ -101,6 +102,8 @@ tanglegram(dend3, dend4, highlight_distinct_edges = FALSE, # Turn-off dashed lin
            common_subtrees_color_branches = TRUE, # Color common branches 
            main = paste("entanglement =", round(entanglement(dend_list), 2)) 
 )
+
+
 
 
 # subset Samples by ADMIXTURE population membership > 90%
@@ -181,8 +184,8 @@ dev.off()
 # ggarrange(pc1, pc2, pc1_dip,pc2_dip)
 
 # tanglegram of non-admixed breeds
-res.dist_dip <- dist((matrix_dip))
-res.dist_tetra <- dist((matrix_tetra))
+res.dist_dip <- nei.dist((matrix_dip))
+res.dist_tetra <- nei.dist((matrix_tetra))
 
 res.hc_dip_wardd2 <- hclust(d= res.dist_dip, method = "ward.D2")
 res.hc_tetra_wardd2 <- hclust(d= res.dist_tetra, method = "ward.D2")
@@ -216,12 +219,13 @@ dend4 <- as.dendrogram(res.hc_tetra_average)
 
 dend_list <- dendlist(dend3, dend4)
 
+png(filename = "tanglegram_average_diploid_tetraploid.png", width = 1200, height = 800, units = "px")
 tanglegram(dend3, dend4, highlight_distinct_edges = FALSE, # Turn-off dashed lines 
            common_subtrees_color_lines = T, # Turn-off line colors 
            common_subtrees_color_branches = TRUE, # Color common branches 
            main = paste("entanglement =", round(entanglement(dend_list), 2)) 
 )
-
+dev.off()
 
 
 # Genomic distance
@@ -229,8 +233,8 @@ tanglegram(dend3, dend4, highlight_distinct_edges = FALSE, # Turn-off dashed lin
 #ss <- sample(1:261, 20)
 #dist <- dist(t(matrix_tetra[,ss]))
 #dist <- dist(scale(t(matrix_tetra)))
-dist <- dist((matrix_tetra))
-res.dist <- dist((matrix_tetra))
+dist <- nei.dist((matrix_tetra))
+res.dist <- nei.dist((matrix_tetra))
 
 # phylogram
 tre <- nj(dist)

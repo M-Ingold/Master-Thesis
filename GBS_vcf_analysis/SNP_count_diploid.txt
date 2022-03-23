@@ -1,0 +1,26 @@
+-e freebayes_269_samples_chr01-12_diploid.vcf 	 3606891 	
+-e 100.
+-e freebayes_269_samples_chr01-12_diploid_QUAL_30.vcf 	 1740331 	
+-e 48.2
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30.vcf 	 1740331 	
+-e 48.2
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_SNPs.vcf 	 1340469 	
+-e 37.1
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_MNPs.vcf 	 9275 	
+-e .257
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_INDELs.vcf 	 83002 	
+-e 2.30
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_COMPLEX.vcf 	 194435 	
+-e 5.39
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_SNPs_1_read.vcf 	 1109783 	
+-e 30.7
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_SNPs_1_read_het.vcf 	 432025 	
+-e 11.9
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_1_read_het_biallelic_SNPs.vcf 	 416607 	
+-e 11.5
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_1_read_het_biallelic_SNPs_blanked.vcf 	 40567 	
+-e 1.12
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf 	 38538 	
+-e 1.06
+-e freebayes_261_samples_chr01-12_diploid_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf 	 15429 	
+-e .427
