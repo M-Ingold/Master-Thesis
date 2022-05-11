@@ -5,6 +5,7 @@ library(reshape2)
 library(dplyr)
 library(ggrepel)
 library(gridExtra)
+library(dplyr)
 
 # reads into an object of class loci (pegas)
 #vcfdip <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf', to = 50000)
@@ -40,11 +41,31 @@ dat[[1]] <- as.character(dat[[1]])
 
 # pairwise relatedness of samples 
 # ritland differs from wang, diploids are the most related there
-# trioml takes too long
+# trioml takes really long
 relatedness <- coancestry(dat, wang=1, 
-                          #trioml = 1, 
-                          #lynchli = 1, lynchrd = 1, ritland = 1, quellergt = 1, dyadml = 1,
-                          allow.inbreeding = T)
+                          #trioml = 1,
+                          lynchli = 1, lynchrd = 1, ritland = 1, quellergt = 1, dyadml = 1,
+                          allow.inbreeding = T, ci95.num.bootstrap = 0)
+
+#trio <- relatedness$relatedness$trioml #save separately due to runtime
+#relatedness$relatedness$trioml <- trio
+save(relatedness, file = "relatedness")
+
+# add column with color, depending on diploids present. This doesn't work for every row
+rel <- relatedness$relatedness
+rel <- rel %>%
+  mutate(color = case_when(
+    ind1.id == "INCA_SUN" ~ "red",
+    ind1.id == "MAYAN_GOLD" ~ "red",
+    ind1.id == "MAYAN_TWILIGHT" ~ "red",
+    ind2.id == "INCA_SUN" ~ "red",
+    ind2.id == "MAYAN_GOLD" ~ "red",
+    ind2.id == "MAYAN_TWILIGHT" ~ "red",
+  ))
+rel[is.na(rel$color),]$color <- "black"
+# this does not yield the expected amount either, I'd expect 260*3-3 but 201
+#sum(rel$ind1.id == c("INCA_SUN","MAYAN_GOLD","MAYAN_TWILIGHT")|rel$ind2.id == c("INCA_SUN","MAYAN_GOLD","MAYAN_TWILIGHT"))
+
 
 inbreeding <- relatedness$inbreeding
 inbreeding$Nr <- 1:261
@@ -56,23 +77,27 @@ relatedness$relatedness[order(relatedness$relatedness$wang, decreasing = T),]
 #relatedness$relatedness[order(relatedness$relatedness$ritland, decreasing = T),]
 
 
-png(filename = "wang_estimator_of_relatedness.png", width = 500, height = 500)
-ggplot(relatedness$relatedness, aes(x=pair.no, y=wang)) +
-  geom_point(shape=1)
+png(filename = "wang_estimator_of_relatedness.png", width = 500, height = 500, res = 150)
+ggplot(rel, aes(x=pair.no, y=wang)) +
+  geom_point(shape=1, colour=rel$color)
 dev.off()
 
-# ggplot(relatedness$relatedness, aes(x=pair.no, y=trioml)) +
-#   geom_point(shape=1)
+png(filename = "trioml_estimator_of_relatedness.png", width = 500, height = 500, res = 150)
+ggplot(relatedness$relatedness, aes(x=pair.no, y=trioml)) +
+  geom_point(shape=1, colour=rel$color)
+dev.off()
 
-df <- melt(relatedness$relatedness[,c(1,6:11)] ,  id.vars = 'pair.no')
 
-png(filename = "Six_estimators_of_relatedness.png", width = 1000, height = 600)
+
+df <- melt(rel[,c(1,5:12)] ,  id.vars = c('pair.no','color'))
+
+png(filename = "seven_estimators_of_relatedness.png", width = 2000, height = 2000, res = 200)
 ggplot(df, aes(pair.no,value)) + 
-  geom_point(shape=1) + 
+  geom_point(shape=1, colour=df$color) + 
   facet_wrap(~variable, scales = "free")
 dev.off()
 
-png(filename = "Inbreeding_estimators.png", width = 1000, height = 600)
+png(filename = "Inbreeding_estimators.png", width = 1200, height = 800, res = 130)
 p1 <- ggplot(inbreeding, aes(Nr, LH, label=ind.id)) + 
   geom_text_repel() +
   geom_point(shape=1)

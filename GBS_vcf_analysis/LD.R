@@ -70,6 +70,7 @@ like_lds[[12]] <- mldest(geno = larray, K = ploidy, type = "comp", nc=11, se = F
 
 # save like_lds in case of crash
 save(like_lds, file = "like_lds")
+#load("like_lds")
 
 # create r2 matrix
 ldmats <- list()
@@ -89,7 +90,7 @@ for (n in 1:12) {
   df <- data.frame(i=maps[[n]]$Position[like_lds[[n]]$i], j=maps[[n]]$Position[like_lds[[n]]$j], r2=like_lds[[n]]$r2, Dprime=like_lds[[n]]$Dprime)
 
   df$dist <- abs(df$i - df$j)
-  df <- df[order(df$dist),]
+  df <- na.omit(df[order(df$dist),])
   ld_dfs[[n]] <- df
 }
 
@@ -114,26 +115,66 @@ for (i in 1:12) {
   newfiles[[i]] <- nf[order(nf$ld_dfs..i...dist),]
 }
 
-# plot LD
-par(mfrow=c(3,4))
-halfdecaydist <- list()
-tenthdecaydist <- list()
+
+
+
+# # plot LD from formula
+# par(mfrow=c(3,4))
+# halfdecaydist <- list()
+# tenthdecaydist <- list()
+# for (i in 1:12) {
+#   maxld <- max(newfiles[[i]]$newrsq,na.rm=TRUE) #using max LD value from adjusted data
+#   halfdecay = 0.5 * maxld
+#   halfdecaydist[[i]] <- newfiles[[i]]$ld_dfs..i...dist[which.min(abs(newfiles[[i]]$newrsq-halfdecay))]
+#   tenthdecay = 0.1
+#   tenthdecaydist[[i]] <- newfiles[[i]]$ld_dfs..i...dist[which.min(abs(newfiles[[i]]$newrsq-tenthdecay))]
+#   
+#   # plotting the values
+#   par(mar = c(5, 5, 1, 1)) 
+#   plot(ld_dfs[[i]]$dist, ld_dfs[[i]]$r2, pch=".", cex=2, xlab="Distance (bp)", main=paste0("Chromosome",i), ylab=expression(LD ~ (r^2)), col="grey")
+#   lines(newfiles[[i]]$ld_dfs..i...dist, newfiles[[i]]$newrsq, col="red", lwd=2)
+#   abline(h=0.1, col="blue") # if you need to add horizental line
+#   abline(v=tenthdecaydist[[i]], col="green")
+#   mtext(round(tenthdecaydist[[i]],2), side=1, line=0.05, at=tenthdecaydist[[i]], cex=1, col="green")
+#   #lines(ld_df$dist, predict(spline_fit,), lty = 2, col = "black") # add spline
+# }
+
+# spline fit. As no parameters were given in other papers, df = 5 was guessed based on what resembles Vos' and Sharma's curve shapes the most. FML
+library(splines)
+spline_fits <- list()
 for (i in 1:12) {
-  maxld <- max(newfiles[[i]]$newrsq,na.rm=TRUE) #using max LD value from adjusted data
+  spline_fit <- rq(r2 ~ bs(dist, df = 5), tau = 0.9, data = ld_dfs[[i]])
+  spline_fits[[i]] <- data.frame(ld_dfs[[i]]$dist, predict(spline_fit))
+  
+}
+
+# plot LD from spline
+par(mfrow=c(3,4))
+halfdecaydist_spline <- list()
+tenthdecaydist_spline <- list()
+for (i in 1:12) {
+  maxld <- max(spline_fits[[i]][2],na.rm=TRUE) 
   halfdecay = 0.5 * maxld
-  halfdecaydist[[i]] <- newfiles[[i]]$ld_dfs..i...dist[which.min(abs(newfiles[[i]]$newrsq-halfdecay))]
+  halfdecaydist_spline[[i]] <- spline_fits[[i]][subset(spline_fits[[i]][2])<halfdecay,][1,1]
   tenthdecay = 0.1
-  tenthdecaydist[[i]] <- newfiles[[i]]$ld_dfs..i...dist[which.min(abs(newfiles[[i]]$newrsq-tenthdecay))]
+  tenthdecaydist_spline[[i]] <- spline_fits[[i]][subset(spline_fits[[i]][2])<tenthdecay,][1,1]
   
   # plotting the values
   par(mar = c(5, 5, 1, 1)) 
   plot(ld_dfs[[i]]$dist, ld_dfs[[i]]$r2, pch=".", cex=2, xlab="Distance (bp)", main=paste0("Chromosome",i), ylab=expression(LD ~ (r^2)), col="grey")
-  lines(newfiles[[i]]$ld_dfs..i...dist, newfiles[[i]]$newrsq, col="red", lwd=2)
+  lines(spline_fits[[i]], lwd = 2, col = "red")
   abline(h=0.1, col="blue") # if you need to add horizental line
-  abline(v=tenthdecaydist[[i]], col="green")
-  mtext(round(tenthdecaydist[[i]],2), side=1, line=0.05, at=tenthdecaydist[[i]], cex=1, col="green")
+  #abline(v=tenthdecaydist_spline[[i]], col="green") # tenthdecaydistance line
+  #mtext(round(tenthdecaydist_spline[[i]],2), side=1, line=0.05, at=tenthdecaydist_spline[[i]], cex=1, col="green") # tenthdecaydistance number
   #lines(ld_df$dist, predict(spline_fit,), lty = 2, col = "black") # add spline
 }
+# saved using export like a pleb
+
+# create dataframe with all decay distances
+decay_distances <- data.frame(row.names = chr, half = round(unlist(halfdecaydist_spline)/10^6, digits = 2), tenth = round(unlist(tenthdecaydist_spline)/10^6, digits = 2))
+# output as latex table
+library(xtable)
+xtable(decay_distances, auto = T)
 
 
 # sizemat <- geno(vcf)$DP
@@ -316,8 +357,10 @@ for (i in 1:12) {
 library(splines)
 # spline 90th percentile regression, pretty sure this is not the right way to do this
 # try different degree of freedoms?
-spline_fit <- rq(r2 ~ bs(dist, df = 5), tau = 0.9, data = ld_df)
-lines(ld_df$dist, predict(spline_fit,), lty = 2, col = "black")
+plot(ld_dfs[[1]]$dist, ld_dfs[[1]]$r2, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
+
+spline_fit <- rq(r2 ~ bs(dist, df = 5), tau = 0.9, data = ld_dfs[[1]])
+lines(ld_dfs[[1]]$dist, predict(spline_fit,), lty = 2, col = "black")
 # 
 # library(gaston)
 # # LD heatmap, doesn't work for this large dataset
