@@ -5,8 +5,8 @@ library(ggplot2)
 #library(GGtools)
 library(poppr)
 
-x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf', to = 50000)
-#x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf', to = 50000)
+#x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf', to = 50000)
+x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf', to = 50000)
 #x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf', to = 50000)
 #x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf', to = 50000)
 
@@ -23,17 +23,25 @@ rownames(newx) <- sort(rownames(admixture))
 newx$Row.names <- NULL
 newx$subpopulation
 
-X <- as.loci(newx, col.pop = length(newx), ploidy = 2
+X <- as.loci(newx, col.pop = length(newx), ploidy = 4
              )
-
+X <- as.loci(x, ploidy = 4
+            )
 #convert to adegenet genind
-#y <- loci2genind(X, ploidy = 4)
-y <- loci2genind(X, ploidy = 2)
+y <- loci2genind(X, ploidy = 4)
+#y <- loci2genind(X, ploidy = 2)
 
+grp <- find.clusters(y, scale = F)
+xvalDapc(y, grp$grp)
+dapc <- dapc(y, grp$grp, scale = F, center = T, n.pca = 200, n.da = 2)
+scatter(dapc)
+compoplot(dapc, posi="bottomright",
+          txt.leg=paste("Cluster", 1:5), lab="",
+          ncol=2, xlab="individuals", col=funky(5))
 
 # subpopulations need to be added this way as strata to be able to perform AMOVA
-strata(y) <- admixture[order(row.names(admixture)),]
-strata(y) <- admixture[order(row.names(admixture)),]
+strata(y) <- admixture[order(row.names(admixture)),]$subpopulation
+#strata(y) <- admixture[order(row.names(admixture)),]
 
 #convert to genpop
 #z <- genind2genpop(y)
@@ -46,6 +54,7 @@ amova.result
 amova.test <- randtest(amova.result)
 plot(amova.test)
 amova.test
+# to-do: reshuffle as test
 
 # probably bad way of doing this
 # hamming distance takes very long
@@ -78,16 +87,28 @@ amova.test
 pops <- seppop(y)
 
 # HWE of the populations
-png(filename = "HWE_of_populations_diploid.png", width=1000, height = 1500)
+png(filename = "HWE_of_populations_tetraploid.png", width=1000, height = 1500, res = 120)
 n = 0
 par(mfrow=c(3,2))
 for (pop in pops) {
   n <- n+1
-  hwp <- hw.test(pop, B=1)
+  hwp <- hw.test(pop, B=0)
   hist(hwp[,3], breaks = 100, main = paste("chi²-test for HWE of population ", n), xlab = "p-value")
 }
 dev.off()
 
+# HWE of the populations
+png(filename = "MAFs_of_populations_tetraploid.png", width=1000, height = 1500, res = 120)
+n = 0
+par(mfrow=c(3,2))
+for (pop in pops) {
+  n <- n+1
+  maf <- minorAllele(pop)
+  hist(maf, breaks = 100, main = paste("MAFs of population", n), xlab = "MAF", xlim = c(0,0.5))
+}
+dev.off()
+
+hist(minorAllele(y), breaks = 100, xlim = c(0,0.5))
 
 #expected vs observed heterozygosity of the populations
 png(filename = "heterozygosity_of_populations_diploid.png", width=1500, height = 2000)
@@ -121,14 +142,14 @@ dev.off()
 # 
 # dev.off()
 # 
-# hwp <- hw.test(y, B=0)
-# 
-# png(filename = "chi²-pval-hist.png", width=1000, height = 1000)
-# hist(hwp[,3], breaks = 100, main = "chi²-test for HWE", xlab = "p-value")
-# dev.off()
+hwp <- hw.test(y, B=0)
+
+png(filename = "chi²-pval-hist.png", width=1000, height = 1000)
+hist(hwp[,3], breaks = 100, main = "chi²-test for HWE", xlab = "p-value")
+dev.off()
 
 # only diploid data
-Fst(x)
+# Fst(x)
 # Rst(X)
 
 
@@ -168,7 +189,7 @@ Fst(x)
 # amova <- poppr.amova(y)
 
 # only diploids
-fs <- filter_stats(y, plot = T)
+#fs <- filter_stats(y, plot = T)
 
 # # Index of Association
 # ia(y)
@@ -199,11 +220,11 @@ summary <- poppr(y
 
 # Probability a genotype is derived from sexual reproduction
 # only for haploid or diploid data
-psex(y)
+#psex(y)
 
 # Fst by hand
 Ht <- summary$Hexp[6]
-Hsub <- summary[-6,c(2,10)]
+Hsub <- summary[-6,c(2,10)] # -6 or -7 depending on if admixed individuals are counted as a subpopulation
 Hs <- sum(Hsub[1]*Hsub[2])/sum(Hsub[1])
 
 Fst <- (Ht - Hs)/Ht
@@ -212,7 +233,7 @@ Fst <- (Ht - Hs)/Ht
 # 3.2% of variation is explained by the subpopulations when MAF MAF > 0.05 for diploidized data
 # 3.2% of variation is explained by the subpopulations when MAF wasn't filtered for diploidized data
 
-
+#to-do: Fis
 
 # inbreeding coefficient
 # everything is loaded fresh to not exclude any samples as before
@@ -225,7 +246,7 @@ x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read
 
 X <- as.loci(x)
 
-y <- loci2genind(X, ploidy = 2)
+y <- loci2genind(X, ploidy = 4)
 
 # inb <- inbreeding(y, res.type = "estimate")
 # 
@@ -242,6 +263,8 @@ HI <- mean(sum$Hobs)
 FIT <- (HT - HI)/HT
 
 FIT2 <- 1-(HI/HT)
+
+
 
 library(hierfstat)
 

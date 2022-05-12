@@ -25,7 +25,7 @@ coverage_chr09 <- read.delim("../data/alignment/coverage_chr09.txt", header = F)
 coverage_chr10 <- read.delim("../data/alignment/coverage_chr10.txt", header = F)
 coverage_chr11 <- read.delim("../data/alignment/coverage_chr11.txt", header = F)
 coverage_chr12 <- read.delim("../data/alignment/coverage_chr12.txt", header = F)
-#coverage_all <- read.delim("../data/alignment/samtools_coverage.txt", header = F)
+#coverage_all <- read.delim("../data/alignment/bedtools_coverage.txt", header = F)
 
 
 #sum of genes on a single chromosome
@@ -96,7 +96,7 @@ avgwindow1chr <- function(file, window){
 #   return(df)
 # }
 # 
-# avgwindow1chrtest(coverage_chr01, 1000000)
+# avgwindow1chrtest(coverage_c(hr01, 1000000)
 
 # chr01coverage <- avgwindow1chr(coverage_chr01, 1000000)
 # 
@@ -351,3 +351,17 @@ ggarrange(plot1, plot2, plot3, plot4, plot5, plot6, plot7, plot8, plot9, plot10,
 dev.off()
 
 
+# find out the percentage of the genome covered deep enough to find SNPs
+# load the subset coverage files and bind them. Not enough RAM to load the full file at once
+files <- list.files(path= "../data/alignment",pattern = "coverage_",full.names = T)
+
+
+DF <- NULL
+for (f in files) {
+  dat <- read.delim(f, header=F)
+  DF <- rbind(DF, dat)
+}
+
+coverage <- subset(DF, V3 > 14300)
+length(coverage$V1)
+hist(coverage$V3)

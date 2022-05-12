@@ -29,10 +29,15 @@ maf <- as.data.frame(maf)
 maf005 <- maf(vcf005,2)
 maf005 <- as.data.frame(maf005)
 
-png(filename = "mafs.png", width=1000, height = 500)
+png(filename = "mafs.png", width=1500, height = 750, res = 150)
 par(mfrow=c(1,2))
 hist(maf$Frequency, main = "Histogram of MAF")
+abline(v=mean(maf$Frequency), col="red", lwd=3, lty=2)
+text(mean(maf$Frequency)+0.05,length(maf$Frequency)*0.7, labels = round(mean(maf$Frequency),2), col="red")
 hist(maf005$Frequency, main = "Histogram of MAF > 0.05")
+abline(v=mean(maf005$Frequency), col="red", lwd=3, lty=2)
+text(mean(maf005$Frequency)+0.05,2900, labels = round(mean(maf005$Frequency),2), col="red")
+
 dev.off()
 
 
@@ -46,12 +51,14 @@ pic005 <- sapply(maf005$Frequency, function(x) 1-(x^2+(1-x)^2)-(2*x^2*(1-x)^2))
 
 
 
-png(filename = "PIC.png", width=1000, height = 500)
+png(filename = "PIC.png", width=1500, height = 750, res = 150)
 par(mfrow=c(1,2))
 hist(pic, main = "Histogram of PIC")
 abline(v=mean(pic), col="red", lwd=3, lty=2)
+text(mean(pic)+0.025,18000, labels = round(mean(pic),2), col="red")
 hist(pic005, main = "Histogram of PIC for MAF > 0.05")
 abline(v=mean(pic005), col="red", lwd=3, lty=2)
+text(mean(pic005)+0.025,1620, labels = round(mean(pic005),2), col="red")
 dev.off()
 
 gt <- extract.gt(vcf, element = "GT")
