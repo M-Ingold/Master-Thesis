@@ -107,3 +107,8 @@ for chromosome in $chrArray; do
     echo "total time in s:	$((bdd_time+idx_time+fb_time))" >> $COMP
     echo -e "${LGREEN}Variant calling pipeline for $TOTAL_SAMPLES samples and for chromosome $chr completely done!${NC}"
 done
+
+
+
+# bcftools is then used to merge the 12 VCFs
+bcftools concat $VCF_FOLDER/freebayes_269_samples_*_diploid.vcf --output $VCF_FOLDER/freebayes_269_samples_diploid.vcf

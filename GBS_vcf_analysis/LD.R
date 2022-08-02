@@ -1,3 +1,5 @@
+# LD and LD decay was determined and plotted using this script
+
 library(VariantAnnotation)
 library(updog)
 library(ldsep)
@@ -7,10 +9,6 @@ library(ggplot2)
 library(quantreg)
 library(dplyr)
 library(ggpubr)
-
-# chr2.gr <- GRanges(seqnames = "chr02", ranges=IRanges(start=1, end=100000000))
-# params <- ScanVcfParam(which=chr2.gr)
-# vcf <- readVcf("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf.gz", param = params)
 
 # create list of chromosomes
 ploidy <- 4
@@ -53,6 +51,10 @@ for (i in 1:12) {
   multidog_results[[i]] <- msub
 }
 
+# plot three random SNP's multidog results. A chromosome number needs to be specified in the brackets
+plot(multidog_results[[2]], indices = sample(1:nrow(vcf_list_by_chr[[2]]), 3))
+# a nice example plot was saved using export
+
 # format multidog results and input them into LD estimator function
 varnames <- paste0("logL_", 0:ploidy)
 like_lds <- list()
@@ -60,11 +62,6 @@ for (i in 1:12) {
   larray <- format_multidog(x = multidog_results[[i]], varname = varnames)
   like_lds[[i]] <- mldest(geno = larray, K = ploidy, type = "comp", nc=11, se = F) # se = FALSE for shorter computation time
 }
-
-# repeat for chr 12, delete later
-larray <- format_multidog(x = multidog_results[[12]], varname = varnames)
-like_lds[[12]] <- mldest(geno = larray, K = ploidy, type = "comp", nc=11, se = F)
-
 
 
 
@@ -94,29 +91,26 @@ for (n in 1:12) {
   ld_dfs[[n]] <- df
 }
 
-# Method according to Hill WG, Weir BS (1988)
+# Method according to Hill WG, Weir BS (1988), this wasn't used for the master thesis but was the first attempt at estimating LD decay
 # estimate 90th percentile C of the LD decay formula
 
 # Start value for estimating C
-Cstart <- c(C=0.01)
-
-newfiles <- list()
-for (i in 1:12) {
-  fit.nlrq <- nlrq(r2 ~ ( (10+C*dist)/( (2+C*dist) * (11+C*dist) ) ) * ( 1+( (3+C*dist) * (12+12*C*dist+(C*dist)^2) ) / ( n*(2+C*dist) * (11+C*dist) ) ),
-                 data=ld_dfs[[i]], start = Cstart, tau = .9, nlrq.control(InitialStepSize = 0.01, maxiter = 100), trace = F)
-  
-  # extract the recombination parameter in 4Nr
-  rec <- summary(fit.nlrq)$coefficients[1]
-  
-  newrsq <- ( (10+rec*ld_dfs[[i]]$dist) / ( (2+rec*ld_dfs[[i]]$dist) * (11+rec*ld_dfs[[i]]$dist) ) ) *
-    ( 1 + ( (3+rec * ld_dfs[[i]]$dist) * (12+12*rec*ld_dfs[[i]]$dist + (rec*ld_dfs[[i]]$dist)^2) ) / 
-    (n*(2+rec*ld_dfs[[i]]$dist) * (11+rec*ld_dfs[[i]]$dist) ) )
-  nf <- data.frame(ld_dfs[[i]]$dist, newrsq)
-  newfiles[[i]] <- nf[order(nf$ld_dfs..i...dist),]
-}
-
-
-
+# Cstart <- c(C=0.01)
+# 
+# newfiles <- list()
+# for (i in 1:12) {
+#   fit.nlrq <- nlrq(r2 ~ ( (10+C*dist)/( (2+C*dist) * (11+C*dist) ) ) * ( 1+( (3+C*dist) * (12+12*C*dist+(C*dist)^2) ) / ( n*(2+C*dist) * (11+C*dist) ) ),
+#                  data=ld_dfs[[i]], start = Cstart, tau = .9, nlrq.control(InitialStepSize = 0.01, maxiter = 100), trace = F)
+#   
+#   # extract the recombination parameter in 4Nr
+#   rec <- summary(fit.nlrq)$coefficients[1]
+#   
+#   newrsq <- ( (10+rec*ld_dfs[[i]]$dist) / ( (2+rec*ld_dfs[[i]]$dist) * (11+rec*ld_dfs[[i]]$dist) ) ) *
+#     ( 1 + ( (3+rec * ld_dfs[[i]]$dist) * (12+12*rec*ld_dfs[[i]]$dist + (rec*ld_dfs[[i]]$dist)^2) ) / 
+#     (n*(2+rec*ld_dfs[[i]]$dist) * (11+rec*ld_dfs[[i]]$dist) ) )
+#   nf <- data.frame(ld_dfs[[i]]$dist, newrsq)
+#   newfiles[[i]] <- nf[order(nf$ld_dfs..i...dist),]
+# }
 
 # # plot LD from formula
 # par(mfrow=c(3,4))
@@ -139,17 +133,17 @@ for (i in 1:12) {
 #   #lines(ld_df$dist, predict(spline_fit,), lty = 2, col = "black") # add spline
 # }
 
-# spline fit. As no parameters were given in other papers, df = 5 was guessed based on what resembles Vos' and Sharma's curve shapes the most. FML
+
+# spline fit as in Vos and Sharma's publication. As no parameter was given in other papers, df = 5 was guessed based on the curve stabilizing at high distances compared to other values
 library(splines)
 spline_fits <- list()
 for (i in 1:12) {
   spline_fit <- rq(r2 ~ bs(dist, df = 5), tau = 0.9, data = ld_dfs[[i]])
   spline_fits[[i]] <- data.frame(ld_dfs[[i]]$dist, predict(spline_fit))
-  
 }
 
 # plot LD from spline
-par(mfrow=c(3,4))
+par(mfrow=c(6,4))
 halfdecaydist_spline <- list()
 tenthdecaydist_spline <- list()
 for (i in 1:12) {
@@ -168,7 +162,7 @@ for (i in 1:12) {
   #mtext(round(tenthdecaydist_spline[[i]],2), side=1, line=0.05, at=tenthdecaydist_spline[[i]], cex=1, col="green") # tenthdecaydistance number
   #lines(ld_df$dist, predict(spline_fit,), lty = 2, col = "black") # add spline
 }
-# saved using export like a pleb
+# plot saved manually
 
 # create dataframe with all decay distances
 decay_distances <- data.frame(row.names = chr, half = round(unlist(halfdecaydist_spline)/10^6, digits = 2), tenth = round(unlist(tenthdecaydist_spline)/10^6, digits = 2))
@@ -177,47 +171,22 @@ library(xtable)
 xtable(decay_distances, auto = T)
 
 
-# sizemat <- geno(vcf)$DP
-# refmat <- geno(vcf)$RO
-# ploidy <- 4
-# 
-# mout <- multidog(refmat = refmat,
-#                  sizemat = sizemat,
-#                  ploidy = ploidy,
-#                  model = "norm",
-#                  nc = 11)
-# 
-# plot(mout, indices = sample(1:nrow(vcf), 3))
-# msub <- filter_snp(x = mout, pmax(Pr_0, Pr_1, Pr_2, Pr_3, Pr_4) < 0.95)
-# nrow(msub$snpdf)
+# plot the comparison of rsq based on variant call genotypes vs. based on genotype probabilities
+pmmat <- format_multidog(x = msub, varname = "postmean")
 
-# varnames <- paste0("logL_", 0:ploidy)
-# varnames
-# 
-# larray <- format_multidog(x = msub, varname = varnames)
-# dim(larray)
-# 
-# pmmat <- format_multidog(x = msub, varname = "postmean")
-# 
-# like_ld <- mldest(geno = larray, K = ploidy, type = "comp", nc=11)
-# plot(like_ld)
-# 
-# mom_ld <- mldest(geno = pmmat, K = ploidy, type = "comp", nc=11)
-# 
-# par(mar = c(2.4, 2.8, 0, 0) + 0.5, mgp = c(1.8, 0.6, 0))
-# plot(mom_ld$r2, like_ld$r2, 
-#      xlab = expression(paste(textstyle(Naive), ~~hat(r)^2)), 
-#      ylab = expression(paste(textstyle(MLE), ~~hat(r)^2)), 
-#      pch  = 20)
-# abline(0, 1, lty = 2, col = 2)
+mom_ld <- mldest(geno = pmmat, K = ploidy, type = "comp", nc=11)
 
-# ldmat <- format_lddf(obj = like_ld, element = "r2")
-# ldmat[1:4, 1:4]
+par(mar = c(2.4, 2.8, 0, 0) + 0.5, mgp = c(1.8, 0.6, 0))
+plot(mom_ld$r2, like_ld$r2,
+     xlab = expression(paste(textstyle(Naive), ~~ r^2)),
+     ylab = expression(paste(textstyle(Likelihood), ~~ r^2)),
+     pch  = 20)
+abline(0, 1, lty = 2, col = 2)
+# plot saved manually
 
-# map <- data.frame(Locus=msub$snpdf$snp, LG="chr02", Position=as.numeric(str_match(msub$snpdf$snp, ":\\s*(.*?)\\s*_")[,2]))
 
-##LD.decay(ldmat, map = map)
 
+# plot mean and median rsq per distance. Not used in master thesis
 # ld_df <- data.frame(i=map$Position[like_ld$i], j=map$Position[like_ld$j], r2=like_ld$r2, Dprime=like_ld$Dprime)
 # 
 # ld_df$dist <- abs(ld_df$i - ld_df$j)
@@ -226,10 +195,6 @@ xtable(decay_distances, auto = T)
 
 #plot(ld_df$dist, ld_df$Dprime)
 
-# SSlogis doesn't work (value becomes too small?)
-#Dat.nls <- nls(r2 ~ SSlogis(delta, Asym, mid, scal), data=ld_df, control=nls.control(minFactor=1/1000000000,maxiter=100,warnOnly=T))
-# ; Dat.nls
-# lines(1:25, predict(Dat.nls, newdata=list(x=1:25)), col=1)
 
 ## average r^2 plotted
 # n<-261
@@ -257,121 +222,73 @@ xtable(decay_distances, auto = T)
 #   scale_x_continuous(breaks=c(0,2*10^6,4*10^6,6*10^6,8*10^6),labels=c("0","2","4","6","8")) +
 #   ggtitle("r^2 median")
 # 
-# theme_update(text = element_text(size=20))
 # png(filename = 'rsq_raw.png', width = 1000, height = 500)
 # ggarrange(gg1, gg2)
 # dev.off()
 
 
+ 
 
-# Method according to Hill WG, Weir BS (1988)
-# pretty sure it was done differently by Vos and Sharma, because the y-Axis intercept of the function below can't be > 0.5
-
-# Start value for estimating C
-#Cstart <- c(C=0.01)
-
-# fit a non linear model using the arbitrary C value, 
-# n is the number of the genotypes that have the SNP site
-# modelC <- nls(r2 ~ ( (10+C*dist)/( (2+C*dist) * (11+C*dist) ) ) * 
-#                 ( 1+( (3+C*dist) * (12+12*C*dist+(C*dist)^2) ) / ( n*(2+C*dist) * (11+C*dist) ) ), 
-#               data=ld_df, start=Cstart, control=nls.control(maxiter=100), trace = T)
-
-# nlrq 
-#ld_df <- ld_df[order(ld_df$dist),]
-
-# fit.nlrq <- nlrq(r2 ~ ( (10+C*dist)/( (2+C*dist) * (11+C*dist) ) ) * ( 1+( (3+C*dist) * (12+12*C*dist+(C*dist)^2) ) / ( n*(2+C*dist) * (11+C*dist) ) ),
-#                   data=ld_df, start = Cstart, tau = .9, nlrq.control(InitialStepSize = 0.01, maxiter = 100), trace = T)
-# 
-# summary <- summary(fit.nlrq)
-# #summary$parameters[1]
-# summary$coefficients[1]
-# # extract the recombination parameter in 4Nr
-# rec <- summary(modelC)$parameters[1]
-# rec <- 3.31994e-06 # why did I get this earlier?
-# rec <- 1.188454e-05 
-# 
-# # feed in the new value of rec to obtain LD values adjusted for their distances along the chromosome/genome
-# # shouldn't this be the fit of the nlrq function?
-# newrsq <- ( (10+rec*ld_df$dist) / ( (2+rec*ld_df$dist) * (11+rec*ld_df$dist) ) ) *
-#   ( 1 + ( (3+rec * ld_df$dist) * (12+12*rec*ld_df$dist + (rec*ld_df$dist)^2) ) / 
-#       (n*(2+rec*ld_df$dist) * (11+rec*ld_df$dist) ) )
-
-#newfile <- data.frame(ld_df$dist, newrsq)
-
-# maxld <- max(newfile$newrsq,na.rm=TRUE) #using max LD value from adjusted data
-# halfdecay = 0.5 * maxld
-# 
-# halfdecaydist <- newfile$ld_df.dist[which.min(abs(newfile$newrsq-halfdecay))]
-# newfile <- newfile[order(newfile$ld_df.dist),]
-# # add 1/10 decay
-# tenthdecay = 0.1
-# tenthdecaydist <- newfile$ld_df.dist[which.min(abs(newfile$newrsq-tenthdecay))]
-# 
-# # plotting the values
-# png("LD_decay.png", height=500, width = 500)
-# #mar.default <- c(5,4,4,2) + 0.1
-# par(mar = c(5, 5, 1, 1)) 
-# plot(ld_df$dist, ld_df$r2, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
-# lines(newfile$ld_df.dist, newfile$newrsq, col="red", lwd=2)
-# abline(h=0.1, col="blue") # if you need to add horizental line
-# abline(v=tenthdecaydist, col="green")
-# mtext(round(tenthdecaydist,2), side=1, line=0.05, at=tenthdecaydist, cex=1, col="green")
-# #lines(ld_df$dist, predict(spline_fit,), lty = 2, col = "black") # add spline
-# dev.off()
-
-
-
-# Doing the same thing as above leads to single-digit LD values
-# rec <- -0.9
-# 
-# newrsq <- ( (10+rec*file$dist) / ( (2+rec*file$dist) * (11+rec*file$dist) ) ) *
-#   ( 1 + ( (3+rec * file$dist) * (12+12*rec*file$dist + (rec*file$dist)^2) ) / 
-#       (2*n*(2+rec*file$dist) * (11+rec*file$dist) ) )
-# 
-# newfile <- data.frame(file$dist, newrsq)
-# 
-# maxld <- max(newfile$newrsq,na.rm=TRUE) #using max LD value from adjusted data
-# halfdecay = maxld*0.5
-# halfdecaydist <- newfile$file.dist[which.min(abs(newfile$newrsq-halfdecay))]
-# newfile <- newfile[order(newfile$file.dist),]
-# 
-# 
-# plot(file$dist, file$rsq, cex=2, pch=".", xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
-# 
-# 
-# par(mar = c(5, 5, 1, 1)) 
-# plot(file$dist, file$rsq, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
-# lines(newfile$file.dist, newfile$newrsq, col="red", lwd=2)
-# abline(h=0.1, col="blue") # if you need to add horizental line
-# abline(v=halfdecaydist, col="green")
-# mtext(round(halfdecaydist,2), side=1, line=0.05, at=halfdecaydist, cex=1, col="green")
-
-#x <- seq(min(file$dist), max(file$dist), length = 10000)
-
-# plot(ld_df$dist, ld_df$r2, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
-# lines(ld_df$dist, predict(modelC,), lty = 2, col = "blue")
-# 
-# lines(ld_df$dist, predict(fit.nlrq,), lty = 2, col = "red")
-      
-
-library(splines)
-# spline 90th percentile regression, pretty sure this is not the right way to do this
-# try different degree of freedoms?
-plot(ld_dfs[[1]]$dist, ld_dfs[[1]]$r2, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey")
-
-spline_fit <- rq(r2 ~ bs(dist, df = 5), tau = 0.9, data = ld_dfs[[1]])
-lines(ld_dfs[[1]]$dist, predict(spline_fit,), lty = 2, col = "black")
-# 
 # library(gaston)
-# # LD heatmap, doesn't work for this large dataset
-# #library(Matrix)
-# #like_ld_sym <- as.matrix(forceSymmetric(ldmat))
+# gaston LD heatmap, doesn't work for this large dataset
+# 
 # png(filename = "test.png", width = 1000, height = 1000)
-# LD.plot(ldmat, map$Position, write.snp.id = F, write.ld = NULL, draw.chr = F
-#         , pdf.file = "test.pdf", finalize.pdf = T
+# LD.plot(like_lds[[1]], maps[[1]]$Position, write.snp.id = F, write.ld = NULL, draw.chr = T
+#         , pdf.file = "test.pdf", finalize.pdf = T, max.dist = F
 #         )
 # dev.off()
 
-#library(LDheatmap) # package ‘LDheatmap’ is not available (for R version 3.6.3)
+library(LDheatmap) 
+library(grid)
+library(gridExtra)
+library(lattice)
 
-### no heatmap for now ###
+rgb.palette <- colorRampPalette(rev(c("blue", "orange", "red")), space = "rgb")
+
+#png(filename = "test.png", width = 2000, height = 2000)
+#par(mfrow=c(3,4)) # doesn't work with this
+
+# LDheatmaps can't be stored in lists???
+# plot_list <- list()
+# for (i in 1:12) {
+#   plot_list[i] <-LDheatmap(ldmats[[i]],maps[[i]]$Position, flip = T, title = paste("Chromosome", i),text = F, color=rgb.palette(30), pop = F)$LDheatmapGrob
+#   }
+# grid.arrange(plot_list, ncol = 4)
+
+
+
+
+LDheat1 <-LDheatmap(ldmats[[1]],maps[[1]]$Position, flip = F, title = paste("Chromosome", 1),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat1 <- editGrob(LDheat1$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat2 <-LDheatmap(ldmats[[2]],maps[[2]]$Position, flip = F, title = paste("Chromosome", 2),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat2 <- editGrob(LDheat2$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat3 <-LDheatmap(ldmats[[3]],maps[[3]]$Position, flip = F, title = paste("Chromosome", 3),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat3 <- editGrob(LDheat3$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat4 <-LDheatmap(ldmats[[4]],maps[[4]]$Position, flip = F, title = paste("Chromosome", 4),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat4 <- editGrob(LDheat4$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat5 <-LDheatmap(ldmats[[5]],maps[[5]]$Position, flip = F, title = paste("Chromosome", 5),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat5 <- editGrob(LDheat5$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat6 <-LDheatmap(ldmats[[6]],maps[[6]]$Position, flip = F, title = paste("Chromosome", 6),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat6 <- editGrob(LDheat6$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat7 <-LDheatmap(ldmats[[7]],maps[[7]]$Position, flip = F, title = paste("Chromosome", 7),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat7 <- editGrob(LDheat7$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat8 <-LDheatmap(ldmats[[8]],maps[[8]]$Position, flip = F, title = paste("Chromosome", 8),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat8 <- editGrob(LDheat8$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat9 <-LDheatmap(ldmats[[9]],maps[[9]]$Position, flip = F, title = paste("Chromosome", 9),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat9 <- editGrob(LDheat9$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat10 <-LDheatmap(ldmats[[10]],maps[[10]]$Position, flip = F, title =paste("Chromosome", 10),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat10 <- editGrob(LDheat10$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat11 <-LDheatmap(ldmats[[11]],maps[[11]]$Position, flip = F, title = paste("Chromosome", 11),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat11 <- editGrob(LDheat11$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+LDheat12 <-LDheatmap(ldmats[[12]],maps[[12]]$Position, flip = F, title = paste("Chromosome", 12),text = F, color=rgb.palette(30), pop = F)#$LDheatmapGrob
+LDheat12 <- editGrob(LDheat12$LDheatmapGrob, gPath("heatMap", "title"),  gp=gpar(cex=10))
+
+# pdf(file = "physical_LD.pdf", width = 100, height = 80)
+# grid.arrange(LDheat1,LDheat2,LDheat3,LDheat4,LDheat5,LDheat6,LDheat7,LDheat8,LDheat9,LDheat10,LDheat11,LDheat12, ncol =4)
+# dev.off()
+
+png(filename = "physical_LD.png", width = 6000, height = 8000)
+grid.arrange(LDheat1,LDheat2,LDheat3,LDheat4,LDheat5,LDheat6,LDheat7,LDheat8,LDheat9,LDheat10,LDheat11,LDheat12, ncol =3)
+dev.off()
+
+

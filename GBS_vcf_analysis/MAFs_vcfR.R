@@ -1,3 +1,5 @@
+# Visualize MAF and PIC
+
 library(vcfR)
 library(ape)
 library(adegenet)
@@ -30,22 +32,20 @@ maf005 <- maf(vcf005,2)
 maf005 <- as.data.frame(maf005)
 
 png(filename = "mafs.png", width=1500, height = 750, res = 150)
+
 par(mfrow=c(1,2))
-hist(maf$Frequency, main = "Histogram of MAF")
+hist(maf$Frequency, main = "No MAF Filter", xlab = "MAF")
 abline(v=mean(maf$Frequency), col="red", lwd=3, lty=2)
 text(mean(maf$Frequency)+0.05,length(maf$Frequency)*0.7, labels = round(mean(maf$Frequency),2), col="red")
-hist(maf005$Frequency, main = "Histogram of MAF > 0.05")
+hist(maf005$Frequency, main = "MAF > 0.05", xlab = "MAF")
 abline(v=mean(maf005$Frequency), col="red", lwd=3, lty=2)
 text(mean(maf005$Frequency)+0.05,2900, labels = round(mean(maf005$Frequency),2), col="red")
 
 dev.off()
 
 
-hist(test$Frequency)
-sum(test$Frequency >= 0.05)
-sum(test$Frequency >= 0.05)/nrow(test)
 
-# PIC
+# Polymorphism information content, not used in master thesis
 pic <- sapply(maf$Frequency, function(x) 1-(x^2+(1-x)^2)-(2*x^2*(1-x)^2))
 pic005 <- sapply(maf005$Frequency, function(x) 1-(x^2+(1-x)^2)-(2*x^2*(1-x)^2))
 
@@ -69,11 +69,13 @@ min(depthoverall)
 max(depthoverall)
 hist(depthoverall)
 
-#population list needed
-#mydiff <- genetic_diff(vcf)
+
+# testing of some functions
+
+#mydiff <- genetic_diff(vcf) # could have used this for GST
 
 #boolean matrix listing if depth > 61. Use to filter VCF
-bool60 <- matrix(as.numeric(dp) > 61, nrow = 32726, ncol =  264, dimnames = list(rownames(dp), colnames(dp)))
+#bool60 <- matrix(as.numeric(dp) > 61, nrow = 32726, ncol =  264, dimnames = list(rownames(dp), colnames(dp)))
 
 #no polyploidy possible
 #my_genind <- vcfR2genind(vcf) 

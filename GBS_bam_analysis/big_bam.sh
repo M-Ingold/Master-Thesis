@@ -1,3 +1,7 @@
+#!/bin/bash
+
+# Create one large BAM file from all the separate samples
+
 PATH_IN_BAMS=../data/alignment
 PATH_BAM_LIST=bam_list_for_bamaddrg.txt
 

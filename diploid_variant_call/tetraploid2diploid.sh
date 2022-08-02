@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script converts the input tetraploid VCF to a diploid VCF by replacing each samples' genotype field
+
 IN_FILE=$1
 NAME=$(basename $1 .vcf)
 FOLDER=../../data/diploid_VCF

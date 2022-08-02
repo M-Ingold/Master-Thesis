@@ -1,44 +1,46 @@
 library(dplyr)
 library(ggplot2)
-#coverage <- read.delim("../data/alignment/samtools_coverage.txt")
-#coverage_full <- read.csv("../data/alignment/bedtools_coverage.txt", sep = "\t")
+library(ggpubr)
+
+# attempt at visually determining a read threshold for VCF filtering later by plotting sequencing depths per base
+
+#coverage_full <- read.csv("../data/alignment/bedtools_coverage.txt", sep = "\t") # too big for my home PC to handle
 coverage <- read.delim("../data/alignment/coverage_chr01.txt")
 coverage <- read.delim("../data/alignment/coverage_chr02.txt")
 coverage <- read.delim("../data/alignment/coverage_chr03.txt")
 
 
-coverage <- subset(coverage, X2 > 14300)
+# filter out read depths that would not pass VCF filters for easier visualization
+coverage_sub <- subset(coverage, X2 > 14329)
 
-sum(coverage[,3] > 7500)
+sum(coverage[,3] > 14329)
 max(coverage[,3])
 min(coverage[,3])
-
-threshold <- quantile(coverage[,3], probs = (0.95))
-#hist(coverage$X2, breaks = 100)
-
-mean_depth_density <- ggplot(data = coverage, aes(x = X2)) + 
-  geom_density(fill = "dodgerblue1", color = "black", alpha = 0.3) + 
-  geom_vline(xintercept = threshold, color = "red") + 
-  annotate("text", x = 200000, y = 0.00002, label = paste("F^{-1}~(0.95) == ",threshold), parse = TRUE) + 
-  labs(x="Coverage per base", title = "Density plot of coverage per base of Chr01")+
-  theme_light()
-mean_depth_density
-
-
-chr01 <- subset(coverage, X.chr == "chr01")
-chr02 <- subset(coverage, X.chr == "chr02")
-
 summary(coverage)
 
-plot(coverage[1:10000, ]$pos,coverage[1:10000, ]$coverage)
 
-region = seq(from=12465501,to=12465678)
+# 95% threshold used in filtering
+threshold <- quantile(coverage[,3], probs = (0.95))
+threshold_sub <- quantile(coverage_sub[,3], probs = (0.95))
 
-x <- chr01[chr01$X.chr %in% region, ]
+mean_depth_density <- ggplot(data = coverage, aes(x = X2)) + 
+  geom_density(fill = "grey", color = "black", alpha = 0.3) + 
+  geom_vline(xintercept = threshold, color = "red") + 
+  annotate("text", x = 3000, y = 0.76, label = paste("F^{-1}~(0.95) == ",threshold), parse = TRUE) + 
+  labs(x="Coverage per base", title = "All base coverages")+
+  theme_bw() +
+  xlim(1,5000)
+#mean_depth_density
 
-x <- filter(chr01, X.chr %in% region)
 
-x <- coverage %>%
-  filter(X.chr == "chr01")
+mean_depth_density_sub <- ggplot(data = coverage_sub, aes(x = X2)) + 
+  geom_density(fill = "grey", color = "black", alpha = 0.3) + 
+  geom_vline(xintercept = threshold_sub, color = "red") + 
+  annotate("text", x = 225000, y = 0.00002, label = paste("F^{-1}~(0.95) == ",threshold_sub), parse = TRUE) + 
+  labs(x="Coverage per base", title = "Base coverage > 14329")+
+  theme_bw() 
+#mean_depth_density_sub
 
-x_region <- x[x$pos > 12465500 | x$pos < 12465679]
+png(filename = "coverage_per_base.png", width = 1500, height = 750, res = 130)
+ggarrange(mean_depth_density, mean_depth_density_sub)
+dev.off()

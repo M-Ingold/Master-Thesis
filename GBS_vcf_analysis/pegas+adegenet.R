@@ -1,20 +1,54 @@
+# GST, AMOVA, HWE deviation
+
 library(pegas)
-#library(snpStats)
 library(adegenet)
 library(ggplot2)
-#library(GGtools)
 library(poppr)
 
 #x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf', to = 50000)
-x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf', to = 50000)
+x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_SNPs_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf', to = 50000)
 #x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf', to = 50000)
 #x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf', to = 50000)
 
+load("Samples") # from phylogenetic tree script
 rownames(x) <- Samples$VARIETY
 
-# assign population. Not useful this way for AMOVA
-newx <- merge(x, admixture, by = 0, all = F)
-newx$V1 <- NULL
+
+# load ADMIXTURE data
+admixture=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf.5.Q")
+rownames(admixture) <- Samples$VARIETY
+# assign population membership by highest membership percentage
+admixture$subpopulation <- max.col(admixture)
+
+# mark breeds with low membership as admixed
+# optional
+for (i in 1:length(admixture$V1)){
+  if (max(admixture[i,1:5])<0.8) {
+    admixture[i,6] <- 6
+  }
+}
+
+# to avoid having to copy-paste a lot, the following code is optional. Just comment it out if subsetting by max subpopulation membership isn't needed
+#########################################################
+# subset by minimum group membership
+# min <- 0.8
+# admixture <- subset(admixture, V1 > min|V2 > min|V3 > min|V4 > min|V5 > min)
+# 
+# # subset for non-admixed breeds
+# matrix_tetra <- matrix_tetra[rownames(admixture), ]
+# matrix_dip <- matrix_dip[rownames(admixture), ]
+# 
+# # after subsetting, some rows all contain the same number. These have to be removed for PCA, in this case using the variance.
+# matrix_tetra <- (matrix_tetra)[ , which(apply((matrix_tetra), 2, var) != 0)]
+# matrix_dip <- (matrix_dip)[ , which(apply((matrix_dip), 2, var) != 0)]
+
+##########################################################
+admixture[,6] <- as.character(admixture[,6])
+
+
+# assign population, works for AMOVA since a few updates
+newx <- merge(x, admixture, by = 0, all = F) # this drops all individuals without subpopulation if subset
+newx$V1 <- NULL # remove to avoid downstream errors
 newx$V2 <- NULL
 newx$V3 <- NULL
 newx$V4 <- NULL
@@ -25,23 +59,29 @@ newx$subpopulation
 
 X <- as.loci(newx, col.pop = length(newx), ploidy = 4
              )
-X <- as.loci(x, ploidy = 4
-            )
-#convert to adegenet genind
+#X <- as.loci(x, ploidy = 4) # if no subpopulations are added
+#            
+#convert to adegenet genind, comment out as needed for ploidy
 y <- loci2genind(X, ploidy = 4)
 #y <- loci2genind(X, ploidy = 2)
 
-grp <- find.clusters(y, scale = F)
-xvalDapc(y, grp$grp)
-dapc <- dapc(y, grp$grp, scale = F, center = T, n.pca = 200, n.da = 2)
-scatter(dapc)
-compoplot(dapc, posi="bottomright",
-          txt.leg=paste("Cluster", 1:5), lab="",
-          ncol=2, xlab="individuals", col=funky(5))
+# output csv to use with genealex
+#genalex <- genind2genalex(y, filename = "../data/genalex_MAF.csv", overwrite = T)
 
-# subpopulations need to be added this way as strata to be able to perform AMOVA
-strata(y) <- admixture[order(row.names(admixture)),]$subpopulation
-#strata(y) <- admixture[order(row.names(admixture)),]
+# DAPC test, not finished
+# grp <- find.clusters(y, scale = F)
+# xvalDapc(y, grp$grp)
+# dapc <- dapc(y, grp$grp, scale = F, center = T, n.pca = 200, n.da = 2)
+# scatter(dapc)
+# compoplot(dapc, posi="bottomright",
+#           txt.leg=paste("Cluster", 1:5), lab="",
+#           ncol=2, xlab="individuals", col=funky(5))
+
+
+
+# subpopulations can be added this way as strata to perform AMOVA, 
+# but only works if additional information such as country of origin is added via dataframe
+#strata(y) <- as.data.frame(admixture[order(row.names(admixture)),]$subpopulation)
 
 #convert to genpop
 #z <- genind2genpop(y)
@@ -49,55 +89,32 @@ strata(y) <- admixture[order(row.names(admixture)),]$subpopulation
 #convert to genclone
 gc <- poppr::as.genclone(y)
 
-amova.result <- poppr.amova(gc, ~subpopulation)
+# AMOVA
+amova.result <- poppr.amova(gc, ~admixture.order.row.names.admixture......subpopulation)
 amova.result
-amova.test <- randtest(amova.result)
+amova.test <- randtest(amova.result, nrepet = 999) # for p-value
 plot(amova.test)
 amova.test
-# to-do: reshuffle as test
 
-# probably bad way of doing this
-# hamming distance takes very long
-#dist <- dist.hamming(X)
-# euclidean <- dist(X)
-# res.amova <- amova(euclidean ~ population, data = X)
-# res.amova
 
-# # test
-# Y <- sample(c("A", "G"), size = 45, replace = TRUE)
-# Y <- matrix(Y, 9, 5)
-# Y
-# Yloc <- as.loci(as.data.frame(Y))
-# Yloc$population <- gl(3, 3, labels = paste0("pop", 1:3))
-# Yg <- loci2genind(Yloc, ploidy = 1)
-# dy <- dist.hamming(Yloc)
-# dy
-# res.amova <- amova(dy ~ population, data = Yloc)
-# 
-# data(Aeut)
-# strata(Aeut) <- other(Aeut)$population_hierarchy[-1]
-# agc <- as.genclone(Aeut)
-# agc
-# amova.result <- poppr.amova(agc, ~Pop/Subpop)
-# amova.result
-# amova.test <- randtest(amova.result) # Test for significance
-# plot(amova.test)
-
-#subset populations
+#subset by subpopulations
 pops <- seppop(y)
 
 # HWE of the populations
 png(filename = "HWE_of_populations_tetraploid.png", width=1000, height = 1500, res = 120)
 n = 0
+deviation_per_subpop <- list()
 par(mfrow=c(3,2))
 for (pop in pops) {
   n <- n+1
   hwp <- hw.test(pop, B=0)
-  hist(hwp[,3], breaks = 100, main = paste("chi²-test for HWE of population ", n), xlab = "p-value")
+  # save fraction of SNPs deviating from HWE in each subpopulation
+  deviation_per_subpop[n] <- sum(hwp[,3]<0.05, na.rm = T)/length(hwp[,3])
+  #hist(hwp[,3], breaks = 100, main = paste("chi²-test for HWE of population ", n), xlab = "p-value",xlim = c(0,1))
 }
 dev.off()
 
-# HWE of the populations
+# MAFs of the populations
 png(filename = "MAFs_of_populations_tetraploid.png", width=1000, height = 1500, res = 120)
 n = 0
 par(mfrow=c(3,2))
@@ -108,27 +125,27 @@ for (pop in pops) {
 }
 dev.off()
 
-hist(minorAllele(y), breaks = 100, xlim = c(0,0.5))
+#hist(minorAllele(y), breaks = 100, xlim = c(0,0.5))
 
-#expected vs observed heterozygosity of the populations
-png(filename = "heterozygosity_of_populations_diploid.png", width=1500, height = 2000)
-n = 0
-par(mfrow=c(5,2))
-for (pop in pops) {
-  n <- n+1
-  sum <- summary(pop)
-  hist(sum$Hobs, main = paste("Histogram of observed heterozygosity of population", n), cex = 30)
-  abline(v = mean(sum$Hobs), col="red", lwd=3, lty=2)
-  mtext(round(mean(sum$Hobs), 2),side = 3)
+# #expected vs observed heterozygosity of the populations, not used in master thesis
+# png(filename = "heterozygosity_of_populations_diploid.png", width=1500, height = 2000)
+# n = 0
+# par(mfrow=c(5,2))
+# for (pop in pops) {
+#   n <- n+1
+#   sum <- summary(pop)
+#   hist(sum$Hobs, main = paste("Histogram of observed heterozygosity of population", n), cex = 30)
+#   abline(v = mean(sum$Hobs), col="red", lwd=3, lty=2)
+#   mtext(round(mean(sum$Hobs), 2),side = 3)
+# 
+#   hist(sum$Hexp, main = paste("Histogram of expected heterozygosityof population", n), cex = 30)
+#   abline(v = mean(sum$Hexp), col="red", lwd=3, lty=2)
+#   mtext(round(mean(sum$Hexp), 2),side = 3)
+#   }
+# dev.off()
 
-  hist(sum$Hexp, main = paste("Histogram of expected heterozygosityof population", n), cex = 30)
-  abline(v = mean(sum$Hexp), col="red", lwd=3, lty=2)
-  mtext(round(mean(sum$Hexp), 2),side = 3)
-  }
-dev.off()
 
-
-# #expected vs observed heterozygosity might be interesting
+# #expected vs observed heterozygosity for the whole population
 # sumy <- summary(y)
 #  
 # png(filename = "heterozygosity.png", width=1000, height = 500)
@@ -142,23 +159,28 @@ dev.off()
 # 
 # dev.off()
 # 
+
+# test for deviation from HWE
 hwp <- hw.test(y, B=0)
 
+# percentage of SNPs significantly deviating from HWE, taking multiple testing into account
+sum(hwp[,3]<0.05/length(hwp[,3]), na.rm = T)/length(hwp[,3])
+
 png(filename = "chi²-pval-hist.png", width=1000, height = 1000)
-hist(hwp[,3], breaks = 100, main = "chi²-test for HWE", xlab = "p-value")
+par(mar=c(5,5,4,2))
+hist(hwp[,3], breaks = 100, main = "chi²-test for HWE", xlab = "p-value", cex.lab=2, cex.axis=2, cex.main=2, cex.sub=2)
 dev.off()
 
-# only diploid data
+
+
+# only for diploid data
 # Fst(x)
 # Rst(X)
 
 
-#snpStats: hard to import using GGtools
-#ss <- vcf2sm('../data/VCF/freebayes_264_samples_chr01-12_QUAL_30_depth_0.9_blanked_1_read_het_biallelic_SNPs_blanked.vcf')
 
 
-
-# plot HWE onto genome
+# plot HWE deviation onto genome
 # probably no interesting pattern
 # hw_df <- as.data.frame(hwp)
 # colnames(hw_df) <- c("chisq","df", "Pr_chisq")
@@ -184,9 +206,6 @@ dev.off()
 # plot(hwe11$pos, hwe11$Pr_chisq)
 # 
 # 
-
-# population strata needed?
-# amova <- poppr.amova(y)
 
 # only diploids
 #fs <- filter_stats(y, plot = T)
@@ -233,14 +252,13 @@ Fst <- (Ht - Hs)/Ht
 # 3.2% of variation is explained by the subpopulations when MAF MAF > 0.05 for diploidized data
 # 3.2% of variation is explained by the subpopulations when MAF wasn't filtered for diploidized data
 
-#to-do: Fis
 
-# inbreeding coefficient
-# everything is loaded fresh to not exclude any samples as before
+
+# calculate FIT, not used in master thesis
 
 #x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf', to = 50000)
-#x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf', to = 50000)
-x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf', to = 50000)
+x <- read.vcf('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf', to = 50000)
+#x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf', to = 50000)
 #x <- read.vcf('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf', to = 50000)
 
 
@@ -262,46 +280,21 @@ HT <- mean(sum$Hexp) #without subpopulations equivalent to Hs
 HI <- mean(sum$Hobs)
 FIT <- (HT - HI)/HT
 
-FIT2 <- 1-(HI/HT)
 
-
-
-library(hierfstat)
-
-# I don't get why this doesn't work
-# Error in (function (..., row.names = NULL, check.rows = FALSE, check.names = TRUE,  : arguments imply differing number of rows: 75, 74
-basic.stats(y)
-hfstat <- genind2hierfstat(y)
-pairwise.neifst(hfstat,diploid=TRUE)
-
-# #test
-# data(nancycats)
-# genind2hierfstat(nancycats)
-# basic.stats(nancycats)
-
-#directly read VCF, populations need to be added later
-hfstat <- read.VCF('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf', convert.chr = F)
-# how do i need to process the bed.matrix to use this method?
-basic.stats(hfstat@snps)
-
-library(SNPRelate)
-
-snpgdsVCF2GDS('../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf', "test.gds")
-genofile <- openfn.gds("test.gds")
-read.gdsn(index.gdsn(genofile, "sample.id"))
-read.gdsn(index.gdsn(genofile, "snp.rs.id"))
-read.gdsn(index.gdsn(genofile, "genotype"))
-
-#seqSetFilter(genofile, sample.id=samp.id[c(2,4,6)])
-
-pca <- snpgdsPCA(genofile, num.thread=2)
-pc.percent <- pca$varprop*100
-head(round(pc.percent, 2))
-
-tab <- data.frame(sample.id = pca$sample.id,
-                  EV1 = pca$eigenvect[,1],    # the first eigenvector
-                  EV2 = pca$eigenvect[,2],    # the second eigenvector
-                  stringsAsFactors = FALSE)
-head(tab)
-
-plot(tab$EV2, tab$EV1, xlab="eigenvector 2", ylab="eigenvector 1")
+# library(hierfstat)
+# 
+# # I don't get why this doesn't work
+# # Error in (function (..., row.names = NULL, check.rows = FALSE, check.names = TRUE,  : arguments imply differing number of rows: 75, 74
+# basic.stats(y)
+# hfstat <- genind2hierfstat(y)
+# pairwise.neifst(hfstat,diploid=TRUE)
+# 
+# # #test
+# # data(nancycats)
+# # genind2hierfstat(nancycats)
+# # basic.stats(nancycats)
+# 
+# #directly read VCF, populations need to be added later
+# hfstat <- read.VCF('../data/diploid_VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf', convert.chr = F)
+# # how do i need to process the bed.matrix to use this method?
+# basic.stats(hfstat@snps)
