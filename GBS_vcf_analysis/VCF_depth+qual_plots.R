@@ -17,8 +17,8 @@ mean_depth_density_unfiltered <- ggplot(data = mean_depth_unfiltered, aes(x = ME
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   xlab("Mean depth per SNP") + 
   ylab("Density") +
-  annotate("text", label = paste0("bar(x) == ",round(mean_unfiltered, digits = 1)), parse = TRUE, x = 150, y = 0.2, size = 5, hjust=0) + 
-  annotate("text", label = paste0("tilde(x) == ",round(median_unfiltered, digits = 1)), parse = TRUE, x = 150, y = 0.18, size = 5, hjust=0) + 
+  annotate("text", label = paste0("bar(x) == ",round(mean_unfiltered, digits = 0)), parse = TRUE, x = 150, y = 0.2, size = 5, hjust=0) + 
+  annotate("text", label = paste0("tilde(x) == ",round(median_unfiltered, digits = 0)), parse = TRUE, x = 150, y = 0.18, size = 5, hjust=0) + 
   theme_bw() +
   # ggtitle("Unfiltered") +
   # theme(plot.title = element_text(hjust = 0.5)) +
@@ -28,8 +28,8 @@ mean_depth_density_filtered <- ggplot(data = mean_depth_filtered, aes(x = MEAN_D
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   xlab("Mean depth per SNP") + 
   ylab("Density") +
-  annotate("text", label = paste0("bar(x) == ",round(mean_filtered, digits = 1)), parse = TRUE, x = 600, y = 0.0018, size = 5, hjust=0) + 
-  annotate("text", label = paste0("tilde(x) == ",round(median_filtered, digits = 1)), parse = TRUE, x = 600, y = 0.00162, size = 5, hjust=0) + 
+  annotate("text", label = paste0("bar(x) == ",round(mean_filtered, digits = 0)), parse = TRUE, x = 600, y = 0.0018, size = 5, hjust=0) + 
+  annotate("text", label = paste0("tilde(x) == ",round(median_filtered, digits = 0)), parse = TRUE, x = 600, y = 0.00162, size = 5, hjust=0) + 
   theme_bw()
   # ggtitle("Filtered") +
   # theme(plot.title = element_text(hjust = 0.5))
@@ -53,8 +53,8 @@ mean_sample_density_unfiltered <- ggplot(data = mean_sample_unfiltered, aes(x = 
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   xlab("Mean depth per sample") + 
   ylab("Density") +
-  annotate("text", label = paste0("bar(x) == ",round(mean_unfiltered2, digits = 1)), parse = TRUE, x = 80, y = 0.0199, size = 5, hjust=0) + 
-  annotate("text", label = paste0("tilde(x) == ",round(median_unfiltered2, digits = 1)), parse = TRUE, x = 80, y = 0.018, size = 5, hjust=0) + 
+  annotate("text", label = paste0("bar(x) == ",round(mean_unfiltered2, digits = 0)), parse = TRUE, x = 80, y = 0.0199, size = 5, hjust=0) + 
+  annotate("text", label = paste0("tilde(x) == ",round(median_unfiltered2, digits = 0)), parse = TRUE, x = 80, y = 0.018, size = 5, hjust=0) + 
   # ggtitle("Unfiltered") +
   # theme(plot.title = element_text(hjust = 0.5)) +
   theme_bw() 
@@ -64,8 +64,8 @@ mean_sample_density_filtered <- ggplot(data = mean_sample_filtered, aes(x = MEAN
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   xlab("Mean depth per sample") + 
   ylab("Density") +
-  annotate("text", label = paste0("bar(x) == ",round(mean_filtered2, digits = 1)), parse = TRUE, x = 610, y = 0.0018, size = 5, hjust=0) + 
-  annotate("text", label = paste0("tilde(x) == ",round(median_filtered2, digits = 1)), parse = TRUE, x = 610, y = 0.00163, size = 5, hjust=0) + 
+  annotate("text", label = paste0("bar(x) == ",round(mean_filtered2, digits = 0)), parse = TRUE, x = 610, y = 0.0018, size = 5, hjust=0) + 
+  annotate("text", label = paste0("tilde(x) == ",round(median_filtered2, digits = 0)), parse = TRUE, x = 610, y = 0.00163, size = 5, hjust=0) + 
   # ggtitle("Filtered") +
   # theme(plot.title = element_text(hjust = 0.5)) +
   theme_bw() 
@@ -87,8 +87,8 @@ mean_qual_density_unfiltered <- ggplot(data = qual_unfiltered, aes(x = QUAL)) +
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   xlab("Quality per SNP") + 
   ylab("Density") +
-  annotate("text", label = paste0("bar(x) == ",round(mean_unfiltered3, digits = 1)), parse = TRUE, x = 120, y = 0.095, size = 5, hjust=0) + 
-  annotate("text", label = paste0("tilde(x) == ",round(median_unfiltered3, digits = 1)), parse = TRUE, x = 120, y = 0.082, size = 5, hjust=0) + 
+  annotate("text", label = "bar(x) == '15,449'", parse = TRUE, x = 120, y = 0.095, size = 5, hjust=0) + 
+  annotate("text", label = paste0("tilde(x) == ",round(median_unfiltered3, digits = 0)), parse = TRUE, x = 120, y = 0.082, size = 5, hjust=0) + 
   theme_bw() +
   ggtitle("Unfiltered") +
   theme(plot.title = element_text(hjust = 0.5)) +
@@ -98,8 +98,8 @@ mean_qual_density_filtered <- ggplot(data = qual_filtered, aes(x = QUAL)) +
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   xlab("Quality per SNP") + 
   ylab("Density") +
-  annotate("text", label = paste0("bar(x) == ",round(mean_filtered3, digits = 1)), parse = TRUE, x = 300000, y = 0.000018, size = 5, hjust=0) + 
-  annotate("text", label = paste0("tilde(x) == ",round(median_filtered3, digits = 1)), parse = TRUE, x = 300000, y = 0.0000159, size = 5, hjust=0) + 
+  annotate("text", label = "bar(x) == '279,513'", parse = TRUE, x = 300000, y = 0.000018, size = 5, hjust=0) + 
+  annotate("text", label = "tilde(x) == '20,028'", parse = TRUE, x = 300000, y = 0.0000159, size = 5, hjust=0) + 
   theme_bw() +
   ggtitle("Filtered") +
   theme(plot.title = element_text(hjust = 0.5)) +
@@ -108,5 +108,5 @@ mean_qual_density_filtered <- ggplot(data = qual_filtered, aes(x = QUAL)) +
 #ggarrange(mean_qual_density_unfiltered,mean_qual_density_filtered)
 
 png(filename="SNP_Depth+Qual.png", width = 750, height = 1125, res = 100)
-ggarrange(mean_qual_density_unfiltered,mean_qual_density_filtered, mean_depth_density_unfiltered, mean_depth_density_filtered,  mean_sample_density_unfiltered, mean_sample_density_filtered, ncol = 2, nrow = 3)
+ggarrange(mean_qual_density_unfiltered,mean_qual_density_filtered, mean_depth_density_unfiltered, mean_depth_density_filtered,  mean_sample_density_unfiltered, mean_sample_density_filtered, ncol = 2, nrow = 3, labels = "auto")
 dev.off()

@@ -8,10 +8,19 @@ library(ggpubr)
 coverage <- read.delim("../data/alignment/coverage_chr01.txt")
 coverage <- read.delim("../data/alignment/coverage_chr02.txt")
 coverage <- read.delim("../data/alignment/coverage_chr03.txt")
+coverage <- read.delim("../data/alignment/coverage_chr04.txt")
+coverage <- read.delim("../data/alignment/coverage_chr05.txt")
+coverage <- read.delim("../data/alignment/coverage_chr06.txt")
+coverage <- read.delim("../data/alignment/coverage_chr07.txt")
+coverage <- read.delim("../data/alignment/coverage_chr08.txt")
+coverage <- read.delim("../data/alignment/coverage_chr09.txt")
+coverage <- read.delim("../data/alignment/coverage_chr10.txt")
+coverage <- read.delim("../data/alignment/coverage_chr11.txt")
+coverage <- read.delim("../data/alignment/coverage_chr12.txt")
 
 
 # filter out read depths that would not pass VCF filters for easier visualization
-coverage_sub <- subset(coverage, X2 > 14329)
+coverage_sub <- subset(coverage, X4 > 14329)
 
 sum(coverage[,3] > 14329)
 max(coverage[,3])
@@ -23,7 +32,7 @@ summary(coverage)
 threshold <- quantile(coverage[,3], probs = (0.95))
 threshold_sub <- quantile(coverage_sub[,3], probs = (0.95))
 
-mean_depth_density <- ggplot(data = coverage, aes(x = X2)) + 
+mean_depth_density <- ggplot(data = coverage, aes(x = X4)) + 
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   geom_vline(xintercept = threshold, color = "red") + 
   annotate("text", x = 3000, y = 0.76, label = paste("F^{-1}~(0.95) == ",threshold), parse = TRUE) + 
@@ -33,7 +42,7 @@ mean_depth_density <- ggplot(data = coverage, aes(x = X2)) +
 #mean_depth_density
 
 
-mean_depth_density_sub <- ggplot(data = coverage_sub, aes(x = X2)) + 
+mean_depth_density_sub <- ggplot(data = coverage_sub, aes(x = X4)) + 
   geom_density(fill = "grey", color = "black", alpha = 0.3) + 
   geom_vline(xintercept = threshold_sub, color = "red") + 
   annotate("text", x = 225000, y = 0.00002, label = paste("F^{-1}~(0.95) == ",threshold_sub), parse = TRUE) + 

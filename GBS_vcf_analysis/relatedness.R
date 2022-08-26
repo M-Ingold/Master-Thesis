@@ -26,6 +26,7 @@ dat <- as.data.frame(genMAF@tab)
 
 # add a column for individuals
 load("Samples")
+
 # coancestry doesn't like spaces
 Samples$VARIETY <- gsub(" ", "_", Samples$VARIETY)
 # for some reason, sample names are cut off at slashes by coancestry. 
@@ -69,14 +70,28 @@ parents <- na.omit(parents[, c(2,8,9)])
 #####################################
 G_FullAutopolyploid <- Gmatrix(matrix_tetra, method="VanRaden", ploidy=4)
 
-#heatmap(G_FullAutopolyploid)
+# extract inbreeding values from matrix
+inbreeding_VR <- data.frame(Nr = 1:length(diag(G_FullAutopolyploid)))
+inbreeding_VR$inbreeding <- diag(G_FullAutopolyploid-1) 
+inbreeding_VR$sample <- row.names(G_FullAutopolyploid)
+
+# plot inbreeding
+png(filename = "VanRaden_inbreeding.png", width = 1200, height = 800, res = 130)
+
+ggplot(inbreeding_VR, aes(Nr, inbreeding, label=sample)) +
+  geom_text_repel(max.overlaps = 5, size = 3.5) +
+  xlab("") + ylab("Inbreeding coefficient")+
+  geom_point(shape=1) +
+  theme_bw()
+
+dev.off()
 
 G_FullAutopolyploid_sub <- G_FullAutopolyploid
 G_FullAutopolyploid_sub[lower.tri(G_FullAutopolyploid, diag = T)] <- NA
 
 G_matrix_subset <- melt(G_FullAutopolyploid_sub, id.var = rownames(G_FullAutopolyploid_sub)[1])
 G_matrix_subset <- na.omit(G_matrix_subset)
-ggplot(G_matrix_subset, aes(as.factor(Var1), Var2, group=Var2)) + geom_tile(aes(fill = value)) + 
+ggplot(G_matrix_subset, aes(as.factor(Var1), Var2, group=Var2)) + geom_tile(aes(fill = value)) +
   #geom_text(aes(fill = data$value, label = round(data$value, 1))) +
   scale_fill_gradient(low = "yellow", high = "#D6604D", space = "Lab")
 
@@ -222,10 +237,15 @@ plot2 <- ggplot(related_only, aes(x=rownames(related_only), y=wang)) +
   theme_bw()
 
 
-
-png(filename = "AGHmatrix_estimator_of_relatedness_MAF_VanRaden.png", width = 1000, height = 500, res = 120)
-ggarrange(plot1, plot2, ncol = 2, nrow = 1)
+png(filename = "wang_estimator_of_relatedness.png", width = 1000, height = 500, res = 120)
+ggarrange(plot1, plot2, ncol = 2, nrow = 1, labels = "AUTO")
 dev.off()
+
+
+
+# png(filename = "AGHmatrix_estimator_of_relatedness_MAF_VanRaden.png", width = 1000, height = 500, res = 120)
+# ggarrange(plot1, plot2, ncol = 2, nrow = 1, labels = "AUTO")
+# dev.off()
 
 # means of relatedness groups
 mean(rel[rel$color=='blue'|rel$color=="green4",]$wang)
@@ -235,10 +255,11 @@ mean(rel[rel$color=="magenta3",]$wang)
 mean(related_only$wang)
 mean(unrelated$wang)
 
-png(filename = "trioml_estimator_of_relatedness.png", width = 500, height = 500, res = 150)
-ggplot(relatedness$relatedness, aes(x=pair.no, y=trioml)) +
-  geom_point(shape=1, colour=rel$color)
-dev.off()
+# # trioml wasn't used for the master thesis
+# png(filename = "trioml_estimator_of_relatedness.png", width = 500, height = 500, res = 150)
+# ggplot(relatedness$relatedness, aes(x=pair.no, y=trioml)) +
+#   geom_point(shape=1, colour=rel$color)
+# dev.off()
 
 
 # # If all estimators of related are used. Not in master thesis

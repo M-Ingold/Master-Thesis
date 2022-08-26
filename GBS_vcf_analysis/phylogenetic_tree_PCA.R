@@ -12,7 +12,7 @@ library(ggpubr)
 library(poppr)
 
 # colorblind palette
-#cbbPalette <- c("#000000", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
+cbbPalette <- c("#000000", "#E69F00", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
 
 #vcfTetra <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth.vcf")
 vcfTetra <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF.vcf")
@@ -64,7 +64,7 @@ Samples <- merge(df, GBS, by="Identifier")
 
 # add proper breed names to rows
 rownames(matrix_tetra) <- Samples$VARIETY
-rownames(matrix_dip) <- Samples$VARIETY
+#rownames(matrix_dip) <- Samples$VARIETY
 
 
 # Percentages of identical dosages between breed pairs of interest
@@ -84,6 +84,7 @@ sum(breed_df$`MAYAN GOLD`==breed_df$`MAYAN TWILIGHT`)/length(breed_df$Kuras)
 sum(breed_df$Scala==breed_df$Stratos)/length(breed_df$Kuras)
 sum(breed_df$BARTINA==breed_df$Saturna)/length(breed_df$Kuras)
 sum(breed_df$Salut==breed_df$Solina)/length(breed_df$Kuras)
+sum(breed_df$RUSSET_BURBANK==breed_df$HEIDENIERE)/length(breed_df$KURAS)
 
 
 
@@ -98,8 +99,17 @@ sum(breed_df$Salut==breed_df$Solina)/length(breed_df$Kuras)
 # }
 
 # load ADMIXTURE data
-admixture=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf.5.Q")
+admixture=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_SNPs_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf.5.Q")
 rownames(admixture) <- Samples$VARIETY
+
+# output membership coefficients as latex table
+library(xtable)
+admixture_inbreeding <- cbind(admixture, inbreeding_VR)[,-c(6,8)] # from relatedness.R
+admixture_inbreeding <- admixture_inbreeding %>%
+  mutate_if(is.numeric, round, digits = 2)
+print(xtable(admixture_inbreeding, auto = T), tabular.environment = "longtable")
+
+
 
 # assign population membership by highest membership percentage
 admixture$subpopulation <- max.col(admixture)
@@ -274,13 +284,13 @@ dev.off()
 
 
 
-pc1 <- autoplot(pca, label = T,label.repel=T, data = admixture, colour = 'subpopulation')+ theme_bw() + scale_color_manual(values=cbbPalette) #+ scale_color_brewer(palette="Set2")
-pc2 <- autoplot(pca, x=2, y=3, label = T,label.repel=T, data = admixture, colour = 'subpopulation')+ theme_bw() + scale_color_manual(values=cbbPalette)
+pc1 <- autoplot(pca, label = F,label.repel=F, data = admixture, colour = 'subpopulation')+ theme_bw() + scale_color_manual(values=cbbPalette) #+ scale_color_brewer(palette="Set2")
+pc2 <- autoplot(pca, x=2, y=3, label = F,label.repel=F, data = admixture, colour = 'subpopulation')+ theme_bw() + scale_color_manual(values=cbbPalette)
 #pc3 <- autoplot(pca, x=3, y=4, label = T,label.repel=T, data = admixture, colour = 'subpopulation')
 #pc4 <- autoplot(pca, x=4, y=5, label = T,label.repel=T, data = admixture, colour = 'subpopulation')
 
-png(filename = "PCA_with_subpopulations.png", width = 3000, height = 1500, units = "px", res = 200)
-ggarrange(pc1,pc2)
+png(filename = "PCA_with_subpopulations.png", width = 1250, height = 2000, units = "px", res = 200)
+ggarrange(pc1,pc2,ncol = 1)
 dev.off()
 
 # heatmap
@@ -291,7 +301,24 @@ png(filename = "heatmap_unsorted_MAF>005.png", width = 5000, height = 4000, res 
 pheatmap(matrix_tetra, color = rev(hcl.colors(50, "Sunset")), cex = 0.8, cluster_cols = F, fontsize = 5)
 dev.off()
 
+# subset heatmap for visibility
+sub_matrix <- matrix_tetra[c("MAYAN TWILIGHT","MAYAN GOLD","INCA SUN","Dartiest","Eurostarch","Kuras","Django","Eurogrande","Amado","Gala"),sample(length(matrix_tetra[1,]),500)]
+png(filename = "heatmap_unsorted_subset.png", width = 1000, height = 500, res = 100)
+pheatmap(sub_matrix, color = rev(hcl.colors(50, "Sunset")), cex = 0.8, cluster_cols = F, fontsize = 15)
+dev.off()
+
+
+
 # distance matrix
 png(filename = "distance_matrix.png", width = 2000, height = 2000, units = "px", res = 150)
 fviz_dist(dist(matrix_tetra), lab_size = 5)
 dev.off()
+
+matrix_tetra_subset1 <- matrix_tetra[sample(length(matrix_tetra[,1]),60),]
+matrix_tetra_subset2 <- matrix_tetra[c("MAYAN TWILIGHT","MAYAN GOLD","INCA SUN","Dartiest","Eurostarch","Kuras","Django","Eurogrande","RATTE","VITELOTTE NOIRE","FLAMENCO","KURODA","Erntedank","Fausta","SANTE","Landsorte P94/077"),]#,"Erika","MARABEL","Scala","Stratos","BARTINA","Saturna","Salut","Solina","Bettina","Reneta","Olympia","Axion","ZARINA","Ideaal","Kamyk","Rote Lötschentaler","Mondial","Liu","CLEOPATRA"),]
+matrix_tetra_subset <- rbind(matrix_tetra_subset1,matrix_tetra_subset2)
+
+png(filename = "distance_matrix_subset.png", width = 2000, height = 2000, units = "px", res = 150)
+fviz_dist(dist(matrix_tetra_subset), lab_size = 10)
+dev.off()
+

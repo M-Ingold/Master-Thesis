@@ -87,14 +87,14 @@ avgwindow1chr <- function(file, window){
 
 
 # I couldn't get the function to call avgwindow1chr properly, so it's calculated beforehand. 
-# It causes Error: $ operator is invalid for atomic vectors. WTF?
+# It causes Error: $ operator is invalid for atomic vectors.
 
 # reproducible error:
 #p <- c("coverage_","chr01")
 #file <- paste(p, collapse = "")
 #chrcoverage <- avgwindow1chr(file, 1000000)
 # works when a big file with all the data is subset and used, file name probably doesn't get recognized as 
-# object when used in another function. But: not enough RAM for the whole coverage file
+# object when used in another function. But: not enough RAM to load the whole coverage file
 
 #plotgenerator <- function(chr){
 #  p <- c("coverage_",chr)

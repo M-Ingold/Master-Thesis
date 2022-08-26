@@ -9,6 +9,7 @@ library(ggplot2)
 library(quantreg)
 library(dplyr)
 library(ggpubr)
+library(splines)
 
 # create list of chromosomes
 ploidy <- 4
@@ -133,9 +134,36 @@ for (n in 1:12) {
 #   #lines(ld_df$dist, predict(spline_fit,), lty = 2, col = "black") # add spline
 # }
 
+# testing for good df values. Plot with desired spline fits was saved manually
+spline_fit3 <- rq(r2 ~ bs(dist, df=3), tau = 0.9, data = ld_df)
+spline_fit4 <- rq(r2 ~ bs(dist, df=4), tau = 0.9, data = ld_df)
+spline_fit5 <- rq(r2 ~ bs(dist, df=5), tau = 0.9, data = ld_df)
+spline_fit6 <- rq(r2 ~ bs(dist, df=6), tau = 0.9, data = ld_df)
+spline_fit7 <- rq(r2 ~ bs(dist, df=7), tau = 0.9, data = ld_df)
+spline_fit8 <- rq(r2 ~ bs(dist, df=8), tau = 0.9, data = ld_df)
+spline_fit9 <- rq(r2 ~ bs(dist, df=9), tau = 0.9, data = ld_df)
+spline_fit10 <- rq(r2 ~ bs(dist, df=10), tau = 0.9, data = ld_df)
+
+spline_fit20 <- rq(r2 ~ bs(dist, df=20), tau = 0.9, data = ld_df)
+
+spline_fit30 <- rq(r2 ~ bs(dist, df=30), tau = 0.9, data = ld_df)
+
+plot(ld_df$dist, ld_df$r2, pch=".", cex=2, xlab="Distance (bp)", ylab=expression(LD ~ (r^2)), col="grey", main = "90 percentile splines with different DFs")
+lines(ld_df$dist, predict(spline_fit3,), lty = 1, col = "black", lwd = 2)
+lines(ld_df$dist, predict(spline_fit4,), lty = 1, col = "green", lwd = 2)
+lines(ld_df$dist, predict(spline_fit5,), lty = 1, col = "red", lwd = 2)
+lines(ld_df$dist, predict(spline_fit6,), lty = 1, col = "blue", lwd = 2)
+lines(ld_df$dist, predict(spline_fit7,), lty = 2, col = "green")
+lines(ld_df$dist, predict(spline_fit8,), lty = 2, col = "yellow")
+lines(ld_df$dist, predict(spline_fit9,), lty = 2, col = "purple")
+lines(ld_df$dist, predict(spline_fit10,), lty = 2, col = "black")
+
+lines(ld_df$dist, predict(spline_fit20,), lty = 1, col = "orange")
+lines(ld_df$dist, predict(spline_fit30,), lty = 2, col = "cyan")
+
+
 
 # spline fit as in Vos and Sharma's publication. As no parameter was given in other papers, df = 5 was guessed based on the curve stabilizing at high distances compared to other values
-library(splines)
 spline_fits <- list()
 for (i in 1:12) {
   spline_fit <- rq(r2 ~ bs(dist, df = 5), tau = 0.9, data = ld_dfs[[i]])

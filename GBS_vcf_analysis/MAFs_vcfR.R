@@ -16,6 +16,11 @@ vcf005 <- read.vcfR("../data/VCF/freebayes_261_samples_chr01-12_QUAL_30_1_read_h
 # 
 # chromoqc(chrom)
 
+# depth per sample per random SNP
+test <- extract.gt(vcf, element = "DP", as.numeric = T)[sample(38525,1),]
+hist(test,breaks = 50)
+#plot(density(test))
+
 altAF <- extract.info(vcf,element = "AF", as.numeric = T)
 altAF005 <- extract.info(vcf005,element = "AF", as.numeric = T)
 

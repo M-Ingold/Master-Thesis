@@ -21,7 +21,7 @@ par(mar = c(0, 8, 4, 0))
 
 #png(filename = "ADMIXTURE_3_clusters_all_SNPs.png", width = 2000, height = 800, units = "px", res = 100)
 
-tbl4=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf.3.Q")
+tbl4=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_SNPs_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf.3.Q")
 #rownames(tbl4) <- Samples$VARIETY
 tbl_sorted4 <- tbl4[order(tbl4$V1,tbl4$V3,tbl4$V2),]
 
@@ -33,9 +33,8 @@ barplot(t(as.matrix(tbl_sorted4)), col=rainbow(3),
         cex = 1, cex.main = 3,
         main = "ADMIXTURE results of 3 clusters with MAF > 0.05",
         xaxt='n'
-        
 )
-
+#mtext("a", outer = F, at = -40)
 
 tbl2=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_MAF_diploidized.vcf.5.Q")
 #rownames(tbl2) <- Samples$VARIETY
@@ -68,7 +67,7 @@ barplot(t(as.matrix(tbl_sorted1)), col=rainbow(3),
         )
 #dev.off()
 
-tbl3=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf.5.Q")
+tbl3=read.table("../scripts/ADMIXTURE/freebayes_261_samples_chr01-12_QUAL_30_SNPs_1_read_het_biallelic_SNPs_blanked_depth_diploidized.vcf.5.Q")
 rownames(tbl3) <- Samples$VARIETY
 tbl_sorted3 <- tbl3[order(tbl3$V1,tbl3$V4,tbl3$V2,tbl3$V3,tbl3$V5),]
 
@@ -124,6 +123,8 @@ dev.off()
 
 # plot maximum subpopulation membership in descending order
 
+tbl3$subpopulation <- max.col(tbl3)
+
 tbl3$max <- pmax(tbl3$V1,tbl3$V2,tbl3$V3,tbl3$V4,tbl3$V5)
 rownames(tbl3) <- Samples$VARIETY
 max_membership <- tbl3[order(tbl3$max, decreasing = T),]$max
@@ -131,3 +132,10 @@ png(filename = "max_subpopulation_membership", width = 500, height = 500, res = 
 plot(max_membership, pch=19, ylab = "Maximum subpopulation membership", xlab = '')
 abline(h=0.8, lwd = 2, col = 'red')
 dev.off()
+
+tbl_unadmixed <- tbl3[tbl3$max > 0.99,]
+tbl_unadmixed <- tbl_unadmixed[order(row.names(tbl_unadmixed)),]
+tbl_to_print <- cbind(row.names(tbl_unadmixed),tbl_unadmixed[,6])
+
+library(xtable)
+print(xtable(tbl_to_print, auto = T), include.rownames = F)

@@ -3,6 +3,11 @@
 # input a target VCF to be diploidized, converted to BED format and analysed by STRUCTURE, 
 # using as many clusters as specified. In this case 10
 
+if [ -z "$1"  ]; then
+	echo "Please provide a path to a file to be analysed" >&2
+	exit 1
+fi
+
 IN_FILE=$1
 NAME=$(basename $1 .vcf)
 FOLDER=../../data/diploid_VCF # diploid VCF is saved in a separate folder
